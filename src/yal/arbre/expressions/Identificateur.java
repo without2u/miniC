@@ -2,6 +2,7 @@ package yal.arbre.expressions;
 
 import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseException;
+import yal.exceptions.ListeDErreurs;
 import yal.exceptions.VariablePasDeclareeException;
 import yal.table.Entree;
 import yal.table.Symbole;
@@ -25,7 +26,8 @@ public class Identificateur extends Expression{
         symbole = Tds.getInstance().getTableDeSymbole().get(e);
         if(symbole == null) {
 
-            throw new VariablePasDeclareeException(noLigne+": variable "+nom+" n'est pas declarée !");
+           AnalyseException erreur= new VariablePasDeclareeException(noLigne+": variable "+nom+" n'est pas declarée !");
+           ListeDErreurs.getErreurs().addErreur(erreur);
 
         }else{
             setType(Type.ENTIER);

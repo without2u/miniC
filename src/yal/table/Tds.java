@@ -2,6 +2,8 @@ package yal.table;
 
 import yal.exceptions.AnalyseException;
 import yal.exceptions.DoublonsException;
+import yal.exceptions.ListeDErreurs;
+import yal.exceptions.VariablePasDeclareeException;
 
 import java.util.HashMap;
 
@@ -25,7 +27,10 @@ public class Tds {
         //si le symbole existe deja (pour eviter les doublons)
 
         if (tableDeSymbole.containsKey(e)) {
-            throw new DoublonsException("variable " + e + " dupliquée !");
+
+            AnalyseException erreur= new DoublonsException("variable " + e + " dupliquée !");
+            ListeDErreurs.getErreurs().addErreur(erreur);
+
 
         }else {
             decalage = decalage - 4;

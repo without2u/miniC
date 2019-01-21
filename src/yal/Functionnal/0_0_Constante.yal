@@ -2,7 +2,8 @@ programme test
 debut
 //testCommentaire
 entier a;
-a=12;
+entier a;
+a=b;
 lire a;
 ecrire a;
 

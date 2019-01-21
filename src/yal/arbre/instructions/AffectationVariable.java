@@ -4,11 +4,14 @@ import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.Identificateur;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
+import yal.exceptions.EnsembleDErreurs;
+import yal.exceptions.ListeDErreurs;
 
 public class AffectationVariable extends Affectation {
 
     private Identificateur filsGauche;
     private Expression filsDroite;
+
 
     public AffectationVariable(Identificateur gauche,Expression droite, int n){
 
@@ -24,8 +27,8 @@ public class AffectationVariable extends Affectation {
         filsDroite.verifier();
         //verifier si les deux variables sont du meme type
         if(filsGauche.getType() != filsDroite.getType()) {
-            AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + filsGauche + " et " + filsDroite + " incompatibles !");
-            //CompilationErreurs.getInstance().ajouter(exception);
+            AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + filsGauche + " et " + filsDroite + " incompatibles !");
+           // ListeDErreurs.getErreurs().addErreur(erreur);
         } else {
 
             filsGauche.setValeur(filsDroite.getValeur());
