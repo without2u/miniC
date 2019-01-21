@@ -23,11 +23,5 @@ public class Symbole {
         this.deplacement = deplacement;
     }
 
-    @Override
-    public String toString() {
-        return "Symbole{" +
-                "type=" + type +
-                ", deplacement=" + deplacement +
-                '}';
-    }
+
 }

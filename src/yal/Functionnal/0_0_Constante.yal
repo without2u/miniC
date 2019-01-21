@@ -3,7 +3,9 @@ debut
 //testCommentaire
 entier a;
 a=12;
+lire a;
 ecrire a;
+
 
 
 

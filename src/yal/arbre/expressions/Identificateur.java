@@ -34,7 +34,7 @@ public class Identificateur extends Expression{
 
     @Override
     public String toMIPS() {
-        return "lw $v0, "+getDeplacement()+"($s7)\n\t";
+        return "";
     }
 
 

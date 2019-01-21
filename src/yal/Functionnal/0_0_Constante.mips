@@ -6,10 +6,16 @@
 move $s7, $sp
 	addi $sp, $sp, -4
 
-	lw $v0, 0($s7)
 	li $v0, 12
 sw $v0, 0($s7)
+	    li $v0, 5
+    syscall
+sw $v0, 0($s7)
 	lw $v0, 0($s7)
+	move $t8, $v0
+	li $v0, 1
+	move $a0, $t8
+	syscall
 	
 end :
 move $v1, $v0

@@ -20,12 +20,6 @@ public class Entree {
         this.nomDentree = nomDentree;
     }
 
-    @Override
-    public String toString() {
-        return "Entree{" +
-                "nomDentree='" + nomDentree + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
