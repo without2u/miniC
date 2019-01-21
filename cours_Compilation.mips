@@ -1,0 +1,13 @@
+.text
+main:
+  move $s7,$sp
+  add $sp,$sp,-8
+#b=45
+  li $v0,45
+  sw $v0,-4($s7)
+#a=76
+  li $v0,76
+  sw $v0,0($s7)
+end:
+  li $v0,0
+  syscall
