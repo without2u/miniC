@@ -21,10 +21,17 @@ public class AffectationVariable extends Affectation {
     }
 
     @Override
+    public String toString() {
+       return "affectation de " + filsDroite + " dans " + filsGauche;
+    }
+
+    @Override
     public void verifier() throws AnalyseException {
 
         filsGauche.verifier();
         filsDroite.verifier();
+
+
         //verifier si les deux variables sont du meme type
         if(filsGauche.getType() != filsDroite.getType()) {
             AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + filsGauche + " et " + filsDroite + " incompatibles !");

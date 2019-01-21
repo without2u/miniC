@@ -1,15 +1,7 @@
 programme test
 debut
 //testCommentaire
-
 entier a;
-entier a;
-
-lire a;
-ecrire a;
-
-
-
-
+a=b;
 
 fin

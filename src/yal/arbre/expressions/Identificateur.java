@@ -20,18 +20,22 @@ public class Identificateur extends Expression{
     }
 
     @Override
+    public String toString() {
+        return nom;
+    }
+
+    @Override
     public void verifier() throws AnalyseException {
 
         Entree e =new Entree(this.nom);
         symbole = Tds.getInstance().getTableDeSymbole().get(e);
         if(symbole == null) {
 
-           VariablePasDeclareeException erreur= new VariablePasDeclareeException("");
+           VariablePasDeclareeException erreur= new VariablePasDeclareeException(noLigne + ": la variable " + nom + " n'est pas declarée !");
            ListeDErreurs.getErreurs().addErreur(erreur);
 
         }else{
             setType(Type.ENTIER);
-           // System.out.println(ListeDErreurs.getErreurs().getListErreurs());
 
         }
     }
@@ -43,7 +47,13 @@ public class Identificateur extends Expression{
 
 
     public Type getType() {
-        return symbole.getType();
+        if (symbole == null){
+            return null;
+
+        }else {
+            return  symbole.getType();
+        }
+
     }
 
     public int getDeplacement() {
