@@ -12,6 +12,9 @@ public class ListeDErreurs implements Iterable<AnalyseException> {
     public Iterator<AnalyseException> iterator() {
         return listErreurs.iterator();
     }
+    public ListeDErreurs(){
+        listErreurs=new ArrayList<AnalyseException>();
+    }
 
     public void addErreur(AnalyseException e){
         listErreurs.add(e);
