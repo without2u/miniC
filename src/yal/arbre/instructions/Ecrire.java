@@ -27,10 +27,9 @@ public class Ecrire extends Instruction {
         }
         else {
             sb.append(exp.toMIPS());
-            sb.append("move $a0, $v0\n\t");
+            sb.append("move $t8, $v0\n\t");
             sb.append("li $v0, 1\n\t");
-            sb.append("li $v0, 4\n\t");
-            sb.append("la $a0, fin\n\t");
+            sb.append("move $a0, $t8\n\t");
             sb.append("syscall\n\t");
         }
         return sb.toString();

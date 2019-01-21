@@ -25,12 +25,12 @@ public class Tds {
         //si le symbole existe deja (pour eviter les doublons)
 
         if (tableDeSymbole.containsKey(e)) {
-                System.out.println("doublons");
             throw new DoublonsException("variable " + e + " dupliquée !");
 
         }else {
-            decalage -= 4;
+            decalage = decalage - 4;
             s.setDeplacement(decalage);
+
             tableDeSymbole.put(e, s);
 
         }

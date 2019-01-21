@@ -1,11 +1,10 @@
 programme test
 debut
 //testCommentaire
-
 entier a;
-a=1;
+a=12;
 ecrire a;
-lire a;
+
 
 
 

@@ -7,35 +7,35 @@ import yal.exceptions.AnalyseSemantiqueException;
 
 public class AffectationVariable extends Affectation {
 
-    private Identificateur gauche;
-    private Expression droite;
+    private Identificateur filsGauche;
+    private Expression filsDroite;
 
     public AffectationVariable(Identificateur gauche,Expression droite, int n){
 
         super(n);
-        this.gauche= gauche;
-        this.droite = droite;
+        this.filsGauche= gauche;
+        this.filsDroite = droite;
     }
 
     @Override
     public void verifier() throws AnalyseException {
 
-        gauche.verifier();
-        droite.verifier();
+        filsGauche.verifier();
+        filsDroite.verifier();
         //verifier si les deux variables sont du meme type
-        if(gauche.getType() != droite.getType()) {
-            AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + gauche + " et " + droite + " incompatibles !");
+        if(filsGauche.getType() != filsDroite.getType()) {
+            AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + filsGauche + " et " + filsDroite + " incompatibles !");
             //CompilationErreurs.getInstance().ajouter(exception);
         } else {
 
-            gauche.setValeur(droite.getValeur());
+            filsGauche.setValeur(filsDroite.getValeur());
         }
     }
 
     @Override
     public String toMIPS() {
 
-        return droite.toMIPS()+"sw $v0, "+gauche.getDeplacement()+"($s7)\n\t";
+        return filsDroite.toMIPS()+"sw $v0, "+filsGauche.getDeplacement()+"($s7)\n\t";
 
     }
 
