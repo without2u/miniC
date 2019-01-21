@@ -20,6 +20,10 @@ public class Entree {
         this.nomDentree = nomDentree;
     }
 
+    @Override
+    public String toString() {
+        return this.nomDentree;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,6 +1,8 @@
 package yal.arbre;
 
 import yal.exceptions.AnalyseException;
+import yal.exceptions.EnsembleDErreurs;
+import yal.exceptions.ListeDErreurs;
 import yal.table.Tds;
 
 public class Programme extends ArbreAbstrait {
@@ -19,6 +21,8 @@ public class Programme extends ArbreAbstrait {
     @Override
     public void verifier() throws AnalyseException {
         bloc.verifier();
+        if(!ListeDErreurs.getErreurs().isEmpty())
+            throw new EnsembleDErreurs("");
     }
 
     @Override

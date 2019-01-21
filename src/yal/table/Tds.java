@@ -23,12 +23,11 @@ public class Tds {
     }
 
     //on effectue une nouvelle entree dans la table de symbole
-    public void ajouter(Entree e, Symbole s) throws AnalyseException {
+    public void ajouter(Entree e, Symbole s ,int no) {
         //si le symbole existe deja (pour eviter les doublons)
 
         if (tableDeSymbole.containsKey(e)) {
-
-            AnalyseException erreur= new DoublonsException("variable " + e + " dupliquée !");
+            DoublonsException erreur= new DoublonsException(no + ": la variable " + e + " est declaree plusieurs fois !\"");
             ListeDErreurs.getErreurs().addErreur(erreur);
 
 

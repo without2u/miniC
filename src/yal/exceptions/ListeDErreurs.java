@@ -12,7 +12,7 @@ public class ListeDErreurs implements Iterable<AnalyseException> {
     public Iterator<AnalyseException> iterator() {
         return listErreurs.iterator();
     }
-    public ListeDErreurs(){
+    private ListeDErreurs(){
         listErreurs=new ArrayList<AnalyseException>();
     }
 
@@ -26,6 +26,11 @@ public class ListeDErreurs implements Iterable<AnalyseException> {
 
     public ArrayList<AnalyseException> getListErreurs() {
         return listErreurs;
+    }
+
+    public boolean isEmpty() {
+
+        return listErreurs.isEmpty();
     }
 
 }

@@ -15,4 +15,8 @@ public class ConstanteEntiere extends Constante {
         return sb.toString() ;
     }
 
+    @Override
+    public String toString() {
+        return "ConstanteEntiere{}";
+    }
 }

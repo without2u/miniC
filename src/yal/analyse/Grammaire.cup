@@ -165,7 +165,7 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 						{: 	Entree e = new Entree(idf);
 							Type type = Type.ENTIER;
 							Symbole s = new Symbole(type);
-							Tds.getInstance().ajouter(e,s);
+							Tds.getInstance().ajouter(e,s,idfleft+1);
 							Identificateur id = new Identificateur(idf,idfleft);
 							RESULT = id;
 						:}

@@ -26,11 +26,13 @@ public class Identificateur extends Expression{
         symbole = Tds.getInstance().getTableDeSymbole().get(e);
         if(symbole == null) {
 
-           AnalyseException erreur= new VariablePasDeclareeException(noLigne+": variable "+nom+" n'est pas declarée !");
+           VariablePasDeclareeException erreur= new VariablePasDeclareeException("");
            ListeDErreurs.getErreurs().addErreur(erreur);
 
         }else{
             setType(Type.ENTIER);
+           // System.out.println(ListeDErreurs.getErreurs().getListErreurs());
+
         }
     }
 
