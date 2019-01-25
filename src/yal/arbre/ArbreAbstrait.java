@@ -1,5 +1,7 @@
 package yal.arbre;
 
+import yal.exceptions.AnalyseException;
+
 public abstract class ArbreAbstrait {
     
     // numéro de ligne du début de l'instruction
@@ -13,7 +15,7 @@ public abstract class ArbreAbstrait {
             return noLigne ;
     }
 
-    public abstract void verifier() ;
+    public abstract void verifier() throws AnalyseException;
     public abstract String toMIPS();
 
 }

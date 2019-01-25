@@ -89,6 +89,7 @@ PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                     p.ajouterBloc(li);
                     RESULT = p;
                 :}
+
         ;
 
 LINST   ::=     LINST:li  INST:i

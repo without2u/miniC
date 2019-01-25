@@ -1,14 +1,22 @@
 package yal.arbre.expressions;
 
 import yal.arbre.instructions.Type;
+import yal.exceptions.AnalyseException;
 
 public class ConstanteEntiere extends Constante {
     
     public ConstanteEntiere(String texte, int n) {
         super(texte, n) ;
         type = Type.ENTIER;
+        this.valeur = Integer.parseInt(cste);
+
     }
 
+
+    @Override
+    public void verifier() throws AnalyseException {
+
+    }
 
     @Override
     public String toMIPS() {
@@ -21,6 +29,6 @@ public class ConstanteEntiere extends Constante {
 
     @Override
     public String toString() {
-        return "ConstanteEntiere{}";
+        return cste;
     }
 }

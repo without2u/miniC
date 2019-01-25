@@ -19,7 +19,16 @@ public class Programme extends ArbreAbstrait {
     }
 
     @Override
+    public String toString() {
+        return "Programme{" +
+                "nomProg='" + nomProg + '\'' +
+                ", bloc=" + bloc +
+                '}';
+    }
+
+    @Override
     public void verifier() throws AnalyseException {
+
         bloc.verifier();
         if(!ListeDErreurs.getErreurs().isEmpty())
             throw new EnsembleDErreurs("");
