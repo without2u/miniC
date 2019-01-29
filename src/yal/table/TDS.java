@@ -3,47 +3,43 @@ package yal.table;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.DoublonsException;
 import yal.exceptions.ListeDErreurs;
-import yal.exceptions.VariablePasDeclareeException;
 
 import java.util.HashMap;
 
-public class Tds {
+public class TDS {
 
-    private static Tds table = new Tds();
+    private static TDS table = new TDS();
     private HashMap<Entree,Symbole> tableDeSymbole;
     //a revoir
     private static int decalage = 4;
 
 
     //constructeur de table de symboles
-    public Tds(){
+    public TDS(){
 
         tableDeSymbole = new HashMap<Entree,Symbole>();
 
     }
 
     //on effectue une nouvelle entree dans la table de symbole
-    public void ajouter(Entree e, Symbole s ,int no) {
+    public void ajouter(Entree e, Symbole s ,int no) throws AnalyseException {
         //si le symbole existe deja (pour eviter les doublons)
 
         if (tableDeSymbole.containsKey(e)) {
             DoublonsException erreur= new DoublonsException(no + ": la variable " + e + " est declaree plusieurs fois !\"");
             ListeDErreurs.getErreurs().addErreur(erreur);
 
-
         }else {
-            decalage = decalage - 4;
+            decalage -= 4;
             s.setDeplacement(decalage);
-
-            tableDeSymbole.put(e, s);
+            tableDeSymbole.put(e,s);
 
         }
 
 
     }
 
-    public static Tds getInstance() {
-
+    public static TDS getInstance() {
         return table;
 
     }
@@ -58,7 +54,10 @@ public class Tds {
 
         StringBuilder sb = new StringBuilder();
         for(Entree e : tableDeSymbole.keySet()){
-            sb.append(e+" "+tableDeSymbole.get(e)+"\n");}
+
+            sb.append(e+"  "+tableDeSymbole.get(e)+"\n");
+
+        }
 
         return sb.toString();
     }

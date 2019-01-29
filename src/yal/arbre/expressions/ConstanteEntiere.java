@@ -8,14 +8,6 @@ public class ConstanteEntiere extends Constante {
     public ConstanteEntiere(String texte, int n) {
         super(texte, n) ;
         type = Type.ENTIER;
-        this.valeur = Integer.parseInt(cste);
-
-    }
-
-
-    @Override
-    public void verifier() throws AnalyseException {
-
     }
 
     @Override
@@ -28,7 +20,7 @@ public class ConstanteEntiere extends Constante {
     }
 
     @Override
-    public String toString() {
-        return cste;
+    public void verifier() throws AnalyseException {
+
     }
 }

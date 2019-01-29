@@ -2,15 +2,15 @@ package yal.analyse ;
 
 import java_cup.runtime.*;
 import yal.exceptions.AnalyseLexicaleException;
-
+      
 %%
-
+   
 %class AnalyseurLexical
 %public
 
 %line
 %column
-
+    
 %type Symbol
 %eofval{
         return symbol(CodesLexicaux.EOF) ;

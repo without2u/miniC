@@ -89,7 +89,6 @@ PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                     p.ajouterBloc(li);
                     RESULT = p;
                 :}
-
         ;
 
 LINST   ::=     LINST:li  INST:i
@@ -166,7 +165,7 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 						{: 	Entree e = new Entree(idf);
 							Type type = Type.ENTIER;
 							Symbole s = new Symbole(type);
-							Tds.getInstance().ajouter(e,s,idfleft+1);
+							Tds.getInstance().ajouter(e,s);
 							Identificateur id = new Identificateur(idf,idfleft);
 							RESULT = id;
 						:}

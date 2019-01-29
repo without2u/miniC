@@ -5,25 +5,25 @@ import yal.arbre.expressions.Identificateur;
 
 public class Lire extends Instruction {
 
-    protected Identificateur i ;
+    protected Identificateur exp ;
 
-    public Lire (Identificateur i, int n) {
+    public Lire (Identificateur e, int n) {
         super(n) ;
-        this.i = i ;
+        exp = e ;
     }
 
 
     @Override
     public void verifier() {
-        i.verifier();
+        exp.verifier();
     }
 
     @Override
     public String toMIPS() {
-        return   i.toMIPS() +
+        return   exp.toMIPS() +
                 "    li $v0, 5\n" +
                 "    syscall\n" +
-                "sw $v0, " + i.getDeplacement() + "($s7)\n\t";
+                "    sw $v0, " + exp.getDeplacement() + "($s7)\n\t";
 
 
     }

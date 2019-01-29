@@ -1,8 +1,13 @@
 programme test
 debut
 //testCommentaire
-entier i;
-i=1;
-ecrire i;
-lire i;
+entier a;
+entier b;
+a=1;
+
+ecrire a;
+lire b;
+
+
+
 fin

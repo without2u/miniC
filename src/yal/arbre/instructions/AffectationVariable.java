@@ -22,7 +22,7 @@ public class AffectationVariable extends Affectation {
 
     @Override
     public String toString() {
-       return "affectation de " + filsDroite + " dans " + filsGauche;
+        return "affectation de " + filsDroite + " dans " + filsGauche;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AffectationVariable extends Affectation {
 
         //verifier si les deux variables sont du meme type
         if(filsGauche.getType() != filsDroite.getType()) {
-            AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," affectation: types " + filsGauche + " et " + filsDroite + " incompatibles !");
+            AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," Erreur d'affectation: le type " + filsGauche + " et de " + filsDroite + " n'est pas compatibles !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         } else {
 

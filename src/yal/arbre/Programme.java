@@ -3,7 +3,7 @@ package yal.arbre;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.EnsembleDErreurs;
 import yal.exceptions.ListeDErreurs;
-import yal.table.Tds;
+import yal.table.TDS;
 
 public class Programme extends ArbreAbstrait {
 
@@ -19,19 +19,12 @@ public class Programme extends ArbreAbstrait {
     }
 
     @Override
-    public String toString() {
-        return "Programme{" +
-                "nomProg='" + nomProg + '\'' +
-                ", bloc=" + bloc +
-                '}';
-    }
-
-    @Override
     public void verifier() throws AnalyseException {
-
         bloc.verifier();
-        if(!ListeDErreurs.getErreurs().isEmpty())
+        if(!ListeDErreurs.getErreurs().isEmpty()){
+
             throw new EnsembleDErreurs("");
+        }
     }
 
     @Override
@@ -44,10 +37,10 @@ public class Programme extends ArbreAbstrait {
                 "              .align 2\n"+
                 ".text\n" +
                 " main :\n") ;
-        if(!Tds.getInstance().isEmpty()) {
+        if(!TDS.getInstance().isEmpty()) {
 
             sb.append("move $s7, $sp\n\t");
-            sb.append("addi $sp, $sp, " + (Tds.getInstance().getSize()) *(-decalage) + "\n\n\t");
+            sb.append("addi $sp, $sp, " + (TDS.getInstance().getSize()) *(-decalage) + "\n\n\t");
 
         }
         sb.append(bloc.toMIPS() + "\n");

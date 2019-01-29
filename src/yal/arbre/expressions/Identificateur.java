@@ -6,7 +6,7 @@ import yal.exceptions.ListeDErreurs;
 import yal.exceptions.VariablePasDeclareeException;
 import yal.table.Entree;
 import yal.table.Symbole;
-import yal.table.Tds;
+import yal.table.TDS;
 
 public class Identificateur extends Expression{
 
@@ -20,24 +20,22 @@ public class Identificateur extends Expression{
     }
 
     @Override
-    public String toString() {
-        return nom;
-    }
-
-    @Override
     public void verifier() throws AnalyseException {
 
         Entree e =new Entree(this.nom);
-        symbole = Tds.getInstance().getTableDeSymbole().get(e);
+        symbole = TDS.getInstance().getTableDeSymbole().get(e);
         if(symbole == null) {
-
-           VariablePasDeclareeException erreur= new VariablePasDeclareeException(noLigne + ": la variable " + nom + " n'est pas declarée !");
-           ListeDErreurs.getErreurs().addErreur(erreur);
-
+            VariablePasDeclareeException erreur= new VariablePasDeclareeException(noLigne + ": la variable " + nom + " n'est pas declarée !");
+            ListeDErreurs.getErreurs().addErreur(erreur);
         }else{
             setType(Type.ENTIER);
 
         }
+    }
+
+    @Override
+    public String toString() {
+            return nom;
     }
 
     @Override
@@ -47,13 +45,13 @@ public class Identificateur extends Expression{
 
 
     public Type getType() {
+
         if (symbole == null){
             return null;
 
         }else {
             return  symbole.getType();
         }
-
     }
 
     public int getDeplacement() {
