@@ -34,7 +34,7 @@ public class AffectationVariable extends Affectation {
 
         //verifier si les deux variables sont du meme type
         if(filsGauche.getType() != filsDroite.getType()) {
-            AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," Erreur d'affectation: le type " + filsGauche + " et de " + filsDroite + " n'est pas compatibles !");
+            AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," Erreur d'affectation: le type de " + filsGauche + " et de " + filsDroite + " n'est pas compatibles !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         } else {
 

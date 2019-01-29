@@ -58,12 +58,12 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE;
-terminal String    IDF, CSTENTIERE, TYPE ;
+terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
 
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG;
-non terminal Expression EXP ;
+non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST,LECTURE;
@@ -122,16 +122,29 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 :}
         ;
 
-EXP    ::=     CSTENTIERE:c
+EXP    ::=      CST:c
                 {:
-                    RESULT = new ConstanteEntiere(c, cleft + 1) ;
+                    RESULT = c ;
                 :}
         |
                 IDF:idf
                 {:
                     RESULT = new Identificateur(idf, idfleft+1);
                 :}
+
         ;
+
+CST     ::=     CSTENTIERE:c
+                {:
+                    RESULT = new ConstanteEntiere(c, cleft + 1) ;
+                :}
+        |
+                CSTBOOLEAN:e
+                {:
+                    RESULT = new ConstanteBoolean(e, eleft+1) ;
+                :}
+        ;
+
 
 AFFECT		::=	    IDF:idf EGAL EXP:e POINTVIRGULE
 					{:
@@ -153,26 +166,27 @@ LDECL		::=		LDECL:ld DECL:d
 							bloc.ajouter(d);
 							RESULT = bloc;
 						:}
-				;
+			;
 
 
 DECL		::=		DECL_VAR:dv
 						{: RESULT = dv; :}
-				;
+			;
 
 
 DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 						{: 	Entree e = new Entree(idf);
 							Type type = Type.ENTIER;
 							Symbole s = new Symbole(type);
-							Tds.getInstance().ajouter(e,s);
+							TDS.getInstance().ajouter(e,s,idfleft+1);
 							Identificateur id = new Identificateur(idf,idfleft);
 							RESULT = id;
 						:}
 				;
+
 LECTURE     ::=     LIRE IDF:idf POINTVIRGULE
                     {: Identificateur id = new Identificateur(idf, idfleft + 1);
                         Instruction l = new Lire(id, idfleft + 1);
                         RESULT = l;
                     :}
-                    ;
+             ;
