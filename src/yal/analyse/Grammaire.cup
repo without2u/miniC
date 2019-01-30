@@ -58,7 +58,7 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE;
-terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN,CSTCHAINE;
+terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
 
 /* Non terminals used in the grammar section.  */
 
@@ -120,20 +120,7 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {:
                     RESULT = aff;
                 :}
-        |
-                ECRIRE CSTCHAINE:cc POINTVIRGULE
-                {:
-                	StringBuffer sb = new StringBuffer(cc);
-                	for(int i = 1; i < sb.length() - 2; i += 2) {
-                		if(sb.charAt(i) == '"' && sb.charAt(i + 1) == '"') {
-                			sb.setCharAt(i, '\\');
-                		}
-                	}
-                	String s = sb.toString();
-                	String chaine = s.replaceAll("[\r\n]", "");
-                	TDC.getInstance().ajouterChaine(chaine);
-                	RESULT = new EcrireChaine(chaine, ccleft+1);
-                :}
+
         ;
 
 EXP    ::=      CST:c
