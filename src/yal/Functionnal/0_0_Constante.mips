@@ -6,10 +6,35 @@
 move $s7, $sp
 	addi $sp, $sp, -4
 
+	move $t8, $v0
+	li $v0, 1
+	beq $v0, $t8, Ecrire0
+	li $v0, 4
+	la $a0, faux
+	syscall
+	j fin0
+Ecrire0: li $v0, 4
+	la $a0, vrai
+	syscall
+	fin0:
+	move $t8, $v0
+	li $v0, 1
+	beq $v0, $t8, Ecrire0
+	li $v0, 4
+	la $a0, faux
+	syscall
+	j fin0
+Ecrire0: li $v0, 4
+	la $a0, vrai
+	syscall
+	fin0:
 	lw $v0, 0($s7)
 	move $t8, $v0
 	li $v0, 1
 	move $a0, $t8
+	syscall
+	li $v0, 4
+	la $a0, str0
 	syscall
 	
 end :

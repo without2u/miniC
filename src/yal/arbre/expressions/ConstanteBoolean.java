@@ -5,29 +5,23 @@ import yal.arbre.instructions.Type;
 public class ConstanteBoolean extends Constante{
     public ConstanteBoolean(String texte, int n) {
         super(texte, n) ;
-        this.type = Type.ENTIER;
-    }
+        type=Type.BOOLEAN;
 
-
-    @Override
-    public void verifier() {
 
     }
 
 
     @Override
     public String toMIPS() {
-        return instructionMIPS();
-    }
-
-
-
-    public String instructionMIPS() {
         StringBuilder sb = new StringBuilder();
-        switch(cste) {
-            case "vrai" : sb.append("li $v0, 1\n\t");break;
-            case "faux" : sb.append("li $v0, 0\n\t");break;
+        if(cste=="vrai"){
+            sb.append("li $v0, 1\n\t");
+        }
+        if(cste=="faux"){
+            sb.append("li $v0, 0\n\t");
         }
         return sb.toString();
     }
+
+
 }

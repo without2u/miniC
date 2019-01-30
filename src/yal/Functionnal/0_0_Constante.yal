@@ -2,7 +2,9 @@ programme test
 debut
 //testCommentaire
 entier a;
-
+ecrire vrai;
+ecrire faux;
 ecrire a;
+ecrire "On doit avoir 220\n";
 
 fin

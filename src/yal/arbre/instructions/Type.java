@@ -3,7 +3,8 @@ package yal.arbre.instructions;
 
     public enum Type {
 
-        ENTIER("ENTIER");
+
+        ENTIER("ENTIER"),BOOLEAN("BOOLEAN");
 
 
         private String type;

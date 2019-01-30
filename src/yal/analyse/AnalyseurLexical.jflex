@@ -35,6 +35,8 @@ import yal.exceptions.AnalyseLexicaleException;
 
 idf = [A-Za-z_][A-Za-z_0-9]*
 csteE = [0-9]+
+csteB = "vrai" | "faux"
+csteC = [\"]([^\"]|[\"]{2})+[\"]
 guillemet = [\"]
 type ="entier"
 finDeLigne = \r|\n
@@ -56,6 +58,8 @@ commentaireSlashSlash = [/][/].*
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
+{csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEAN, yytext()); }
+{csteC}      	       { return symbol(CodesLexicaux.CSTCHAINE, yytext()); }
 
 "="                	    { return symbol(CodesLexicaux.EGAL); }
 
