@@ -62,6 +62,7 @@ commentaireSlashSlash = [/][/].*
 "alors"				   { return symbol(CodesLexicaux.ALORS); }
 "sinon"				   { return symbol(CodesLexicaux.SINON); }
 "finsi"				   { return symbol(CodesLexicaux.FINSI); }
+"non"                  { return symbol(CodesLexicaux.NON); }
 
 "="                	    { return symbol(CodesLexicaux.EGAL); }
 
@@ -70,5 +71,4 @@ commentaireSlashSlash = [/][/].*
 {espace}               { }
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
 {commentaireSlashSlash} {}
-
 

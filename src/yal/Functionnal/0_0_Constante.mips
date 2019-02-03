@@ -36,8 +36,9 @@ Ecrire 0: li $v0, 4
 	move $a0, $t8
 	syscall
 	# debut condition 1
-li $v0, 7
-si1: beq $v0, 0, sinon 1
+ li $t8, 1
+	 sub $v0, $t8, $v0
+	si1: beq $v0, 0, sinon 1
 alors1:     li $v0, 5
     syscall
     sw $v0, 0($s7)

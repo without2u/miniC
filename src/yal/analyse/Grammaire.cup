@@ -6,6 +6,7 @@ import yal.table.*;
 import yal.arbre.expressions.* ;
 import yal.arbre.instructions.* ;
 import yal.exceptions.AnalyseSyntaxiqueException;
+import yal.arbre.expressions.unaire.NonLogique;
 
 import java_cup.runtime.*;
 
@@ -57,7 +58,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
 
 /* Non terminals used in the grammar section.  */
@@ -68,7 +69,7 @@ non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
 
-
+precedence left NON;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -138,9 +139,9 @@ EXP    ::=      CST:c
                     RESULT = new Identificateur(idf, idfleft+1);
                 :}
         |
-                NON EXPR:e
+                NON EXP:ne
                 {:
-                    RESULT = new NonLogique(e);
+                    RESULT = new NonLogique(ne);
                 :}
 
         ;

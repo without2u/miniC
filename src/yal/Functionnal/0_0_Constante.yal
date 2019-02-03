@@ -6,8 +6,9 @@ a=1;
 ecrire vrai;
 ecrire faux;
 ecrire a;
-si 7 alors
+si non faux alors
 lire a;
 finsi
+
 
 fin
