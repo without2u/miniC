@@ -2,7 +2,7 @@ programme test
 debut
 //testCommentaire
 entier a;
-a=1;
+a= - 1;
 ecrire vrai;
 ecrire faux;
 ecrire a;

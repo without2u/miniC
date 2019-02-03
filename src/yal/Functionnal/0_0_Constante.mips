@@ -6,7 +6,8 @@
 move $s7, $sp
 	addi $sp, $sp, -4
 
-	li $v0, 1
+	 li $t8, 1
+	 sub $v0, $t8, $v0
 sw $v0, 0($s7)
 	move $t8, $v0
 	li $v0, 1
@@ -38,7 +39,7 @@ Ecrire 0: li $v0, 4
 	# debut condition 1
  li $t8, 1
 	 sub $v0, $t8, $v0
-	si1: beq $v0, 0, sinon 1
+si1: beq $v0, 0, sinon 1
 alors1:     li $v0, 5
     syscall
     sw $v0, 0($s7)

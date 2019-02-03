@@ -63,6 +63,7 @@ commentaireSlashSlash = [/][/].*
 "sinon"				   { return symbol(CodesLexicaux.SINON); }
 "finsi"				   { return symbol(CodesLexicaux.FINSI); }
 "non"                  { return symbol(CodesLexicaux.NON); }
+"-"                	   { return symbol(CodesLexicaux.MOINS); }
 
 "="                	    { return symbol(CodesLexicaux.EGAL); }
 

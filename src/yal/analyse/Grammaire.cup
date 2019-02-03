@@ -7,6 +7,7 @@ import yal.arbre.expressions.* ;
 import yal.arbre.instructions.* ;
 import yal.exceptions.AnalyseSyntaxiqueException;
 import yal.arbre.expressions.unaire.NonLogique;
+import yal.arbre.expressions.unaire.MoinsUnaire;
 
 import java_cup.runtime.*;
 
@@ -60,6 +61,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
+terminal Symbol    MOINS;
 
 /* Non terminals used in the grammar section.  */
 
@@ -69,7 +71,7 @@ non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
 
-precedence left NON;
+precedence left NON,MOINS;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -142,6 +144,11 @@ EXP    ::=      CST:c
                 NON EXP:ne
                 {:
                     RESULT = new NonLogique(ne);
+                :}
+        |
+                MOINS  EXP:me
+                {:
+                    RESULT = new MoinsUnaire(me);
                 :}
 
         ;

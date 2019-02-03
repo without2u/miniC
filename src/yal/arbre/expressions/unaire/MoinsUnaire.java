@@ -5,27 +5,32 @@ import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
 
-public class NonLogique extends Unaire {
-    public NonLogique(Expression e) {
+public class MoinsUnaire extends Unaire{
+    public MoinsUnaire(Expression e) {
         super(e);
     }
 
     @Override
     public String getOperateur() {
-        return  " non ";
+        return "- ";
     }
 
     @Override
     public void verifier() {
         super.verifier();
-        if(e.getType() != Type.BOOLEAN) {
-
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne()," : " + "l'operateur" + getOperateur() +" est défini que pour les expression de type <<BOOLEAN>>");
+        if(e.getType() != Type.ENTIER) {
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " + "l'operateur" + getOperateur() +" est defini pour le type ENTIER");
             ListeDErreurs.getErreurs().addErreur(a);
+        }else {
 
-        }else{
-            setType(Type.BOOLEAN);
+            setType(Type.ENTIER);
+            setValeur(getValeur());
         }
+    }
+
+    @Override
+    public int getValeur() {
+        return - e.getValeur();
     }
 
     @Override
