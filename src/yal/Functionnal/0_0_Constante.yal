@@ -2,9 +2,12 @@ programme test
 debut
 //testCommentaire
 entier a;
+a=1;
 ecrire vrai;
 ecrire faux;
 ecrire a;
-
+si 7 alors
+lire a;
+finsi
 
 fin

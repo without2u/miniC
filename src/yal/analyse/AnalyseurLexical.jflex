@@ -58,6 +58,10 @@ commentaireSlashSlash = [/][/].*
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 {csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEAN, yytext()); }
+"si"				   { return symbol(CodesLexicaux.SI); }
+"alors"				   { return symbol(CodesLexicaux.ALORS); }
+"sinon"				   { return symbol(CodesLexicaux.SINON); }
+"finsi"				   { return symbol(CodesLexicaux.FINSI); }
 
 "="                	    { return symbol(CodesLexicaux.EGAL); }
 

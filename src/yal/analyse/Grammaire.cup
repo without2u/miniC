@@ -57,7 +57,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
 
 /* Non terminals used in the grammar section.  */
@@ -66,7 +66,7 @@ non terminal ArbreAbstrait PROG;
 non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
-non terminal Instruction AFFECT, INST,LECTURE;
+non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
 
 
 
@@ -120,6 +120,11 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {:
                     RESULT = aff;
                 :}
+        |
+        		CONDITION:co
+        		{:
+        		    RESULT = co;
+        		:}
 
         ;
 
@@ -131,6 +136,11 @@ EXP    ::=      CST:c
                 IDF:idf
                 {:
                     RESULT = new Identificateur(idf, idfleft+1);
+                :}
+        |
+                NON EXPR:e
+                {:
+                    RESULT = new NonLogique(e);
                 :}
 
         ;
@@ -147,32 +157,32 @@ CST     ::=     CSTENTIERE:e
         ;
 
 
-AFFECT		::=	    IDF:idf EGAL EXP:e POINTVIRGULE
+AFFECT		    ::=	    IDF:idf EGAL EXP:e POINTVIRGULE
 					{:
 					    Identificateur i = new Identificateur(idf, idfleft+1);
 					    Instruction aff = new AffectationVariable(i, e, idfleft+1);
 					    RESULT = aff;
 					:}
 
-			;
+			    ;
 
-LDECL		::=		LDECL:ld DECL:d
+LDECL		    ::=		LDECL:ld DECL:d
 					{:
                         ld.ajouter(d);
                         RESULT = ld;
 					:}
-			|
+			    |
 					DECL:d
 						{:	BlocDInstructions bloc = new BlocDInstructions(dleft+1);
 							bloc.ajouter(d);
 							RESULT = bloc;
 						:}
-			;
+			    ;
 
 
-DECL		::=		DECL_VAR:dv
+DECL		    ::=		DECL_VAR:dv
 						{: RESULT = dv; :}
-			;
+			    ;
 
 
 DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
@@ -185,9 +195,38 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 						:}
 				;
 
-LECTURE     ::=     LIRE IDF:idf POINTVIRGULE
-                    {: Identificateur id = new Identificateur(idf, idfleft + 1);
-                        Instruction l = new Lire(id, idfleft + 1);
-                        RESULT = l;
-                    :}
-             ;
+LECTURE         ::=     LIRE IDF:idf POINTVIRGULE
+                        {:  Identificateur id = new Identificateur(idf, idfleft + 1);
+                            Instruction l = new Lire(id, idfleft + 1);
+                            RESULT = l;
+                        :}
+                ;
+
+CONDITION		::=		SI EXP:e ALORS FINSI
+                          {:
+                              RESULT = new Condition(e,eleft+1);
+                          :}
+                 |
+                        SI EXP:e ALORS LINST:li FINSI
+                        {:
+                            Instruction instruction = new Condition(e,eleft+1);
+                            ((Condition)instruction).addConditionAlors(li);
+                            RESULT = instruction;
+                        :}
+                 |
+                        SI EXP:e ALORS SINON LINST:li FINSI
+                        {:
+                            Instruction instruction = new Condition(e,eleft+1);
+                            ((Condition)instruction).addConditionSinon(li);
+                            RESULT = instruction;
+                        :}
+                |
+                        SI EXP:e ALORS LINST:li1 SINON LINST:li2 FINSI
+                        {:
+                            Instruction instruction= new Condition(e,eleft+1);
+                            ((Condition)instruction).addConditionAlors(li1);
+                            ((Condition)instruction).addConditionSinon(li2);
+                            RESULT = instruction;
+                        :}
+
+                ;
