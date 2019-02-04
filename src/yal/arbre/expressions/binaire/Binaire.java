@@ -41,11 +41,8 @@ public abstract class Binaire extends Expression {
 
     @Override
     public void verifier() throws AnalyseException {
-        if(filsGauche.getType() == null || filsDroite.getType() == null) {
-        }
         filsGauche.verifier();
         filsDroite.verifier();
-
     }
 
     public Expression getFilsDroite() {
