@@ -3,28 +3,35 @@
               .align 2
 vrai:	.asciiz "vrai"
 faux:	.asciiz "faux"
+error_div:	.asciiz "Erreur: Division par 0 !"
 .text
  main :
-# debut condition1
-li $v0, 0
-	si1: beq $v0, 0, sinon1
-alors1: li $v0,3
+move $s7, $sp
+	addi $sp, $sp, -8
+
+	li $v0,4
 	
-move $t8, $v0
+sw $v0, 0($s7)
+	#calcul de l'expression yal.arbre.expressions.binaire.arithmetique.Division@2f0e140b
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,2
+	
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	bne $v0, 0, division
+	li $v0, 4
+	la $a0, error_div
+	syscall
+	j end
+division : 
+	div $t8, $v0
+	mflo $v0
+	move $t8, $v0
 	li $v0, 1
 	move $a0, $t8
 	syscall
-	
-j fsi1
-sinon1: li $v0,7
-	
-move $t8, $v0
-	li $v0, 1
-	move $a0, $t8
-	syscall
-	
-# fin condition1
-fsi1: 
 	
 end :
 move $v1, $v0

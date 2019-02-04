@@ -8,6 +8,16 @@ import yal.arbre.instructions.* ;
 import yal.exceptions.AnalyseSyntaxiqueException;
 import yal.arbre.expressions.unaire.NonLogique;
 import yal.arbre.expressions.unaire.MoinsUnaire;
+import yal.arbre.expressions.binaire.arithmetique.Division;
+import yal.arbre.expressions.binaire.arithmetique.Moins;
+import yal.arbre.expressions.binaire.arithmetique.Multiplication;
+import yal.arbre.expressions.binaire.arithmetique.Plus;
+import yal.arbre.expressions.binaire.comparaison.Different;
+import yal.arbre.expressions.binaire.comparaison.Egal;
+import yal.arbre.expressions.binaire.comparaison.Inferieur;
+import yal.arbre.expressions.binaire.comparaison.Superieur;
+import yal.arbre.expressions.binaire.logique.EtLogique;
+import yal.arbre.expressions.binaire.logique.OuLogique;
 
 import java_cup.runtime.*;
 
@@ -61,7 +71,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
-terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MOINS, MULT, DIV;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV;
 
 /* Non terminals used in the grammar section.  */
 
@@ -71,7 +81,7 @@ non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
 
-precedence left NON, MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MOINS, MULT, DIV;
+precedence left NON, MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -158,10 +168,10 @@ EXP    ::=      CST:c
                 {: RESULT = new Moins(e1,e2); :}
         |
                 EXP:e1  MULT  EXP:e2
-                {: RESULT = new Mult(e1,e2); :}
+                {: RESULT = new Multiplication(e1,e2); :}
         |
                 EXP:e1  DIV  EXP:e2
-                {: RESULT = new Div(e1,e2); :}
+                {: RESULT = new Division(e1,e2); :}
         |
                 EXP:e1  INF  EXP:e2
                 {: RESULT = new Inferieur(e1,e2); :}

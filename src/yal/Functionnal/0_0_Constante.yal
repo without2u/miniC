@@ -1,10 +1,9 @@
 programme test
 debut
 //testCommentaire
-si faux alors
-ecrire 3;
-sinon
-ecrire 7;
-finsi
+entier a;
+entier b;
+a=4;
+ecrire a/0;
 
 fin

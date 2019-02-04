@@ -64,9 +64,14 @@ commentaireSlashSlash = [/][/].*
 "finsi"				   { return symbol(CodesLexicaux.FINSI); }
 "non"                  { return symbol(CodesLexicaux.NON); }
 "-"                	   { return symbol(CodesLexicaux.MOINS); }
-
-"="                	    { return symbol(CodesLexicaux.EGAL); }
-
+"+"                	   { return symbol(CodesLexicaux.PLUS); }
+"*"                	   { return symbol(CodesLexicaux.MULT); }
+"/"                    { return symbol(CodesLexicaux.DIV); }
+"=="                   { return symbol(CodesLexicaux.EGALEGAL); }
+"!="                   { return symbol(CodesLexicaux.DIFF); }
+"<"                	   { return symbol(CodesLexicaux.INF); }
+">"                	   { return symbol(CodesLexicaux.SUP); }
+"="                	   { return symbol(CodesLexicaux.EGAL); }
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }

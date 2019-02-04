@@ -37,7 +37,9 @@ public class Programme extends ArbreAbstrait {
                 "              .align 2\n"+
                 "vrai:\t" + ".asciiz \"vrai\"" + "\n"+
                 "faux:\t" + ".asciiz \"faux\"" + "\n"+
-                ".text\n" +
+                "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\"" + "\n"+
+
+        ".text\n" +
                 " main :\n") ;
         if(!TDS.getInstance().isEmpty()) {
 
