@@ -16,15 +16,21 @@ public class MoinsUnaire extends Unaire{
     }
 
     @Override
+    public String toString() {
+        return getOperateur();
+    }
+
+    @Override
     public void verifier() {
         super.verifier();
         if(e.getType() != Type.ENTIER) {
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " + "l'operateur" + getOperateur() +" est defini pour le type ENTIER");
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " + "l'operateur " + getOperateur() +"  est que  defini pour les expressions de type ENTIER");
             ListeDErreurs.getErreurs().addErreur(a);
         }else {
 
             setType(Type.ENTIER);
             setValeur(getValeur());
+
         }
     }
 
@@ -33,9 +39,9 @@ public class MoinsUnaire extends Unaire{
         return - e.getValeur();
     }
 
-    @Override
-    public String toMIPS() {
-        return  " li $t8, 1\n\t"+
+
+    public String codeToMips() {
+        return  " li $t8, 0 \n\t"+
                 " sub $v0, $t8, $v0\n";
     }
 }

@@ -26,7 +26,10 @@ public abstract class Unaire extends Expression {
             sb.append("lw $v0, " + ((Identificateur)e).getDeplacement() + "($s7)\n\t");
         } else {
             sb.append(e.toMIPS());
+            sb.append(codeToMips());
         }
         return sb.toString();
     }
+
+
 }

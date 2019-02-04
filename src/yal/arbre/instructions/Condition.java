@@ -29,12 +29,12 @@ public class Condition extends Instruction {
     @Override
     public String toMIPS() {
 
-        return "# debut condition "+ cmpt +"\n"+ e.toMIPS()+
-        "si" + cmpt + ": beq $v0, 0, sinon " + cmpt + "\n"+
+        return "# debut condition"+ cmpt +"\n"+ e.toMIPS()+
+        "si" + cmpt + ": beq $v0, 0, sinon" + cmpt + "\n"+
         "alors" + cmpt + ": " + alors.toMIPS() + "\n"+
         "j fsi" + cmpt + "\n"+
         "sinon" + cmpt + ": " + sinon.toMIPS() +"\n"+
-        "# fin condition "+ cmpt +"\n"+
+        "# fin condition"+ cmpt +"\n"+
         "fsi" + cmpt + ": \n\t";
     }
 

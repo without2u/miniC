@@ -28,8 +28,10 @@ public class NonLogique extends Unaire {
         }
     }
 
+
+
     @Override
-    public String toMIPS() {
+    public String codeToMips() {
         return  " li $t8, 1\n\t"+
                 " sub $v0, $t8, $v0\n";
     }

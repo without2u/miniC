@@ -1,52 +1,29 @@
 .data
  fin:         .asciiz 
               .align 2
+vrai:	.asciiz "vrai"
+faux:	.asciiz "faux"
 .text
  main :
-move $s7, $sp
-	addi $sp, $sp, -4
-
-	 li $t8, 1
-	 sub $v0, $t8, $v0
-sw $v0, 0($s7)
-	move $t8, $v0
-	li $v0, 1
-	beq $v0, $t8, Ecrire 0
-	li $v0, 4
-	la $a0, faux
-	syscall
-	j fin 0
-Ecrire 0: li $v0, 4
-	la $a0, vrai
-	syscall
-	fin 0:
-	move $t8, $v0
-	li $v0, 1
-	beq $v0, $t8, Ecrire 0
-	li $v0, 4
-	la $a0, faux
-	syscall
-	j fin 0
-Ecrire 0: li $v0, 4
-	la $a0, vrai
-	syscall
-	fin 0:
-	lw $v0, 0($s7)
-	move $t8, $v0
+# debut condition1
+li $v0, 0
+	si1: beq $v0, 0, sinon1
+alors1: li $v0,3
+	
+move $t8, $v0
 	li $v0, 1
 	move $a0, $t8
 	syscall
-	# debut condition 1
- li $t8, 1
-	 sub $v0, $t8, $v0
-si1: beq $v0, 0, sinon 1
-alors1:     li $v0, 5
-    syscall
-    sw $v0, 0($s7)
 	
 j fsi1
-sinon1: 
-# fin condition 1
+sinon1: li $v0,7
+	
+move $t8, $v0
+	li $v0, 1
+	move $a0, $t8
+	syscall
+	
+# fin condition1
 fsi1: 
 	
 end :

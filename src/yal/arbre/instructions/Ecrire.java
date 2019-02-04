@@ -45,15 +45,15 @@ public class Ecrire extends Instruction {
             sb.append(exp.toMIPS());
             sb.append("move $t8, $v0\n\t");
             sb.append("li $v0, 1\n\t");
-            sb.append("beq $v0, $t8, Ecrire "+cmp+"\n\t");
+            sb.append("beq $v0, $t8, Ecrire"+cmp+"\n\t");
             sb.append("li $v0, 4\n\t");
             sb.append("la $a0, faux\n\t");
             sb.append("syscall\n\t");
-            sb.append("j fin "+cmp+"\n");
-            sb.append("Ecrire "+cmp+": li $v0, 4\n\t");
+            sb.append("j fin"+cmp+"\n");
+            sb.append("Ecrire"+cmp+": li $v0, 4\n\t");
             sb.append("la $a0, vrai\n\t");
             sb.append("syscall\n\t");
-            sb.append("fin "+cmp+":\n\t");
+            sb.append("fin"+cmp+":\n\t");
         }
 
         return sb.toString();

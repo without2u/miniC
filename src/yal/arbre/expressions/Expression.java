@@ -27,4 +27,5 @@ public abstract class Expression extends ArbreAbstrait {
     public void setType(Type type) {
         this.type = type;
     }
+    public abstract String codeToMips();
 }

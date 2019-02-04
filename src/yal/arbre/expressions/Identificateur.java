@@ -54,6 +54,11 @@ public class Identificateur extends Expression{
         }
     }
 
+    @Override
+    public String codeToMips() {
+        return null;
+    }
+
     public int getDeplacement() {
         return symbole.getDeplacement();
     }

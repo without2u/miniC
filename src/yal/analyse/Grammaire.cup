@@ -61,7 +61,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
-terminal Symbol    MOINS;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MOINS, MULT, DIV;
 
 /* Non terminals used in the grammar section.  */
 
@@ -71,7 +71,7 @@ non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
 
-precedence left NON,MOINS;
+precedence left NON, MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MOINS, MULT, DIV;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -150,7 +150,36 @@ EXP    ::=      CST:c
                 {:
                     RESULT = new MoinsUnaire(me);
                 :}
-
+        |
+                EXP:e1  PLUS  EXP:e2
+                {: RESULT = new Plus(e1,e2) ; :}
+        |
+                EXP:e1  MOINS  EXP:e2
+                {: RESULT = new Moins(e1,e2); :}
+        |
+                EXP:e1  MULT  EXP:e2
+                {: RESULT = new Mult(e1,e2); :}
+        |
+                EXP:e1  DIV  EXP:e2
+                {: RESULT = new Div(e1,e2); :}
+        |
+                EXP:e1  INF  EXP:e2
+                {: RESULT = new Inferieur(e1,e2); :}
+        |
+                EXP:e1  SUP  EXP:e2
+                {: RESULT = new Superieur(e1,e2); :}
+        |
+                EXP:e1  EGALEGAL  EXP:e2
+                {: RESULT = new Egal(e1,e2); :}
+        |
+                EXP:e1  DIFF  EXP:e2
+                {: RESULT = new Different(e1,e2); :}
+        |
+                EXP:e1  ET  EXP:e2
+                {: RESULT = new EtLogique(e1,e2); :}
+        |
+                EXP:e1  OU  EXP:e2
+                {: RESULT = new OuLogique(e1,e2); :}
         ;
 
 CST     ::=     CSTENTIERE:e

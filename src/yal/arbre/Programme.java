@@ -35,6 +35,8 @@ public class Programme extends ArbreAbstrait {
         sb.append(".data\n" +
                 " fin:         .asciiz \n" +
                 "              .align 2\n"+
+                "vrai:\t" + ".asciiz \"vrai\"" + "\n"+
+                "faux:\t" + ".asciiz \"faux\"" + "\n"+
                 ".text\n" +
                 " main :\n") ;
         if(!TDS.getInstance().isEmpty()) {
