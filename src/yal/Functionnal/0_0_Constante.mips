@@ -3,77 +3,76 @@
               .align 2
 vrai:	.asciiz "vrai"
 faux:	.asciiz "faux"
-error_div:	.asciiz "Erreur: Division par 0 !"
+error_div:	.asciiz "Erreur: Division par 0 !
 .text
  main :
 move $s7, $sp
-	addi $sp, $sp, -4
+addi $sp, $sp, -4
+li $v0,4
 
-	li $v0,4
-	
 sw $v0, 0($s7)
 	# debut boucle 2
-	tantque2: # on clacule l'expression 
+tantque2: # on clacule l'expression 
 	lw $v0, 0($s7)
-	sw $v0, 0($sp)
+sw $v0, 0($sp)
 	addi $sp, $sp, -4
 	li $v0,0
-	
+
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	sgt $v0, $t8, $v0
-	# evaluation de la condition
-	beq $v0, 0, fintantque2
-	# debut boucle 1
-	tantque1: # on clacule l'expression 
+# evaluation de la condition
+beq $v0, 0, fintantque2
+# debut boucle 1
+tantque1: # on clacule l'expression 
 	lw $v0, 0($s7)
-	sw $v0, 0($sp)
+sw $v0, 0($sp)
 	addi $sp, $sp, -4
 	li $v0,2
-	
+
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	sgt $v0, $t8, $v0
-	# evaluation de la condition
-	beq $v0, 0, fintantque1
-	li $v0,100
-	
+# evaluation de la condition
+beq $v0, 0, fintantque1
+li $v0,100
+
 move $t8, $v0
-	li $v0, 1
-	move $a0, $t8
-	syscall
-	# on clacule l'expression 
+li $v0, 1
+move $a0, $t8
+syscall
+# on clacule l'expression 
 	lw $v0, 0($s7)
-	sw $v0, 0($sp)
+sw $v0, 0($sp)
 	addi $sp, $sp, -4
 	li $v0,1
-	
+
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
-	sub $v0, $t8, $v0
-	sw $v0, 0($s7)
+	sub $v0, $t8, $v0 
+sw $v0, 0($s7)
 	j tantque1
-	# fin de la boucle 1
-	fintantque1:
+# fin de la boucle 1
+fintantque1:
+lw $v0, 0($s7)
+move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+# on clacule l'expression 
 	lw $v0, 0($s7)
-	move $t8, $v0
-	li $v0, 1
-	move $a0, $t8
-	syscall
-	# on clacule l'expression 
-	lw $v0, 0($s7)
-	sw $v0, 0($sp)
+sw $v0, 0($sp)
 	addi $sp, $sp, -4
 	li $v0,1
-	
+
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
-	sub $v0, $t8, $v0
-	sw $v0, 0($s7)
+	sub $v0, $t8, $v0 
+sw $v0, 0($s7)
 	j tantque2
-	# fin de la boucle 2
-	fintantque2:
-	
+# fin de la boucle 2
+fintantque2:
+
 end :
 move $v1, $v0
  li $v0, 10 

@@ -18,7 +18,7 @@ public abstract class BinaireArithmetique extends Binaire {
         getFilsGauche().verifier();
 
         if((getFilsGauche().getType() != Type.ENTIER) || (getFilsDroite().getType() != Type.ENTIER)) {
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ,": les types des operandes doivent être ENTIER pour l'opérateur : " + getOperateur());
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ,": les types des operandes doivent être ENTIER ");
             ListeDErreurs.getErreurs().addErreur(a);
         } else {
             //le type d'expression

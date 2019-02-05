@@ -15,7 +15,7 @@ public class Superieur extends Comparaison{
 
     @Override
     public String codeToMips() {
-        return "sgt $v0, $t8, $v0\n\t";
+        return "sgt $v0, $t8, $v0\n";
     }
 
     @Override

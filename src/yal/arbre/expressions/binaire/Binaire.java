@@ -20,7 +20,7 @@ public abstract class Binaire extends Expression {
         StringBuilder sb = new StringBuilder();
         sb.append("# on clacule l'expression \n\t");
         if(filsGauche instanceof Identificateur) {
-            sb.append("lw $v0, " + ((Identificateur)filsGauche).getDeplacement() + "($s7)\n\t");
+            sb.append("lw $v0, " + ((Identificateur)filsGauche).getDeplacement() + "($s7)\n");
         } else{
             sb.append(filsGauche.toMIPS());
         }
@@ -28,7 +28,7 @@ public abstract class Binaire extends Expression {
         sb.append("addi $sp, $sp, -4\n\t");
 
         if(filsDroite instanceof Identificateur) {
-            sb.append("lw $v0, " + ((Identificateur)filsDroite).getDeplacement() + "($s7)\n\t");
+            sb.append("lw $v0, " + ((Identificateur)filsDroite).getDeplacement() + "($s7)\n");
         } else {
             sb.append(filsDroite.toMIPS());
         }

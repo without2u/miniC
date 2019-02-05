@@ -1,6 +1,7 @@
 package yal.arbre.expressions.binaire.logique;
 
 import yal.arbre.expressions.Expression;
+import yal.exceptions.AnalyseException;
 
 public class OuLogique extends BinaireLogique{
     public OuLogique(Expression filsGauche, Expression filsDroite) {
@@ -14,6 +15,11 @@ public class OuLogique extends BinaireLogique{
 
     @Override
     public String codeToMips() {
-        return "or $v0, $t8, $v0\n\t";
+        return "or $v0, $t8, $v0 \n";
+    }
+
+    @Override
+    public void verifier() throws AnalyseException {
+        super.verifier();
     }
 }

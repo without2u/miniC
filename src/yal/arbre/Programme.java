@@ -35,16 +35,16 @@ public class Programme extends ArbreAbstrait {
         sb.append(".data\n" +
                 " fin:         .asciiz \n" +
                 "              .align 2\n"+
-                "vrai:\t" + ".asciiz \"vrai\"" + "\n"+
-                "faux:\t" + ".asciiz \"faux\"" + "\n"+
-                "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\"" + "\n"+
+                "vrai:\t" + ".asciiz \"vrai\"\n"+
+                "faux:\t" + ".asciiz \"faux\"\n"+
+                "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\n"+
 
         ".text\n" +
                 " main :\n") ;
         if(!TDS.getInstance().isEmpty()) {
 
-            sb.append("move $s7, $sp\n\t");
-            sb.append("addi $sp, $sp, " + (TDS.getInstance().getSize()) *(-decalage) + "\n\n\t");
+            sb.append("move $s7, $sp\n");
+            sb.append("addi $sp, $sp, " + (TDS.getInstance().getSize()) *(-decalage) + "\n");
 
         }
         sb.append(bloc.toMIPS() + "\n");

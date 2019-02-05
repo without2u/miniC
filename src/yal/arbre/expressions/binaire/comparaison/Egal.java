@@ -15,7 +15,7 @@ public class Egal extends Comparaison{
 
     @Override
     public String codeToMips() {
-        return "seq $v0, $t8, $v0\n\t";
+        return "seq $v0, $t8, $v0\n";
     }
 
     @Override

@@ -19,7 +19,7 @@ public class ConstanteEntiere extends Constante {
 
     public String codeToMips(){
         StringBuilder sb = new StringBuilder("") ;
-        sb.append("li $v0,"+ cste + "\n\t") ;
+        sb.append("li $v0,"+ cste + "\n") ;
         sb.append("\n") ;
         return sb.toString() ;
     }

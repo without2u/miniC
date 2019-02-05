@@ -23,7 +23,7 @@ public class Lire extends Instruction {
         return   exp.toMIPS() +
                 "    li $v0, 5\n" +
                 "    syscall\n" +
-                "    sw $v0, " + exp.getDeplacement() + "($s7)\n\t";
+                "    sw $v0, " + exp.getDeplacement() + "($s7)\n";
 
 
     }

@@ -36,14 +36,14 @@ public class Boucle extends Instruction{
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-        sb.append("# debut boucle "+ tmp +"\n\t");
+        sb.append("# debut boucle "+ tmp +"\n");
         sb.append("tantque" + tmp + ": " + e.toMIPS());
-        sb.append("# evaluation de la condition\n\t");
-        sb.append("beq $v0, 0, fintantque" + tmp + "\n\t");
+        sb.append("# evaluation de la condition\n");
+        sb.append("beq $v0, 0, fintantque" + tmp + "\n");
         sb.append(bloc.toMIPS());
-        sb.append("j " + "tantque" + tmp + "\n\t");
-        sb.append("# fin de la boucle " + tmp + "\n\t");
-        sb.append("fintantque" + tmp + ":\n\t");
+        sb.append("j " + "tantque" + tmp + "\n");
+        sb.append("# fin de la boucle " + tmp + "\n");
+        sb.append("fintantque" + tmp + ":\n");
         return sb.toString();
     }
     public void ajouter(ArbreAbstrait a){

@@ -16,7 +16,7 @@ public abstract class BinaireLogique extends Binaire {
         if(getFilsGauche().getType() == Type.BOOLEAN && getFilsDroite().getType() == Type.BOOLEAN) {
             setType(Type.BOOLEAN);
         } else{
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ,": les types des operandes doivent être BOOLEEN pour l'operateur : " + getOperateur());
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ,": les types des operandes doivent être BOOLEAN ");
             ListeDErreurs.getErreurs().addErreur(a);
         }
     }

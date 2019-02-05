@@ -24,7 +24,8 @@ public class MoinsUnaire extends Unaire{
     public void verifier() {
         super.verifier();
         if(e.getType() != Type.ENTIER) {
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " + "l'operateur " + getOperateur() +"  est que  defini pour les expressions de type ENTIER");
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " +
+                    " les expressions doivent etre de type ENTIER \n");
             ListeDErreurs.getErreurs().addErreur(a);
         }else {
 
@@ -41,7 +42,7 @@ public class MoinsUnaire extends Unaire{
 
 
     public String codeToMips() {
-        return  " li $t8, 0 \n\t"+
+        return  " li $t8, 0 \n"+
                 " sub $v0, $t8, $v0\n";
     }
 }

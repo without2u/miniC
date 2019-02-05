@@ -20,7 +20,8 @@ public class NonLogique extends Unaire {
         super.verifier();
         if(e.getType() != Type.BOOLEAN) {
 
-            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne()," : " + "l'operateur" + getOperateur() +" est défini que pour les expression de type <<BOOLEAN>>");
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne()," : " +
+                    " les expressions doivent etre de type BOOLEAN \n");
             ListeDErreurs.getErreurs().addErreur(a);
 
         }else{

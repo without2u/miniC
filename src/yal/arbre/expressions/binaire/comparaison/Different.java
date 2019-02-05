@@ -15,7 +15,7 @@ public class Different extends Comparaison{
 
     @Override
     public String codeToMips() {
-        return "sne $v0, $t8, $v0\n\t";
+        return "sne $v0, $t8, $v0\n";
     }
 
     @Override

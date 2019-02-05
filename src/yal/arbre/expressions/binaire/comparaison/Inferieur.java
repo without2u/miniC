@@ -15,7 +15,7 @@ public class Inferieur extends Comparaison{
 
     @Override
     public String codeToMips() {
-        return "slt $v0, $t8, $v0\n\t";
+        return "slt $v0, $t8, $v0\n";
     }
 
     @Override
