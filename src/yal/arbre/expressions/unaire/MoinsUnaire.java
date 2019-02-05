@@ -25,7 +25,7 @@ public class MoinsUnaire extends Unaire{
         super.verifier();
         if(e.getType() != Type.ENTIER) {
             AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ," : " +
-                    " les expressions doivent etre de type ENTIER \n");
+                    " moinsUnaire :  les expressions doivent etre de type ENTIER \n");
             ListeDErreurs.getErreurs().addErreur(a);
         }else {
 

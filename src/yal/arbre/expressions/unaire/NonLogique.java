@@ -21,7 +21,7 @@ public class NonLogique extends Unaire {
         if(e.getType() != Type.BOOLEAN) {
 
             AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne()," : " +
-                    " les expressions doivent etre de type BOOLEAN \n");
+                    " nonLogique : les expressions doivent etre de type BOOLEAN \n");
             ListeDErreurs.getErreurs().addErreur(a);
 
         }else{

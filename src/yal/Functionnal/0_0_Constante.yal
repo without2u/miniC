@@ -2,15 +2,14 @@ programme test
 debut
 //testCommentaire
 entier a;
+si non a alors
+finsi
 a=4;
-tantque a>0 repeter
+tantque a repeter
 
-tantque a>2 repeter
-ecrire 100;
-a = a - 1;
-fintantque
-
-ecrire a;
+si a alors
+finsi
+ecrire b;
 a = a - 1;
 fintantque
 
