@@ -11,12 +11,14 @@ public class Boucle extends Instruction{
     private static int cmpt = 0;
     protected Expression e;
     protected BlocDInstructions bloc;
+    private int tmp;
+
     public Boucle(Expression e,int n) {
         super(n);
         this.e=e;
         cmpt++;
         bloc = new BlocDInstructions(n);
-
+        this.tmp=cmpt;
     }
 
     @Override
@@ -34,14 +36,14 @@ public class Boucle extends Instruction{
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-        sb.append("# debut boucle "+ cmpt +"\n\t");
-        sb.append("tantque" + cmpt + ": " + e.toMIPS());
+        sb.append("# debut boucle "+ tmp +"\n\t");
+        sb.append("tantque" + tmp + ": " + e.toMIPS());
         sb.append("# evaluation de la condition\n\t");
-        sb.append("beq $v0, 0, fintantque" + cmpt + "\n\t");
+        sb.append("beq $v0, 0, fintantque" + tmp + "\n\t");
         sb.append(bloc.toMIPS());
-        sb.append("j " + "tantque" + cmpt + "\n\t");
-        sb.append("# fin de la boucle " + cmpt + "\n\t");
-        sb.append("fintantque" + cmpt + ":\n\t");
+        sb.append("j " + "tantque" + tmp + "\n\t");
+        sb.append("# fin de la boucle " + tmp + "\n\t");
+        sb.append("fintantque" + tmp + ":\n\t");
         return sb.toString();
     }
     public void ajouter(ArbreAbstrait a){

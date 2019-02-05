@@ -3,11 +3,14 @@ debut
 //testCommentaire
 entier a;
 a=4;
-
 tantque a>0 repeter
-si a == 2 alors
+
+tantque a>2 repeter
+ecrire 100;
+a = a - 1;
+fintantque
+
 ecrire a;
-finsi
 a = a - 1;
 fintantque
 

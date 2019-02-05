@@ -10,12 +10,14 @@ public class Condition extends Instruction {
     protected BlocDInstructions sinon;
     protected BlocDInstructions alors;
     private static int cmpt = 0;
+    private int tmp;
     public Condition(Expression e,int n) {
         super(n);
         this.e=e;
         alors=new BlocDInstructions(n);
         sinon=new BlocDInstructions(n);
         cmpt++;
+        tmp=cmpt;
     }
 
     @Override
@@ -32,13 +34,13 @@ public class Condition extends Instruction {
     @Override
     public String toMIPS() {
 
-        return "# debut condition"+ cmpt +"\n"+ e.toMIPS()+
-        "si" + cmpt + ": beq $v0, 0, sinon" + cmpt + "\n"+
-        "alors" + cmpt + ": " + alors.toMIPS() + "\n"+
-        "j fsi" + cmpt + "\n"+
-        "sinon" + cmpt + ": " + sinon.toMIPS() +"\n"+
-        "# fin condition"+ cmpt +"\n"+
-        "fsi" + cmpt + ": \n\t";
+        return "# debut condition"+ tmp +"\n"+ e.toMIPS()+
+        "si" + tmp + ": beq $v0, 0, sinon" + tmp + "\n"+
+        "alors" + tmp + ": " + alors.toMIPS() + "\n"+
+        "j fsi" + tmp + "\n"+
+        "sinon" + tmp + ": " + sinon.toMIPS() +"\n"+
+        "# fin condition"+ tmp +"\n"+
+        "fsi" + tmp + ": \n\t";
     }
 
     public void addConditionAlors(ArbreAbstrait a){
