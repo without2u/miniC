@@ -7,12 +7,25 @@ error_div:	.asciiz "Erreur: Division par 0 !"
 .text
  main :
 move $s7, $sp
-	addi $sp, $sp, -8
+	addi $sp, $sp, -4
 
 	li $v0,4
 	
 sw $v0, 0($s7)
-	#calcul de l'expression yal.arbre.expressions.binaire.arithmetique.Division@2f0e140b
+	# debut boucle 1
+	tantque1: # on clacule l'expression 
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,0
+	
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	sgt $v0, $t8, $v0
+	# evaluation de la condition
+	beq $v0, 0, fintantque1
+	# debut condition1
+# on clacule l'expression 
 	lw $v0, 0($s7)
 	sw $v0, 0($sp)
 	addi $sp, $sp, -4
@@ -20,18 +33,31 @@ sw $v0, 0($s7)
 	
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
-	bne $v0, 0, division
-	li $v0, 4
-	la $a0, error_div
-	syscall
-	j end
-division : 
-	div $t8, $v0
-	mflo $v0
+	seq $v0, $t8, $v0
+	si1: beq $v0, 0, sinon1
+alors1: lw $v0, 0($s7)
 	move $t8, $v0
 	li $v0, 1
 	move $a0, $t8
 	syscall
+	
+j fsi1
+sinon1: 
+# fin condition1
+fsi1: 
+	# on clacule l'expression 
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+	
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	sub $v0, $t8, $v0
+	sw $v0, 0($s7)
+	j tantque1
+	# fin de la boucle 1
+	fintantque1:
 	
 end :
 move $v1, $v0

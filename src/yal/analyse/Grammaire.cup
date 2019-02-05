@@ -71,7 +71,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
-terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE;
 
 /* Non terminals used in the grammar section.  */
 
@@ -79,7 +79,7 @@ non terminal ArbreAbstrait PROG;
 non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
-non terminal Instruction AFFECT, INST, LECTURE, CONDITION;
+non terminal Instruction AFFECT, INST, LECTURE, CONDITION,BOUCLE;
 
 precedence left NON, MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV;
 
@@ -138,6 +138,11 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
         		{:
         		    RESULT = co;
         		:}
+        |
+                BOUCLE:b
+                {:
+                    RESULT = b;
+                :}
 
         ;
 
@@ -276,4 +281,12 @@ CONDITION		::=		SI EXP:e ALORS FINSI
                             RESULT = instruction;
                         :}
 
+                ;
+
+BOUCLE          ::=     TANTQUE EXP:e REPETER LINST:li FINTANTQUE
+                        {:
+                            Instruction boucle = new Boucle(e,eleft+1);
+                            ((Boucle)boucle).ajouter(li);
+                            RESULT = boucle;
+                        :}
                 ;

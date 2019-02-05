@@ -2,6 +2,8 @@ package yal.arbre.instructions;
 import yal.arbre.ArbreAbstrait;
 import yal.arbre.BlocDInstructions;
 import yal.arbre.expressions.Expression;
+import yal.exceptions.AnalyseSemantiqueException;
+import yal.exceptions.ListeDErreurs;
 
 public class Condition extends Instruction {
     private Expression e;
@@ -20,7 +22,8 @@ public class Condition extends Instruction {
     public void verifier() {
         e.verifier();
         if( e.getType() != Type.BOOLEAN) {
-            //throw new AnalyseSemantiqueException(getNoLigne() + " condition: type booleen attendu !");
+            AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() , " condition :l'espression doit etre du type boolean !");
+            ListeDErreurs.getErreurs().addErreur(a);
         }
         alors.verifier();
         sinon.verifier();

@@ -2,8 +2,13 @@ programme test
 debut
 //testCommentaire
 entier a;
-entier b;
 a=4;
-ecrire a/0;
+
+tantque a>0 repeter
+si a == 2 alors
+ecrire a;
+finsi
+a = a - 1;
+fintantque
 
 fin

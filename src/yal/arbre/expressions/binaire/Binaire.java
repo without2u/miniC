@@ -18,7 +18,7 @@ public abstract class Binaire extends Expression {
     public String toMIPS() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("#calcul de l'expression " + this +"\n\t");
+        sb.append("# on clacule l'expression \n\t");
         if(filsGauche instanceof Identificateur) {
             sb.append("lw $v0, " + ((Identificateur)filsGauche).getDeplacement() + "($s7)\n\t");
         } else{

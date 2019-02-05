@@ -21,6 +21,7 @@ public abstract class BinaireArithmetique extends Binaire {
             AnalyseSemantiqueException a = new AnalyseSemantiqueException(getNoLigne() ,": les types des operandes doivent être ENTIER pour l'opérateur : " + getOperateur());
             ListeDErreurs.getErreurs().addErreur(a);
         } else {
+            //le type d'expression
             setType(Type.ENTIER);
             setValeur(this.getValeur());
         }
