@@ -33,7 +33,7 @@ public class Programme extends ArbreAbstrait {
         StringBuilder sb = new StringBuilder("") ;
 
         sb.append(".data\n" +
-                " fin:         .asciiz \n" +
+                " finLigne:   .asciiz \"\\n\"\n" +
                 "              .align 2\n"+
                 "vrai:\t" + ".asciiz \"vrai\"\n"+
                 "faux:\t" + ".asciiz \"faux\"\n"+

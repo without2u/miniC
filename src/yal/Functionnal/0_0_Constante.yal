@@ -1,16 +1,13 @@
 programme test
 debut
 //testCommentaire
-entier a;
-si non a alors
-finsi
-a=4;
-tantque a repeter
-
-si a alors
-finsi
-ecrire b;
-a = a - 1;
-fintantque
+entier x;
+entier y;
+entier z;
+y=2;
+x=y;
+ecrire x;
+ecrire y;
+ecrire z;
 
 fin

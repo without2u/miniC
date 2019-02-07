@@ -25,7 +25,7 @@ public class Identificateur extends Expression{
         Entree e =new Entree(this.nom);
         symbole = TDS.getInstance().getTableDeSymbole().get(e);
         if(symbole == null) {
-            VariablePasDeclareeException erreur= new VariablePasDeclareeException(noLigne + ": la variable " + nom + " n'est pas declarée !");
+            VariablePasDeclareeException erreur= new VariablePasDeclareeException("ligne "+noLigne + "\n\t la variable " + nom + " n'est pas declarée !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         }else{
             setType(Type.ENTIER);

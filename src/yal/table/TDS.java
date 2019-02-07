@@ -26,7 +26,8 @@ public class TDS {
         //si le symbole existe deja (pour eviter les doublons)
 
         if (tableDeSymbole.containsKey(e)) {
-            DoublonsException erreur= new DoublonsException(no + ": la variable " + e + " est declaree plusieurs fois !\"");
+            DoublonsException erreur= new DoublonsException("ligne "+no+"\n\t la variable " + e + " est declaree plusieurs fois !");
+
             ListeDErreurs.getErreurs().addErreur(erreur);
 
         }else {
