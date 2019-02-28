@@ -8,6 +8,7 @@ import yal.exceptions.AnalyseSyntaxiqueException;
 import yal.exceptions.ListeDErreurs;
 
 public class Division extends BinaireArithmetique {
+    private static int cmp = -1;
     public Division(Expression filsGauche, Expression filsDroite) {
         super(filsGauche, filsDroite);
     }
@@ -20,12 +21,13 @@ public class Division extends BinaireArithmetique {
     @Override
     public String codeToMips() {
         StringBuilder sb = new StringBuilder();
-        sb.append("bne $v0, 0, division\n");
+        cmp++;
+        sb.append("bne $v0, 0, division"+cmp+"\n");
         sb.append("li $v0, 4\n");
         sb.append("la $a0, " + "error_div" +"\n");
         sb.append("syscall\n");
         sb.append("j end\n");
-        sb.append("division : \n");
+        sb.append("division"+cmp+" : \n");
         sb.append("div $t8, $v0\n");
         sb.append("mflo $v0\n");
         return sb.toString();

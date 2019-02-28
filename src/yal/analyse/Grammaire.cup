@@ -69,7 +69,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, CROOUV, CROFER, PAROUV, PARFER;
 terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
 terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE;
 
@@ -81,7 +81,13 @@ non terminal BlocDInstructions LINST, LDECL;
 non terminal Identificateur DECL, DECL_VAR;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION,BOUCLE;
 
-precedence left NON, MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV;
+precedence left OU ;
+precedence left ET ;
+precedence left EGALEGAL, DIFF;
+precedence left INF, SUP ;
+precedence left PLUS, MOINS;
+precedence left MULT, DIV ;
+precedence left NON ;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -195,6 +201,9 @@ EXP    ::=      CST:c
         |
                 EXP:e1  OU  EXP:e2
                 {: RESULT = new OuLogique(e1,e2); :}
+        |
+                PAROUV  EXP:e  PARFER
+                {: RESULT = e; :}
         ;
 
 CST     ::=     CSTENTIERE:e

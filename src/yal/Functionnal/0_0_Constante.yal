@@ -1,13 +1,6 @@
-programme test
-debut
-//testCommentaire
-entier x;
-entier y;
-entier z;
-y=2;
-x=y;
-ecrire x;
-ecrire y;
-ecrire z;
-
+programme priorite debut
+   entier a ;   entier b ;   entier c ;    entier d ;
+   a = 10 ; b = 5 ; c = 6 ; d = 25 ;
+   ecrire a + 5 * c - d / 5 + a - c *a ;
+   ecrire (a + (5*c) - (d / 5) + a - (c*a)) ;
 fin

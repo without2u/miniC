@@ -15,10 +15,16 @@ public abstract class Binaire extends Expression {
     public abstract String getOperateur() ;
 
     @Override
+    public String toString() {
+
+            return "(" + filsGauche + getOperateur() + filsDroite + ")" ;
+    }
+
+    @Override
     public String toMIPS() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("# on clacule l'expression \n\t");
+        sb.append("# on clacule l'expression " +this+"\n\t");
         if(filsGauche instanceof Identificateur) {
             sb.append("lw $v0, " + ((Identificateur)filsGauche).getDeplacement() + "($s7)\n");
         } else{

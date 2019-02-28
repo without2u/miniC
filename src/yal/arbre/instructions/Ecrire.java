@@ -27,12 +27,13 @@ public class Ecrire extends Instruction {
         StringBuilder sb = new StringBuilder();
 
         if(exp.getType()==Type.ENTIER) {
+            System.out.println(exp);
+            sb.append("# affichichage de l'expression entiere : " + exp + "\n");
             if(exp instanceof Identificateur) {
                 sb.append("lw $v0, " + ((Identificateur)exp).getDeplacement() + "($s7)\n");
             }
-            else {
-                sb.append("# affichichage d'une expression entiere\n");
-                sb.append(exp.toMIPS());}
+            else
+                sb.append(exp.toMIPS());
                 sb.append("move $t8, $v0\n");
                 sb.append("li $v0, 1\n");
                 sb.append("move $a0, $t8\n");
@@ -45,9 +46,6 @@ public class Ecrire extends Instruction {
         if(exp.getType()==Type.BOOLEAN) {
 
             cmp++;
-
-
-
             sb.append("# affichichage d'une expression booleenne\n");
             sb.append(exp.toMIPS());
             sb.append("move $t8, $v0\n");

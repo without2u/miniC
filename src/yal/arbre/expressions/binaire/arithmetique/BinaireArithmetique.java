@@ -10,6 +10,7 @@ import yal.exceptions.ListeDErreurs;
 public abstract class BinaireArithmetique extends Binaire {
     public BinaireArithmetique(Expression filsGauche, Expression filsDroite) {
         super(filsGauche, filsDroite);
+
     }
 
     @Override
