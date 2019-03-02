@@ -14,7 +14,7 @@ addi $sp, $sp, -4
 	# stocker la valeur de boss() dans la variable boss() du bloc 0
 	sw $v0, 0($s7)
 	# affichichage de l'expression entiere : a
-# charger la valeur de la variable a du bloc 0
+# chargement de la variable  a du bloc 0
 	lw $v0, 0($s7)
 	move $t8, $v0
 li $v0, 1
@@ -28,35 +28,29 @@ end :
 move $v1, $v0
  li $v0, 10 
  syscall
-# fonction boss () avec 0 parametre(s)
-# empilement de l'adresse de retour
-	fonct1: sw $ra, 0($sp)
+# l'empilement de l'adresse de retour
+	fonct0: sw $ra, 0($sp)
 	addi $sp, $sp, -4
 	# empilement de l'ancienne base
 	sw $s7, 0($sp)
 	addi $sp, $sp, -4
-	# empilement du numero de region (bloc)
-	li $v0, 1
+	# l'empilement du numero de la region du bloc
+	li $v0, 0
 	sw $v0, ($sp)
 	addi $sp, $sp, -4
-	# charger dans $s7 la nouvelle base
 	move $s7, $sp
-	# instructions de la fonction
+	addi $sp, $sp, -4
+	# liste d'instructions de la fonction
 	li $v0,8
 
 # sauvegarde du resultat 8 dans son emplacement retour
 	sw $v0, 16($s7)
-	# dépilement des 0 variables locales
+	# dépilement des variables locales
 	addi $sp, $sp, 0
-	# dépilement du numero bloc + ancienne base
 	addi $sp, $sp, 8
-	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
 	lw $s7, 0($sp)
-	# dépilement de l'adresse de retour de l'appelant
 	addi $sp, $sp, 4
-	# chargement dans $ra de l'adresse de retour de l'appelant
 	lw $ra, 0($sp)
-	# branchement vers la prochaine instruction de l'appelant
 	jr $ra
 	 
  

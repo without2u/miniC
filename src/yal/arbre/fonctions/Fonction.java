@@ -121,4 +121,11 @@ public class Fonction extends ArbreAbstrait{
         }
     }
 
+    public void setBloc(BlocDInstructions bloc) {
+        this.bloc = bloc;
+    }
+
+    public BlocDInstructions getBloc() {
+        return bloc;
+    }
 }

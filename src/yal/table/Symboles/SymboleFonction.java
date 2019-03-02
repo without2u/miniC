@@ -1,36 +1,59 @@
 package yal.table.Symboles;
 
+
 import yal.arbre.instructions.Type;
 
 public class SymboleFonction extends Symbole {
 
-    private int etiquette;
-    private int nbParam;
+    private int etiquetteSymbole;
+    private int nbrParamSymbole;
+
 
     public SymboleFonction(Type type) {
         super(type);
     }
 
-    public int getEtiquette() {
-        return etiquette;
+    @Override
+    public int getNumBloc() {
+        return super.getNumBloc();
     }
 
-    public void setEtiquette(int etiquette) {
-        this.etiquette = etiquette;
+    @Override
+    public void setNumBloc(int numBloc) {
+        super.setNumBloc(numBloc);
     }
 
-
-    public int getNbParam() {
-        return nbParam;
+    @Override
+    public void setType(Type type) {
+        super.setType(type);
     }
 
-    public void setNbParam(int nbParam) {
-        this.nbParam = nbParam;
+    public void setEtiquetteSymbole(int etiquetteSymbole) {
+        this.etiquetteSymbole = etiquetteSymbole;
+    }
+
+    @Override
+    public Type getType() {
+        return super.getType();
+    }
+
+    public int getEtiquetteSymbole() {
+        return etiquetteSymbole;
+    }
+
+    public int getNbrParamSymbole() {
+        return nbrParamSymbole;
     }
 
     @Override
     public String toString() {
-        return "type retour: " + type + " bloc " + getNumeroBloc() + " etiquette:" + etiquette;
+
+        return " type de retour: "+ getType() +
+                " bloc " + getNumBloc() +
+                " etiquette:" + getEtiquetteSymbole();
     }
 
+    public void setNbrParamSymbole(int nbrParamSymbole) {
+        this.nbrParamSymbole = nbrParamSymbole;
+    }
 }

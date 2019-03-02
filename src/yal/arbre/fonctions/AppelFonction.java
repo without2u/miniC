@@ -30,7 +30,7 @@ public class AppelFonction extends Expression {
 
 
     public int getNbParam() {
-        return ((SymboleFonction)symbole).getNbParam();
+        return ((SymboleFonction)symbole).getNbrParamSymbole();
     }
 
 

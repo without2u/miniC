@@ -49,13 +49,13 @@ public class AffectationVariable extends Affectation {
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
         sb.append(filsDroite.toMIPS());
-        if(filsGauche.getSymbole().getNumeroBloc() != getNoBloc()) {
+        if(filsGauche.getSymbole().getNumBloc() != getNoBloc()) {
             sb.append("# charger dans t8 la valeur de l'ancienne base\n\t");
             sb.append("lw $t8, 8($s7)\n\t");
-            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc " + filsGauche.getSymbole().getNumeroBloc() + "\n\t");
+            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc " + filsGauche.getSymbole().getNumBloc() + "\n\t");
             sb.append("sw $v0, " + filsGauche.getDeplacement() + "($t8)\n\t");
         } else {
-            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsDroite + " du bloc " + filsGauche.getSymbole().getNumeroBloc() + "\n\t");
+            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsDroite + " du bloc " + filsGauche.getSymbole().getNumBloc() + "\n\t");
             sb.append("sw $v0, " + filsGauche.getDeplacement() + "($s7)\n\t");
         }
         return sb.toString();

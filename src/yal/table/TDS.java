@@ -47,8 +47,8 @@ public class TDS implements Iterable<Entree>{
             // si c'est une fonction on lui affecte une étiquette et un nombre de parametres donnee
             if(e instanceof EntreeFonction) {
                 etiquette++;
-                ((SymboleFonction)s).setEtiquette(etiquette);
-                ((SymboleFonction)s).setNbParam(((EntreeFonction)e).getNbParam());
+                ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
+                ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNbParam());
             }
             if(!existe(e.getNomEntree(), e.getNumeroBloc(), no)) {
                 if(e instanceof EntreeVar) {

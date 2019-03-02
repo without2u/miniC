@@ -291,7 +291,7 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 						    e.setNumeroBloc(bloc);
 							Type type = Type.ENTIER;
 							Symbole s = new SymboleVar(type);
-							s.setNumeroBloc(bloc);
+							s.setNumBloc(bloc);
 							TDS.getInstance().ajouter(e,s,idfleft+1);
 							Identificateur id = new Identificateur(idf,idfleft);
 							id.setNumBloc(bloc);
@@ -306,9 +306,9 @@ DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LINST:li FIN
 							Type type = Type.ENTIER;
 							Symbole symbole = new SymboleFonction(type);
 							int bloc = TDS.getInstance().getNoBlocCourant();
-							symbole.setNumeroBloc(bloc);
+							symbole.setNumBloc(bloc);
 							TDS.getInstance().ajouter(entree, symbole, idfleft+1);
-							f.setNbParam(p.size());
+							f.setNbrParamFonction(p.size());
 							f.setBloc(li);
 							RESULT = f;
 						:}
