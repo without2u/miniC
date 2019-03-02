@@ -2,6 +2,7 @@ package yal.arbre.expressions.binaire.arithmetique;
 
 import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.binaire.Binaire;
+import yal.arbre.fonctions.AppelFonction;
 import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
@@ -24,7 +25,12 @@ public abstract class BinaireArithmetique extends Binaire {
         } else {
             //le type d'expression
             setType(Type.ENTIER);
-            setValeur(this.getValeur());
+            if(!(getFilsGauche() instanceof AppelFonction) &&
+                    !(getFilsDroite() instanceof AppelFonction)) {
+
+                setValeur(this.getValeur());
+
+            }
         }
     }
 }

@@ -17,12 +17,12 @@ public abstract class Comparaison extends Binaire {
         getFilsGauche().verifier();
         getFilsDroite().verifier();
 
-        if(getFilsGauche().getType() != Type.ENTIER || getFilsDroite().getType() != Type.ENTIER) {
-            AnalyseSemantiqueException a =  new AnalyseSemantiqueException(getNoLigne() ," les types des operandes doivent être ENTIER ");
-            ListeDErreurs.getErreurs().addErreur(a);
-        }else {
+        if(getFilsGauche().getType() == Type.ENTIER && getFilsDroite().getType() == Type.ENTIER) {
             //le type d'expression
             setType(Type.BOOLEAN);
+        }else {
+            AnalyseSemantiqueException a =  new AnalyseSemantiqueException(getNoLigne() ," les types des operandes doivent être ENTIER ");
+            ListeDErreurs.getErreurs().addErreur(a);
         }
 
     }

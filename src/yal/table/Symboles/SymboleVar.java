@@ -1,17 +1,13 @@
-package yal.table;
+package yal.table.Symboles;
 
 import yal.arbre.instructions.Type;
 
-public class Symbole {
-    //un Symbole est réduit au déplacement par rapport au début de la zone des variables
-
-    private Type type;
+public class SymboleVar  extends Symbole{
     private int deplacement;
 
-    public Symbole(Type t){
-        this.type=t;
+    public SymboleVar(Type type) {
+        super(type);
     }
-
     public Type getType() {
         return type;
     }

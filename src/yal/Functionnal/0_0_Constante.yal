@@ -1,6 +1,24 @@
-programme priorite debut
-   entier a ;   entier b ;   entier c ;    entier d ;
-   a = 10 ; b = 5 ; c = 6 ; d = 25 ;
-   ecrire a + 5 * c - d / 5 + a - c *a ;
-   ecrire (a + (5*c) - (d / 5) + a - (c*a)) ;
+
+
+
+programme test
+debut
+
+entier a;
+
+    fonction boss()
+    debut
+
+        retourne 8;
+
+    fin
+
+
+
+
+     a=boss();
+     ecrire a;
+
+
+
 fin

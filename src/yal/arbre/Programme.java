@@ -1,26 +1,74 @@
 package yal.arbre;
 
+import yal.arbre.fonctions.Fonction;
 import yal.exceptions.AnalyseException;
+import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.EnsembleDErreurs;
 import yal.exceptions.ListeDErreurs;
 import yal.table.TDS;
+import yal.table.tabDesEntrees.Entree;
+import yal.table.tabDesEntrees.EntreeVar;
+
+import java.util.ArrayList;
 
 public class Programme extends ArbreAbstrait {
 
     protected String nomProg;
     protected BlocDInstructions bloc;
     private static int decalage = 4;
-    public Programme(String nomProg,int n) {
+    private ArrayList<ArbreAbstrait> listeDesDecl;
 
+    public Programme(String nomProg,int n) {
         super(n);
         this.nomProg=nomProg;
-        this.bloc=new BlocDInstructions(n);
+    }
 
+    // on genere le code mips pour les fonctions
+    private void getMipsForFonction(StringBuilder sb) {
+
+        if(listeDesDecl != null) {
+            for(ArbreAbstrait a : listeDesDecl) {
+                if((a instanceof Fonction)) {
+                    sb.append(((Fonction)a).toMIPS()).append(" \n ");
+                }
+            }
+        }
+        else {
+
+        }
+    }
+
+    // on compte le nombre des variables dans le bloc principal 0
+    private int getNbrVariable() {
+        int cmp = 0;
+        for(Entree entree : TDS.getInstance()) {
+
+            if((entree instanceof EntreeVar) && (entree.getNumeroBloc() == 0))
+                cmp++;
+        }
+
+        return cmp;
     }
 
     @Override
     public void verifier() throws AnalyseException {
-        bloc.verifier();
+        //si la liste des declaration est vide
+        if(listeDesDecl != null) {
+
+            for(ArbreAbstrait a : listeDesDecl) {
+                a.verifier();
+            }
+        }
+        //si le bloc est vide
+        if(bloc != null) {
+            bloc.verifier();
+            if(bloc.ifContientRetourne()) {
+                AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(bloc.getNoLigne() , ": le programme principal " + nomProg +" ne retourne pas de valeur ");
+                ListeDErreurs.getErreurs().addErreur(exception);
+
+            }
+        }
+        //si y a des erreurs a afficher
         if(!ListeDErreurs.getErreurs().isEmpty()){
 
             throw new EnsembleDErreurs("");
@@ -29,9 +77,8 @@ public class Programme extends ArbreAbstrait {
 
     @Override
     public String toMIPS() {
-
+        int cmp = getNbrVariable();
         StringBuilder sb = new StringBuilder("") ;
-
         sb.append(".data\n" +
                 " finLigne:   .asciiz \"\\n\"\n" +
                 "              .align 2\n"+
@@ -41,24 +88,28 @@ public class Programme extends ArbreAbstrait {
 
         ".text\n" +
                 " main :\n") ;
-        if(!TDS.getInstance().isEmpty()) {
-
-            sb.append("move $s7, $sp\n");
-            sb.append("addi $sp, $sp, " + (TDS.getInstance().getSize()) *(-decalage) + "\n");
-
+        sb.append("move $s7, $sp\n");
+        if(cmp != 0) {
+            //on reserve de la memoire pour les variable du bloc local
+            sb.append("addi $sp, $sp, " + cmp*(-decalage) + "\n");
         }
         sb.append(bloc.toMIPS() + "\n");
         sb.append("end :\n" +
                 "move $v1, $v0\n"+
                 " li $v0, 10 \n" +
                 " syscall\n") ;
+        getMipsForFonction(sb);
         return sb.toString() ;
     }
 
     //ajouter un nouveau bloc au programme
     public void ajouterBloc(ArbreAbstrait a){
-
         bloc.ajouter(a);
-
+    }
+    public void setBloc(BlocDInstructions bloc) {
+        this.bloc = bloc;
+    }
+    public void setListeDesDecl(ArrayList<ArbreAbstrait> listeDesDecl) {
+        this.listeDesDecl = listeDesDecl;
     }
 }

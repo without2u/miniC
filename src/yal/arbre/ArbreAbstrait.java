@@ -3,9 +3,8 @@ package yal.arbre;
 import yal.exceptions.AnalyseException;
 
 public abstract class ArbreAbstrait {
-    
-    // numéro de ligne du début de l'instruction
-    protected int noLigne ;
+    protected int noLigne;
+    protected int noBloc;
     
     protected ArbreAbstrait(int n) {
         noLigne = n ;
@@ -18,4 +17,15 @@ public abstract class ArbreAbstrait {
     public abstract void verifier() throws AnalyseException;
     public abstract String toMIPS();
 
+    public int getNoBloc() {
+        return noBloc;
+    }
+
+    public void setNoBloc(int noBloc) {
+        this.noBloc = noBloc;
+    }
+
+    public void setNoLigne(int noLigne) {
+        this.noLigne = noLigne;
+    }
 }

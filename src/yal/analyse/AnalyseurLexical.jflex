@@ -66,10 +66,11 @@ commentaireSlashSlash = [/][/].*
 "tantque"			   { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"			   { return symbol(CodesLexicaux.REPETER); }
 "fintantque"		   { return symbol(CodesLexicaux.FINTANTQUE); }
+"fonction"			   { return symbol(CodesLexicaux.FONCTION); }
+"retourne"			   { return symbol(CodesLexicaux.RETOURNE); }
 "("                	   { return symbol(CodesLexicaux.PAROUV); }
 ")"                	   { return symbol(CodesLexicaux.PARFER); }
-"["                	   { return symbol(CodesLexicaux.CROOUV); }
-"]"                	   { return symbol(CodesLexicaux.CROFER); }
+
 "-"                	   { return symbol(CodesLexicaux.MOINS); }
 "+"                	   { return symbol(CodesLexicaux.PLUS); }
 "*"                	   { return symbol(CodesLexicaux.MULT); }
@@ -82,6 +83,7 @@ commentaireSlashSlash = [/][/].*
 "et"                   { return symbol(CodesLexicaux.ET); }
 "ou"                   { return symbol(CodesLexicaux.OU); }
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
+
 
 {espace}               { }
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }

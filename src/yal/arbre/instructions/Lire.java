@@ -2,6 +2,7 @@ package yal.arbre.instructions;
 
 import yal.arbre.expressions.Expression;
 import yal.arbre.expressions.Identificateur;
+import yal.table.TDS;
 
 public class Lire extends Instruction {
 
@@ -10,11 +11,13 @@ public class Lire extends Instruction {
     public Lire (Identificateur e, int n) {
         super(n) ;
         exp = e ;
+        this.noBloc = TDS.getInstance().getNoBlocCourant();
     }
 
 
     @Override
     public void verifier() {
+        exp.setNumBloc(getNoBloc());
         exp.verifier();
     }
 

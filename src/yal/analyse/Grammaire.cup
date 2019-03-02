@@ -18,6 +18,15 @@ import yal.arbre.expressions.binaire.comparaison.Inferieur;
 import yal.arbre.expressions.binaire.comparaison.Superieur;
 import yal.arbre.expressions.binaire.logique.EtLogique;
 import yal.arbre.expressions.binaire.logique.OuLogique;
+import yal.table.Symboles.Symbole;
+import yal.table.Symboles.SymboleFonction;
+import yal.table.Symboles.SymboleVar;
+import yal.table.tabDesEntrees.Entree;
+import yal.table.tabDesEntrees.EntreeFonction;
+import yal.table.tabDesEntrees.EntreeVar;
+import yal.arbre.fonctions.Fonction;
+import yal.arbre.fonctions.Retourne;
+import yal.arbre.fonctions.AppelFonction;
 
 import java_cup.runtime.*;
 
@@ -69,17 +78,20 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, CROOUV, CROFER, PAROUV, PARFER;
-terminal String    IDF, CSTENTIERE, TYPE,CSTBOOLEAN;
-terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, PAROUV, PARFER;
+terminal String    IDF, CSTENTIERE,CSTBOOLEAN;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE;
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG;
+non terminal ArbreAbstrait PROG, DECL, DECL_FONCTION ;
 non terminal Expression EXP, CST ;
-non terminal BlocDInstructions LINST, LDECL;
-non terminal Identificateur DECL, DECL_VAR;
-non terminal Instruction AFFECT, INST, LECTURE, CONDITION,BOUCLE;
+non terminal BlocDInstructions LINST;
+non terminal Identificateur  DECL_VAR;
+non terminal ArrayList<ArbreAbstrait> LDECL;
+non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER;
+non terminal ArrayList<Identificateur> PARAMETRES;
+
 
 precedence left OU ;
 precedence left ET ;
@@ -88,6 +100,7 @@ precedence left INF, SUP ;
 precedence left PLUS, MOINS;
 precedence left MULT, DIV ;
 precedence left NON ;
+precedence left PAROUV, PARFER ;
 
 /* ----------------------------Grammar Section-------------------- */
 
@@ -96,7 +109,8 @@ start with PROG ;
 PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                 {:
                     Programme p = new Programme(idf,idfleft);
-                    p.ajouterBloc(li);
+                    //p.ajouterBloc(li);
+                    p.setBloc(li);
                     RESULT = p;
                 :}
 
@@ -104,20 +118,25 @@ PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                 PROGRAMME IDF:idf DEBUT LDECL:ld LINST:li FIN
                 {:
                     Programme p = new Programme(idf,idfleft);
-                    p.ajouterBloc(ld);
-                    p.ajouterBloc(li);
+                    p.setListeDesDecl(ld);
+                    p.setBloc(li);
+                    //p.ajouterBloc(ld);
+                    //p.ajouterBloc(li);
                     RESULT = p;
                 :}
         ;
 
 LINST   ::=     LINST:li  INST:i
                 {:
-                    ((BlocDInstructions)li).ajouter(i) ;
-                     RESULT = li ; :}
+                    i.setNoBloc(TDS.getInstance().getNoBlocCourant());
+                    li.ajouter(i) ;
+                     RESULT = li ;
+                :}
         |
                 INST:i
                 {:
                     BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
+                    i.setNoBloc(TDS.getInstance().getNoBlocCourant());
                     b.ajouter(i) ;
                     RESULT = b ;
                 :}
@@ -149,6 +168,11 @@ INST    ::=     ECRIRE EXP:e POINTVIRGULE
                 {:
                     RESULT = b;
                 :}
+        |
+        	    RETOURNER:r
+        		{:
+        		    RESULT = r;
+        		:}
 
         ;
 
@@ -204,6 +228,13 @@ EXP    ::=      CST:c
         |
                 PAROUV  EXP:e  PARFER
                 {: RESULT = e; :}
+         |
+                IDF:idf PAROUV PARFER
+                {:
+                    AppelFonction af = new AppelFonction(idf, idfleft+1);
+                    af.setListe(new ArrayList<Expression>());
+                    RESULT = af;
+                :}
         ;
 
 CST     ::=     CSTENTIERE:e
@@ -228,33 +259,70 @@ AFFECT		    ::=	    IDF:idf EGAL EXP:e POINTVIRGULE
 			    ;
 
 LDECL		    ::=		LDECL:ld DECL:d
-					{:
-                        ld.ajouter(d);
+					    {:
+                        ld.add(d);
                         RESULT = ld;
-					:}
+					    :}
 			    |
-					DECL:d
-						{:	BlocDInstructions bloc = new BlocDInstructions(dleft+1);
-							bloc.ajouter(d);
-							RESULT = bloc;
+					    DECL:d
+						{:
+						//BlocDInstructions bloc = new BlocDInstructions(dleft+1);
+						ArrayList<ArbreAbstrait> declar= new ArrayList<ArbreAbstrait>();
+							declar.add(d);
+							RESULT = declar;
 						:}
 			    ;
 
 
 DECL		    ::=		DECL_VAR:dv
 						{: RESULT = dv; :}
+				|
+                        DECL_FONCTION:df
+                        {: TDS.getInstance().uneSortie();
+                           RESULT = df;
+                        :}
 			    ;
 
 
 DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
-						{: 	Entree e = new Entree(idf);
+						{:
+						    int bloc = TDS.getInstance().getNoBlocCourant();
+						    Entree e = new EntreeVar(idf);
+						    e.setNumeroBloc(bloc);
 							Type type = Type.ENTIER;
-							Symbole s = new Symbole(type);
+							Symbole s = new SymboleVar(type);
+							s.setNumeroBloc(bloc);
 							TDS.getInstance().ajouter(e,s,idfleft+1);
 							Identificateur id = new Identificateur(idf,idfleft);
+							id.setNumBloc(bloc);
 							RESULT = id;
 						:}
 				;
+DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LINST:li FIN
+						{:
+							Fonction f = new Fonction(idf, idfleft);
+							Entree entree = new EntreeFonction(idf, p.size());
+							entree.setNumeroBloc(0);
+							Type type = Type.ENTIER;
+							Symbole symbole = new SymboleFonction(type);
+							int bloc = TDS.getInstance().getNoBlocCourant();
+							symbole.setNumeroBloc(bloc);
+							TDS.getInstance().ajouter(entree, symbole, idfleft+1);
+							f.setNbParam(p.size());
+							f.setBloc(li);
+							RESULT = f;
+						:}
+				;
+
+PARAMETRES		::=		PAROUV PARFER
+						{:
+							TDS.getInstance().nouvelleEntree();
+							ArrayList<Identificateur> al = new ArrayList<Identificateur>();
+							RESULT = al;
+						:}
+
+				;
+
 
 LECTURE         ::=     LIRE IDF:idf POINTVIRGULE
                         {:  Identificateur id = new Identificateur(idf, idfleft + 1);
@@ -299,3 +367,7 @@ BOUCLE          ::=     TANTQUE EXP:e REPETER LINST:li FINTANTQUE
                             RESULT = boucle;
                         :}
                 ;
+
+ RETOURNER		::=		RETOURNE EXP:e POINTVIRGULE
+ 						{: RESULT = new Retourne(e, eleft+1); :}
+ 				;
