@@ -1,7 +1,6 @@
 package yal.arbre.instructions;
 
 import yal.arbre.expressions.Expression;
-import yal.arbre.expressions.Identificateur;
 import yal.exceptions.AnalyseException;
 import yal.table.TDS;
 

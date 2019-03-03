@@ -1,24 +1,15 @@
-
-
-
 programme test
 debut
 
-entier a;
-
-    fonction boss()
+    fonction un()
     debut
-
-        retourne 8;
-
+        retourne 10 - 3 * 2;
     fin
 
+    entier bite;
+    bite = 20;
 
-
-
-     a=boss();
-     ecrire a;
-
-
+    bite = bite + un();
+    ecrire bite;
 
 fin

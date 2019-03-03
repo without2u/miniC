@@ -22,7 +22,4 @@ public abstract class Symbole {
         this.numBloc = numBloc;
     }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
 }

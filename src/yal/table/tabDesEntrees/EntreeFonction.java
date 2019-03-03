@@ -2,45 +2,40 @@ package yal.table.tabDesEntrees;
 
 public class EntreeFonction extends Entree {
 
-    private int nbParam;
+    private int nombreParamFonction;
 
 
-    public EntreeFonction(String nomEntree, int nbParam) {
-        super(nomEntree);
-        this.nbParam = nbParam;
+    public EntreeFonction(String nomEntreefonction, int nombreParamFonction) {
+        super(nomEntreefonction);
+        this.nombreParamFonction = nombreParamFonction;
     }
 
-
-    public int getNbParam() {
-        return nbParam;
+    public int getNombreParamFonction() {
+        return nombreParamFonction;
     }
 
-
-    public void setNbParam(int nbParam) {
-        this.nbParam = nbParam;
+    public void setNombreParamFonction(int nombreParamFonction) {
+        this.nombreParamFonction = nombreParamFonction;
     }
-
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || getClass() != obj.getClass())
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()){
             return false;
-        EntreeFonction ef = (EntreeFonction) obj;
+        }
+        EntreeFonction ef = (EntreeFonction) o;
         return this.nomEntree.equals(ef.getNomEntree()) &&
                 this.numeroBloc == ef.getNumeroBloc() &&
-                this.nbParam == ef.getNbParam();
+                this.nombreParamFonction == ef.getNombreParamFonction();
     }
-
 
     @Override
     public int hashCode() {
-        return ("fonction: " + nomEntree + " bloc: " + numeroBloc + " nbParam: " + nbParam).hashCode();
+        return ("fonction: " + nomEntree + " bloc: " + numeroBloc + " nbParam: " + nombreParamFonction).hashCode();
     }
-
 
     @Override
     public String toString() {
         return nomEntree;
     }
-
 }

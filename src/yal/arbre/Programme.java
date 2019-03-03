@@ -33,17 +33,15 @@ public class Programme extends ArbreAbstrait {
                 }
             }
         }
-        else {
 
-        }
     }
 
     // on compte le nombre des variables dans le bloc principal 0
     private int getNbrVariable() {
         int cmp = 0;
-        for(Entree entree : TDS.getInstance()) {
+        for(Entree e : TDS.getInstance()) {
 
-            if((entree instanceof EntreeVar) && (entree.getNumeroBloc() == 0))
+            if((e instanceof EntreeVar) && (e.getNumeroBloc() == 0))
                 cmp++;
         }
 
@@ -63,8 +61,9 @@ public class Programme extends ArbreAbstrait {
         if(bloc != null) {
             bloc.verifier();
             if(bloc.ifContientRetourne()) {
-                AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(bloc.getNoLigne() , ": le programme principal " + nomProg +" ne retourne pas de valeur ");
-                ListeDErreurs.getErreurs().addErreur(exception);
+                AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(bloc.getNoLigne() , ": le programme principal " +
+                        nomProg +" ne retourne pas de valeur ");
+                ListeDErreurs.getErreurs().addErreur(erreur);
 
             }
         }
@@ -79,6 +78,7 @@ public class Programme extends ArbreAbstrait {
     public String toMIPS() {
         int cmp = getNbrVariable();
         StringBuilder sb = new StringBuilder("") ;
+        getMipsForFonction(sb);
         sb.append(".data\n" +
                 " finLigne:   .asciiz \"\\n\"\n" +
                 "              .align 2\n"+
@@ -98,14 +98,10 @@ public class Programme extends ArbreAbstrait {
                 "move $v1, $v0\n"+
                 " li $v0, 10 \n" +
                 " syscall\n") ;
-        getMipsForFonction(sb);
+
         return sb.toString() ;
     }
 
-    //ajouter un nouveau bloc au programme
-    public void ajouterBloc(ArbreAbstrait a){
-        bloc.ajouter(a);
-    }
     public void setBloc(BlocDInstructions bloc) {
         this.bloc = bloc;
     }

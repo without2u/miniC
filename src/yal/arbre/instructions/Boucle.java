@@ -6,6 +6,7 @@ import yal.arbre.expressions.Expression;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
+import yal.table.TDS;
 
 public class Boucle extends Instruction{
     private static int cmpt = 0;
@@ -19,6 +20,7 @@ public class Boucle extends Instruction{
         cmpt++;
         bloc = new BlocDInstructions(n);
         this.tmp=cmpt;
+
     }
 
     @Override

@@ -1,4 +1,46 @@
-.data
+# l'empilement de l'adresse de retour
+	fonct1: sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	# empilement de l'ancienne base
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	# l'empilement du numero de la region du bloc
+	li $v0, 1
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	move $s7, $sp
+	addi $sp, $sp, -4
+	# liste d'instructions de la fonction
+	# on clacule l'expression (10 - (3 * 2))
+	li $v0,10
+
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# on clacule l'expression (3 * 2)
+	li $v0,3
+
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,2
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	mult $v0, $t8 
+mflo $v0 
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	sub $v0, $t8, $v0 
+# sauvegarde du resultat (10 - (3 * 2)) dans son emplacement retour
+	sw $v0, 16($s7)
+	# dépilement des variables locales
+	addi $sp, $sp, 0
+	addi $sp, $sp, 8
+	lw $s7, 0($sp)
+	addi $sp, $sp, 4
+	lw $ra, 0($sp)
+	jr $ra
+	 
+ .data
  finLigne:   .asciiz "\n"
               .align 2
 vrai:	.asciiz "vrai"
@@ -8,13 +50,27 @@ error_div:	.asciiz "Erreur: Division par 0 !
  main :
 move $s7, $sp
 addi $sp, $sp, -4
-addi $sp, $sp, -4
+li $v0,20
+
+# stocker la valeur de 20 dans la variable bite du bloc 0
+	sw $v0, 0($s7)
+	# stockage ok 
+	# on clacule l'expression (bite + un())
+	# chargement de la variable  bite du bloc 0
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	addi $sp, $sp, -4
 	jal fonct1
 	addi $sp, $sp, 4
-	# stocker la valeur de boss() dans la variable boss() du bloc 0
+	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# stocker la valeur de (bite + un()) dans la variable bite du bloc 0
 	sw $v0, 0($s7)
-	# affichichage de l'expression entiere : a
-# chargement de la variable  a du bloc 0
+	# stockage ok 
+	# affichichage de l'expression entiere : bite
+# chargement de la variable  bite du bloc 0
 	lw $v0, 0($s7)
 	move $t8, $v0
 li $v0, 1
@@ -28,29 +84,4 @@ end :
 move $v1, $v0
  li $v0, 10 
  syscall
-# l'empilement de l'adresse de retour
-	fonct0: sw $ra, 0($sp)
-	addi $sp, $sp, -4
-	# empilement de l'ancienne base
-	sw $s7, 0($sp)
-	addi $sp, $sp, -4
-	# l'empilement du numero de la region du bloc
-	li $v0, 0
-	sw $v0, ($sp)
-	addi $sp, $sp, -4
-	move $s7, $sp
-	addi $sp, $sp, -4
-	# liste d'instructions de la fonction
-	li $v0,8
 
-# sauvegarde du resultat 8 dans son emplacement retour
-	sw $v0, 16($s7)
-	# dépilement des variables locales
-	addi $sp, $sp, 0
-	addi $sp, $sp, 8
-	lw $s7, 0($sp)
-	addi $sp, $sp, 4
-	lw $ra, 0($sp)
-	jr $ra
-	 
- 

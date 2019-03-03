@@ -1,5 +1,6 @@
 package yal.arbre;
 
+import yal.arbre.fonctions.Fonction;
 import yal.arbre.fonctions.Retourne;
 import yal.exceptions.AnalyseException;
 
@@ -30,7 +31,7 @@ public class BlocDInstructions extends ArbreAbstrait implements Iterable<ArbreAb
     public boolean ifContientRetourne() {
         for(ArbreAbstrait a : listDesBlocs) {
             if(a instanceof Retourne) {
-                return true;
+               return true;
             }
         }
         return false;
@@ -45,9 +46,11 @@ public class BlocDInstructions extends ArbreAbstrait implements Iterable<ArbreAb
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-        for(ArbreAbstrait a: listDesBlocs)
-            sb.append(a.toMIPS());
-
+        for(ArbreAbstrait a: listDesBlocs) {
+            if (!(a instanceof Fonction)) {
+                sb.append(a.toMIPS());
+            }
+        }
         return sb.toString();
     }
 

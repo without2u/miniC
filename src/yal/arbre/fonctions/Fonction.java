@@ -24,22 +24,22 @@ public class Fonction extends ArbreAbstrait{
         this.nomFonction=nomFonction;
         this.noBlocFonction = TDS.getInstance().getNoBlocCourant();
 
-
     }
 
     @Override
     public void verifier() throws AnalyseException {
         EntreeFonction entree = new EntreeFonction(nomFonction, nbrParamFonction);
-        setNoBlocFonction(0);
+        entree.setNumeroBloc(0);
         symbole = TDS.getInstance().getSymboleTable(entree);
         if(symbole == null) {
-            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " : la variable "+ this + " n'est pas declarée !");
+            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " : la fonction "+ this + " n'est pas declarée !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         }
         else if(bloc != null) {
             bloc.verifier();
             if(!bloc.ifContientRetourne()) {
-                AnalyseException erreur = new AnalyseSemantiqueException(bloc.LastInstruction().getNoLigne() , " la fonction " + nomFonction + "() retourne un resultat de type ENTIER !");
+                AnalyseException erreur = new AnalyseSemantiqueException(bloc.LastInstruction().getNoLigne() ,
+                        " la fonction " + nomFonction + "() retourne un resultat de type ENTIER !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
             }
         }
@@ -81,16 +81,16 @@ public class Fonction extends ArbreAbstrait{
     }
 
     public int getNbrParamFonction() {
-        return nbrParamFonction;
+        return ((SymboleFonction)symbole).getNbrParamSymbole();
     }
 
     public int getNoBlocFonction() {
-        return noBlocFonction;
+        return ((SymboleFonction)symbole).getEtiquetteSymbole();
     }
     private int getNbrVariablesDeFonction() {
         int nbr = 0;
         for(Entree entree : TDS.getInstance()) {
-            if(entree instanceof EntreeVar && (entree.getNumeroBloc() == getNoBloc())) {
+            if(entree instanceof EntreeVar && entree.getNumeroBloc() == getNoBloc()) {
                 nbr++;
             }
         }
@@ -102,10 +102,10 @@ public class Fonction extends ArbreAbstrait{
         StringBuilder sb = new StringBuilder();
         sb.append("fonction " + nomFonction + "(");
 
-        for (int i = 0; i < nbrParamFonction; i++) {
+        for (int i = 0; i < getNbrParamFonction(); i++) {
             sb.append("ENTIER");
-            if(i != (nbrParamFonction - 1))
-                sb.append(" ; ");
+            if(i != (getNbrParamFonction() - 1))
+                sb.append("; ");
         }
         sb.append(")");
         return super.toString();

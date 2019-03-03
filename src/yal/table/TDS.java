@@ -19,7 +19,6 @@ public class TDS implements Iterable<Entree>{
 
     private static TDS table = new TDS();
     private HashMap<Entree,Symbole> tableDeSymbole;
-    //a revoir
     private static int decalage = 4;
     private static int numBloc = 0;
     private static int etiquette = 0;
@@ -48,29 +47,30 @@ public class TDS implements Iterable<Entree>{
             if(e instanceof EntreeFonction) {
                 etiquette++;
                 ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
-                ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNbParam());
+                ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
             }
             if(!existe(e.getNomEntree(), e.getNumeroBloc(), no)) {
                 if(e instanceof EntreeVar) {
                     decalage -= 4;
                     ((SymboleVar)s).setDeplacement(decalage);
                 }
+
             }
             tableDeSymbole.put(e,s);
         }
     }
 
     private boolean existe(String nom, int numeroBloc, int noLigne) {
-        boolean found = false;
+        boolean estVrai = false;
         for(Entree e : tableDeSymbole.keySet()) {
             if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNumeroBloc() == numeroBloc) {
-                found = true;
+                estVrai = true;
                 AnalyseException erreur = new DoublonsException(noLigne+"\"" + nom + "\"" + " et variable " + "\"" + e + "\"" + " dupliquées !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
                 break;
             }
         }
-        return found;
+        return estVrai;
     }
 
     public static TDS getInstance() {
@@ -93,16 +93,6 @@ public class TDS implements Iterable<Entree>{
         }
 
         return sb.toString();
-    }
-    public boolean isEmpty() {
-
-        return tableDeSymbole.isEmpty();
-
-    }
-    public int getSize() {
-
-        return tableDeSymbole.size();
-
     }
 
     public HashMap<Entree, Symbole> getTableDeSymbole() {

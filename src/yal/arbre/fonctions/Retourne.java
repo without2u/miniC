@@ -55,6 +55,7 @@ public class Retourne extends Instruction {
 
                     if(((SymboleFonction)symbole).getNbrParamSymbole() > 0) {
                         sb.append("sw $v0, " + (16 + ((SymboleFonction)symbole).getNbrParamSymbole() * decalage) + "($s7)\n\t");
+                        System.out.println();
                     } else {
                         sb.append("sw $v0, 16($s7)\n\t");
                     }

@@ -109,7 +109,6 @@ start with PROG ;
 PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                 {:
                     Programme p = new Programme(idf,idfleft);
-                    //p.ajouterBloc(li);
                     p.setBloc(li);
                     RESULT = p;
                 :}
@@ -120,8 +119,6 @@ PROG    ::=     PROGRAMME  IDF:idf  DEBUT  LINST:li  FIN
                     Programme p = new Programme(idf,idfleft);
                     p.setListeDesDecl(ld);
                     p.setBloc(li);
-                    //p.ajouterBloc(ld);
-                    //p.ajouterBloc(li);
                     RESULT = p;
                 :}
         ;
@@ -232,7 +229,7 @@ EXP    ::=      CST:c
                 IDF:idf PAROUV PARFER
                 {:
                     AppelFonction af = new AppelFonction(idf, idfleft+1);
-                    af.setListe(new ArrayList<Expression>());
+                    af.setListE(new ArrayList<Expression>());
                     RESULT = af;
                 :}
         ;
