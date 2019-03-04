@@ -9,26 +9,17 @@
     <list default="true" id="932ebea7-d95b-43b8-99eb-46aff11cac0a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.mips" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.mips" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/analyse/AnalyseurSyntaxique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/analyse/AnalyseurSyntaxique.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/analyse/CodesLexicaux.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/analyse/CodesLexicaux.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/analyse/Grammaire.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/analyse/Grammaire.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/Programme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/Programme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/arbre/expressions/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/expressions/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Division.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Division.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/arbre/instructions/Boucle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/instructions/Boucle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/arbre/instructions/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/instructions/Condition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/Symboles/Symbole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/Symboles/Symbole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/Symboles/SymboleFonction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/Symboles/SymboleFonction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/Symboles/SymboleVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/Symboles/SymboleVar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/yal/table/TDS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/TDS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/Entree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/Entree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeFonction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeFonction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeVar.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,134 +31,112 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
+            <state relative-caret-position="1058">
+              <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3207#3208#0" expanded="true" />
-                <element signature="e#3263#3264#0" expanded="true" />
-                <element signature="e#3320#3321#0" expanded="true" />
-                <element signature="e#3372#3373#0" expanded="true" />
-                <element signature="e#3412#3413#0" expanded="true" />
-                <element signature="e#3482#3483#0" expanded="true" />
-                <element signature="e#3520#3521#0" expanded="true" />
-                <element signature="e#3591#3592#0" expanded="true" />
-                <element signature="e#4788#4789#0" expanded="true" />
-                <element signature="e#4820#4821#0" expanded="true" />
-                <element signature="e#4862#4863#0" expanded="true" />
-                <element signature="e#4889#4890#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/Symboles/SymboleFonction.java">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/NonLogique.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+            <state relative-caret-position="48">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding>
-                <element signature="e#409#410#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/ArbreAbstrait.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="22" />
+              <folding>
                 <element signature="e#448#449#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeFonction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeVar.java">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/MoinsUnaire.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/Symboles/SymboleVar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/Symboles/Symbole.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+            <state relative-caret-position="179">
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding>
-                <element signature="e#537#538#0" expanded="true" />
-                <element signature="e#562#563#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/tabDesEntrees/Entree.java">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/logique/BinaireLogique.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+            <state relative-caret-position="256">
+              <caret line="18" column="134" selection-start-line="18" selection-start-column="134" selection-end-line="18" selection-end-column="134" />
               <folding>
-                <element signature="e#230#231#0" expanded="true" />
-                <element signature="e#259#260#0" expanded="true" />
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#336#337#0" expanded="true" />
-                <element signature="e#386#387#0" expanded="true" />
-                <element signature="e#428#429#0" expanded="true" />
-                <element signature="e#464#465#0" expanded="true" />
-                <element signature="e#496#497#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/analyse/AnalyseurSyntaxique.java">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Comparaison.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6335">
-              <caret line="558" column="30" selection-start-line="558" selection-start-column="30" selection-end-line="558" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/analyse/Grammaire.cup">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="305" column="46" selection-start-line="305" selection-start-column="46" selection-end-line="305" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/yal/table/TDS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2020">
-              <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="23" />
+            <state relative-caret-position="265">
+              <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
               <folding>
-                <element signature="e#2796#2797#0" expanded="true" />
-                <element signature="e#2840#2841#0" expanded="true" />
-                <element signature="e#3150#3151#0" expanded="true" />
-                <element signature="e#3187#3188#0" expanded="true" />
-                <element signature="e#3469#3470#0" expanded="true" />
-                <element signature="e#3526#3527#0" expanded="true" />
-                <element signature="e#3665#3666#0" expanded="true" />
-                <element signature="e#3695#3696#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1173">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Moins.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Different.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yal/arbre/Programme.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -235,13 +204,9 @@
         <option value="$PROJECT_DIR$/src/yal/arbre/Fonction.java" />
         <option value="$PROJECT_DIR$/src/yal/analyse/AnalyseurLexical.jflex" />
         <option value="$PROJECT_DIR$/src/yal/arbre/instructions/Lire.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/BinaireArithmetique.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/Binaire.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Comparaison.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java" />
-        <option value="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Division.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/expressions/Expression.java" />
         <option value="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.mips" />
@@ -249,20 +214,24 @@
         <option value="$PROJECT_DIR$/src/yal/arbre/instructions/Condition.java" />
         <option value="$PROJECT_DIR$/src/yal/arbre/ArbreAbstrait.java" />
         <option value="$PROJECT_DIR$/src/yal/table/tabDesEntrees/Entree.java" />
-        <option value="$PROJECT_DIR$/src/yal/table/TDS.java" />
         <option value="$PROJECT_DIR$/src/yal/table/Symboles/SymboleFonction.java" />
         <option value="$PROJECT_DIR$/src/yal/table/Symboles/SymboleVar.java" />
         <option value="$PROJECT_DIR$/src/yal/table/Symboles/Symbole.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/Programme.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java" />
         <option value="$PROJECT_DIR$/src/yal/analyse/Grammaire.cup" />
         <option value="$PROJECT_DIR$/src/yal/analyse/AnalyseurSyntaxique.java" />
-        <option value="$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java" />
         <option value="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeFonction.java" />
         <option value="$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeVar.java" />
+        <option value="$PROJECT_DIR$/src/yal/table/TDS.java" />
+        <option value="$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/Programme.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java" />
+        <option value="$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java" />
       </list>
     </option>
   </component>
@@ -332,6 +301,54 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="yal" type="462c0819:PsiDirectoryNode" />
               <item name="arbre" type="462c0819:PsiDirectoryNode" />
+              <item name="expressions" type="462c0819:PsiDirectoryNode" />
+              <item name="binaire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yal" type="462c0819:PsiDirectoryNode" />
+              <item name="arbre" type="462c0819:PsiDirectoryNode" />
+              <item name="expressions" type="462c0819:PsiDirectoryNode" />
+              <item name="binaire" type="462c0819:PsiDirectoryNode" />
+              <item name="arithmetique" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yal" type="462c0819:PsiDirectoryNode" />
+              <item name="arbre" type="462c0819:PsiDirectoryNode" />
+              <item name="expressions" type="462c0819:PsiDirectoryNode" />
+              <item name="binaire" type="462c0819:PsiDirectoryNode" />
+              <item name="comparaison" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yal" type="462c0819:PsiDirectoryNode" />
+              <item name="arbre" type="462c0819:PsiDirectoryNode" />
+              <item name="expressions" type="462c0819:PsiDirectoryNode" />
+              <item name="binaire" type="462c0819:PsiDirectoryNode" />
+              <item name="logique" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yal" type="462c0819:PsiDirectoryNode" />
+              <item name="arbre" type="462c0819:PsiDirectoryNode" />
+              <item name="expressions" type="462c0819:PsiDirectoryNode" />
+              <item name="unaire" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yal" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="yal" type="462c0819:PsiDirectoryNode" />
+              <item name="arbre" type="462c0819:PsiDirectoryNode" />
               <item name="fonctions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -394,7 +411,7 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="yal" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551701453006" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551705420543" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Groovy JUnit" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="groovy.util.GroovyTestCase" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -505,7 +522,7 @@
       <workItem from="1551447309244" duration="9903000" />
       <workItem from="1551526628325" duration="6110000" />
       <workItem from="1551617623129" duration="8746000" />
-      <workItem from="1551687319635" duration="9798000" />
+      <workItem from="1551687319635" duration="13579000" />
     </task>
     <task id="LOCAL-00001" summary="ecrire toMips Fonctionne">
       <created>1548067619851</created>
@@ -689,11 +706,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551627276443</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="correction yal3 avant final">
+      <created>1551701512460</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1551701512460</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118801000" />
+    <option name="totallyTimeSpent" value="122582000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -718,7 +742,7 @@
       <window_info id="Learn" order="7" weight="0.3297568" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32923833" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48569384" visible="true" weight="0.27272728" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48569384" weight="0.27272728" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -799,7 +823,8 @@
     <MESSAGE value="correction yal3 done :  declaration ; retourne valeur ; (Fonction)" />
     <MESSAGE value="correction yal3 maj" />
     <MESSAGE value="correction yal3 maj5" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction yal3 maj5" />
+    <MESSAGE value="correction yal3 avant final" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction yal3 avant final" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -845,13 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/BinaireArithmetique.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
@@ -866,16 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="52" column="62" selection-start-line="52" selection-start-column="62" selection-end-line="52" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Moins.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -902,23 +910,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Comparaison.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Different.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Egal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -937,16 +928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/logique/BinaireLogique.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="18" column="134" selection-start-line="18" selection-start-column="134" selection-end-line="18" selection-end-column="134" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -980,38 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/MoinsUnaire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/NonLogique.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#460#461#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/Constante.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -1019,161 +968,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/ConstanteBoolean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/ConstanteEntiere.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/Expression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="31" />
-          <folding>
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#354#355#0" expanded="true" />
-            <element signature="e#397#398#0" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Affectation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Boucle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-205">
-          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Condition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Instruction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Lire.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Type.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1623#1624#0" expanded="true" />
-            <element signature="e#1669#1670#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/ArbreAbstrait.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="22" />
-          <folding>
-            <element signature="e#448#449#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="62" column="64" selection-start-line="62" selection-start-column="64" selection-end-line="62" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="75" column="71" selection-start-line="75" selection-start-column="71" selection-end-line="75" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3431#3432#0" expanded="true" />
-            <element signature="e#3466#3467#0" expanded="true" />
-            <element signature="e#3629#3630#0" expanded="true" />
-            <element signature="e#3657#3658#0" expanded="true" />
-            <element signature="e#3714#3715#0" expanded="true" />
-            <element signature="e#3748#3749#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.mips">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="53" column="4" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/Programme.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="72" column="58" selection-start-line="72" selection-start-column="58" selection-end-line="72" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1206,45 +1004,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="305" column="46" selection-start-line="305" selection-start-column="46" selection-end-line="305" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/table/TDS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2020">
-          <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="23" />
-          <folding>
-            <element signature="e#2796#2797#0" expanded="true" />
-            <element signature="e#2840#2841#0" expanded="true" />
-            <element signature="e#3150#3151#0" expanded="true" />
-            <element signature="e#3187#3188#0" expanded="true" />
-            <element signature="e#3469#3470#0" expanded="true" />
-            <element signature="e#3526#3527#0" expanded="true" />
-            <element signature="e#3665#3666#0" expanded="true" />
-            <element signature="e#3695#3696#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3207#3208#0" expanded="true" />
-            <element signature="e#3263#3264#0" expanded="true" />
-            <element signature="e#3320#3321#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-            <element signature="e#3412#3413#0" expanded="true" />
-            <element signature="e#3482#3483#0" expanded="true" />
-            <element signature="e#3520#3521#0" expanded="true" />
-            <element signature="e#3591#3592#0" expanded="true" />
-            <element signature="e#4788#4789#0" expanded="true" />
-            <element signature="e#4820#4821#0" expanded="true" />
-            <element signature="e#4862#4863#0" expanded="true" />
-            <element signature="e#4889#4890#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1285,8 +1044,272 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/yal/table/tabDesEntrees/EntreeVar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        <state relative-caret-position="483">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+          <folding>
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/table/TDS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-963">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="e#2793#2794#0" expanded="true" />
+            <element signature="e#3140#3141#0" expanded="true" />
+            <element signature="e#3454#3455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.yal">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Instruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Condition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-245">
+          <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Boucle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-268">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Affectation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/Retourne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2694#2695#0" expanded="true" />
+            <element signature="e#2807#2808#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/Fonction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-89">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3151#3152#0" expanded="true" />
+            <element signature="e#3260#3261#0" expanded="true" />
+            <element signature="e#3370#3371#0" expanded="true" />
+            <element signature="e#3479#3480#0" expanded="true" />
+            <element signature="e#4687#4688#0" expanded="true" />
+            <element signature="e#4756#4757#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/Functionnal/0_0_Constante.mips">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="36" column="22" lean-forward="true" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Ecrire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-252">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/Expression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="31" />
+          <folding>
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/Lire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/fonctions/AppelFonction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-865">
+          <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3476#3477#0" expanded="true" />
+            <element signature="e#3514#3515#0" expanded="true" />
+            <element signature="e#3584#3585#0" expanded="true" />
+            <element signature="e#3667#3668#0" expanded="true" />
+            <element signature="e#3758#3759#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/Identificateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="83" column="29" lean-forward="true" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="29" />
+          <folding>
+            <element signature="e#2607#2608#0" expanded="true" />
+            <element signature="e#2637#2638#0" expanded="true" />
+            <element signature="e#2679#2680#0" expanded="true" />
+            <element signature="e#2717#2718#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/ConstanteBoolean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/ConstanteEntiere.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/Unaire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="37" column="9" lean-forward="true" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#514#515#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/NonLogique.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/logique/BinaireLogique.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="18" column="134" selection-start-line="18" selection-start-column="134" selection-end-line="18" selection-end-column="134" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Comparaison.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/BlocDInstructions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1058">
+          <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/Programme.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/ArbreAbstrait.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="e#448#449#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/instructions/AffectationVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/arithmetique/Moins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/binaire/comparaison/Different.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yal/arbre/expressions/unaire/MoinsUnaire.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

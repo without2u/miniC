@@ -40,9 +40,9 @@ public class Programme extends ArbreAbstrait {
     private int getNbrVariable() {
         int cmp = 0;
         for(Entree e : TDS.getInstance()) {
-
-            if((e instanceof EntreeVar) && (e.getNoBloc() == 0))
+            if((e instanceof EntreeVar) && (e.getNoBloc() == 0)) {
                 cmp++;
+            }
         }
 
         return cmp;
@@ -78,7 +78,6 @@ public class Programme extends ArbreAbstrait {
     public String toMIPS() {
         int cmp = getNbrVariable();
         StringBuilder sb = new StringBuilder("") ;
-
         sb.append(".data\n" +
                 " finLigne:   .asciiz \"\\n\"\n" +
                 "              .align 2\n"+

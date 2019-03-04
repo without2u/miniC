@@ -12,7 +12,7 @@ public class Ecrire extends Instruction {
     public Ecrire (Expression e, int n) {
         super(n) ;
         exp = e ;
-        noBloc = TDS.getInstance().getNoBlocCourant();
+        this.noBloc = TDS.getInstance().getNoBlocCourant();
 
     }
 

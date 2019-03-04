@@ -20,7 +20,7 @@ public class AffectationVariable extends Affectation {
         this.filsGauche= gauche;
         this.filsDroite = droite;
 
-        noBloc = TDS.getInstance().getNoBlocCourant();
+        this.noBloc = TDS.getInstance().getNoBlocCourant();
     }
 
     @Override
@@ -57,22 +57,21 @@ public class AffectationVariable extends Affectation {
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
         sb.append(filsDroite.toMIPS());
-        if(filsGauche.getSymbole().getNoBlocS() != getNoBloc()) {
+        if(filsGauche.getSymbole().getNoBlocS() == getNoBloc()) {
 
-
-            sb.append("# charger dans t8 la valeur de la base\n\t");
-            sb.append("lw $t8, 8($s7)\n\t");
-            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc "
-                    + filsGauche.getSymbole().getNoBlocS() + "\n\t");
-            sb.append("sw $v0, " + filsGauche.getDeplacement() + "($t8)\n\t");
-            sb.append("# stockage ok \n\t");
-        } else {
-
-
-            sb.append("# stocker la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc "
+            sb.append("# stockage de la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc numero : "
                     + filsGauche.getSymbole().getNoBlocS() + "\n\t");
             sb.append("sw $v0, " + filsGauche.getDeplacement() + "($s7)\n\t");
             sb.append("# stockage ok \n\t");
+
+        } else {
+            sb.append("# on charge dans t8 l'anceinne valeur de la base\n\t");
+            sb.append("lw $t8, 8($s7)\n\t");
+            sb.append("# stockage de la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc numero : "
+                    + filsGauche.getSymbole().getNoBlocS() + "\n\t");
+            sb.append("sw $v0, " + filsGauche.getDeplacement() + "($t8)\n\t");
+            sb.append("# stockage ok \n\t");
+
         }
         return sb.toString();
 

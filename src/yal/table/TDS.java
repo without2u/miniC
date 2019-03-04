@@ -38,40 +38,40 @@ public class TDS implements Iterable<Entree>{
     public void ajouter(Entree e, Symbole s ,int no) throws AnalyseException {
         //si le symbole existe deja (pour eviter les doublons)
         if (tableDeSymbole.containsKey(e)) {
-            String tmp = (e instanceof EntreeVar) ? "variable " : (e instanceof EntreeFonction) ? "fonction ": "z";
-            DoublonsException erreur= new DoublonsException("ligne "+no+"\n\t "+tmp+"la variable " + e + " est declaree plusieurs fois !");
+            DoublonsException erreur= new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
             ListeDErreurs.getErreurs().addErreur(erreur);
 
         }else {
-            // si c'est une fonction on lui affecte une étiquette et un nombre de parametres donnee
-            if(e instanceof EntreeFonction) {
-                etiquette++;
-                ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
-                ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
-            }
-            if(!existe(e.getNomEntree(), e.getNoBloc(), no)) {
+            if(!dejaExiste(e.getNomEntree(), e.getNoBloc(), no)) {
+                // si c'est une variable
                 if(e instanceof EntreeVar) {
                     decalage -= 4;
                     ((SymboleVar)s).setDeplacement(decalage);
                 }
 
             }
+            // si c'est une fonction on lui affecte une étiquette et un nombre de parametres donnee
+            if(e instanceof EntreeFonction) {
+                etiquette++;
+                ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
+                ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
+            }
+
             tableDeSymbole.put(e,s);
         }
     }
 
-    private boolean existe(String nom, int numeroBloc, int noLigne) {
-        boolean estVrai = false;
+    private boolean dejaExiste(String nom, int numeroBloc, int no) {
+
         for(Entree e : tableDeSymbole.keySet()) {
             if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
-                estVrai = true;
-                AnalyseException erreur = new DoublonsException(noLigne+"\"" + nom + "\"" + " et variable " + "\"" + e + "\"" + " dupliquées !");
+                AnalyseException erreur = new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
-                break;
+                return true;
 
             }
         }
-        return estVrai;
+        return false;
     }
 
     public static TDS getInstance() {

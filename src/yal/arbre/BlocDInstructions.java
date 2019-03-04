@@ -47,9 +47,8 @@ public class BlocDInstructions extends ArbreAbstrait implements Iterable<ArbreAb
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
         for(ArbreAbstrait a: listDesBlocs) {
-            if (!(a instanceof Fonction)) {
+            if (!(a instanceof Fonction))
                 sb.append(a.toMIPS());
-            }
         }
         return sb.toString();
     }

@@ -8,9 +8,20 @@ error_div:	.asciiz "Erreur: Division par 0 !
  main :
 move $s7, $sp
 addi $sp, $sp, -4
+# affichichage de l'expression entiere : un()
+addi $sp, $sp, -4
+	jal fonction1
+	addi $sp, $sp, 4
+	move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 4      # retour à la ligne
+la $a0, finLigne
+syscall
 li $v0,20
 
-# stocker la valeur de 20 dans la variable bite du bloc 0
+# stockage de la valeur de 20 dans la variable bite du bloc numero : 0
 	sw $v0, 0($s7)
 	# stockage ok 
 	# on clacule l'expression (bite + un())
@@ -19,12 +30,12 @@ li $v0,20
 	sw $v0, 0($sp)
 	addi $sp, $sp, -4
 	addi $sp, $sp, -4
-	jal fonct1
+	jal fonction1
 	addi $sp, $sp, 4
 	addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	add $v0, $t8, $v0 
-# stocker la valeur de (bite + un()) dans la variable bite du bloc 0
+# stockage de la valeur de (bite + un()) dans la variable bite du bloc numero : 0
 	sw $v0, 0($s7)
 	# stockage ok 
 	# affichichage de l'expression entiere : bite
@@ -42,20 +53,20 @@ end :
 move $v1, $v0
  li $v0, 10 
  syscall
-# fonction un () avec 0 parametre(s)
-# empilement de l'adresse de retour
-	fonct1: sw $ra, 0($sp)
+# la fonction un () elle a  0 parametres
+# l'empilement de l'adresse de retour de la fonction 
+	fonction1: sw $ra, 0($sp)
 	addi $sp, $sp, -4
-	# empilement de l'ancienne base
+	# l'empilement de l'ancienne base
 	sw $s7, 0($sp)
 	addi $sp, $sp, -4
-	# empilement du numero de region (bloc)
+	# l'empilement du numero de region 
 	li $v0, 1
 	sw $v0, ($sp)
 	addi $sp, $sp, -4
-	# charger dans $s7 la nouvelle base
+	# chargement dans $s7 la nouvelle base
 	move $s7, $sp
-	# instructions de la fonction
+	# liste d'instructions de la fonction
 	# on clacule l'expression (10 - (3 * 2))
 	li $v0,10
 
@@ -75,19 +86,14 @@ mflo $v0
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	sub $v0, $t8, $v0 
-# sauvegarde du resultat (10 - (3 * 2)) dans son emplacement retour
+# sauvegardement du resultat (10 - (3 * 2))
 	sw $v0, 16($s7)
-	# dépilement des 0 variables locales
+	# dépilement des variables locales de fonction 
 	addi $sp, $sp, 0
-	# dépilement du numero bloc + ancienne base
 	addi $sp, $sp, 8
-	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
 	lw $s7, 0($sp)
-	# dépilement de l'adresse de retour de l'appelant
 	addi $sp, $sp, 4
-	# chargement dans $ra de l'adresse de retour de l'appelant
 	lw $ra, 0($sp)
-	# branchement vers la prochaine instruction de l'appelant
 	jr $ra
 	 
  

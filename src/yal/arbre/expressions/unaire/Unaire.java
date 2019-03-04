@@ -28,12 +28,12 @@ public abstract class Unaire extends Expression {
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
         if(e instanceof Identificateur) {
-            if(((Identificateur)e).getNumBloc() != getNoBloc()) {
+            if(((Identificateur)e).getNumBloc() == getNoBloc()) {
+                sb.append("lw $v0, " + ((Identificateur) e).getDeplacement() + "($s7)\n\t");
+            } else {
                 sb.append("sw $t8, $s7\n\t");
                 sb.append("addi $t8, $t8, 8\n\t");
                 sb.append("lw $v0, " + ((Identificateur)e).getDeplacement() + "($s7)\n\t");
-            } else {
-                sb.append("lw $v0, " + ((Identificateur) e).getDeplacement() + "($s7)\n\t");
             }
         } else {
             sb.append(e.toMIPS());

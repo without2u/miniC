@@ -6,10 +6,14 @@ debut
         retourne 10 - 3 * 2;
     fin
 
+
     entier bite;
+
+    ecrire un();
     bite = 20;
 
     bite = bite + un();
     ecrire bite;
+
 
 fin

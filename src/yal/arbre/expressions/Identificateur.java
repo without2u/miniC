@@ -73,13 +73,13 @@ public class Identificateur extends Expression{
     public String codeToMips() {
 
         StringBuilder sb = new StringBuilder();
-        if((symbole.getNoBlocS() != getNumBloc()) && (getNumBloc() != 0))  {
+        if((symbole.getNoBlocS() == getNumBloc()) && (getNumBloc() == 0))  {
+            sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
+            sb.append("lw $v0, " + getDeplacement() + "($s7)\n\t");
+        } else {
             sb.append("# chargement de la variable " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $t8, 8($s7)\n\t");
             sb.append("lw $v0, " + getDeplacement() + "($t8)\n\t");
-        } else {
-            sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
-            sb.append("lw $v0, " + getDeplacement() + "($s7)\n\t");
         }
         return sb.toString();
 

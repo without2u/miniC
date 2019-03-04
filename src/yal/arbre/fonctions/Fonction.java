@@ -49,29 +49,27 @@ public class Fonction extends ArbreAbstrait{
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-        sb.append("# fonction " + nomFonction + " () avec " + getNbrParamFonction() + " parametre(s)\n");
-        sb.append("# empilement de l'adresse de retour\n\t");
-        sb.append("fonct" + getNoBlocFonction() + ": sw $ra, 0($sp)\n\t");
-        sb.append("addi $sp, $sp, -4\n\t");
-        sb.append("# empilement de l'ancienne base\n\t");
+        int nbr = getNbrVariablesDeFonction();
+        sb.append("# la fonction " + nomFonction + " () elle a  " + getNbrParamFonction() + " parametres\n");
+        sb.append("# l'empilement de l'adresse de retour de la fonction \n\t");
+        sb.append("fonction" + getNoBlocFonction() + ": sw $ra, 0($sp)\n\t");
+        sb.append("addi $sp, $sp, "+(-decalage)+"\n\t");
+        sb.append("# l'empilement de l'ancienne base\n\t");
         sb.append("sw $s7, 0($sp)\n\t");
-        sb.append("addi $sp, $sp, -4\n\t");
-        sb.append("# empilement du numero de region (bloc)\n\t");
+        sb.append("addi $sp, $sp, "+(-decalage)+"\n\t");
+        sb.append("# l'empilement du numero de region \n\t");
         sb.append("li $v0, " + getNoBlocFonction() + "\n\t");
         sb.append("sw $v0, ($sp)\n\t");
-        sb.append("addi $sp, $sp, -4\n\t");
-        sb.append("# charger dans $s7 la nouvelle base\n\t");
+        sb.append("addi $sp, $sp, "+(-decalage)+"\n\t");
+        sb.append("# chargement dans $s7 la nouvelle base\n\t");
         sb.append("move $s7, $sp\n\t");
-        int compteur = getNbrVariablesDeFonction();
-        // reserver l'espace pour les variables locales
-        if(compteur != 0){
-          //  sb.append("addi $sp, $sp, " + (compteur * (-4)) + "\n\t");
-            System.out.println("c est vrai");}
-        // recuperer les arguments si cette fonction possede des parametres
+        if(nbr != 0) {
+            sb.append("addi $sp, $sp, " + (nbr * (-4)) + "\n\t");
+        }
         if(getNbrParamFonction() > 0) {
             getMipsArgumentForFonction(sb);
         }
-        sb.append("# instructions de la fonction\n\t");
+        sb.append("# liste d'instructions de la fonction\n\t");
         sb.append(bloc.toMIPS());
 
         return sb.toString();
@@ -97,7 +95,6 @@ public class Fonction extends ArbreAbstrait{
         for(Entree entree : TDS.getInstance()) {
             if(entree instanceof EntreeVar && entree.getNoBloc() == getNoBlocFonction()) {
                 nbr++;
-                System.out.println("oui");
             }
         }
         return nbr;
@@ -110,11 +107,13 @@ public class Fonction extends ArbreAbstrait{
 
         for (int i = 0; i < getNbrParamFonction(); i++) {
             sb.append("ENTIER");
-            if(i != (getNbrParamFonction() - 1))
+            if(i != (getNbrParamFonction() - 1)) {
                 sb.append("; ");
+            }
         }
         sb.append(")");
-        return super.toString();
+
+        return sb.toString();
     }
 
     private void getMipsArgumentForFonction(StringBuilder sb) {

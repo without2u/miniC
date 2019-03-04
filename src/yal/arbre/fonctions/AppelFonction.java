@@ -18,8 +18,8 @@ public class AppelFonction extends Expression {
 
     private String nomFonction;
     private int noBlocAppelF;
-    private Symbole symbole;
     private ArrayList<Expression> listE;
+    private Symbole symbole;
     private static int decalage = 4;
 
     @Override
@@ -45,8 +45,8 @@ public class AppelFonction extends Expression {
     public AppelFonction(String nomFonction, int n) {
         super(n);
         this.nomFonction=nomFonction;
-        this.noBlocAppelF = TDS.getInstance().getNoBlocCourant();
         this.valeur = 0;
+        this.noBlocAppelF = TDS.getInstance().getNoBlocCourant();
     }
 
     private void empilementDArguments(StringBuilder sb) {
@@ -69,15 +69,17 @@ public class AppelFonction extends Expression {
     @Override
     public String codeToMips() {
         StringBuilder sb = new StringBuilder();
-        sb.append("addi $sp, $sp, -4\n\t");
-        if(getNombreParametresFonction() > 0) {
+        sb.append("addi $sp, $sp, "+(-decalage)+"\n\t");
+        if(getNombreParametresFonction() > 0)
             empilementDArguments(sb);
-        }
-        sb.append("jal fonct" + ((SymboleFonction)symbole).getNoBlocS() +"\n\t");
-        if(getNombreParametresFonction() > 0) {
-            sb.append("addi $sp, $sp, " + getNombreParametresFonction() * 4 +"\n\t");
-        }
-        sb.append("addi $sp, $sp, 4\n\t");
+
+        sb.append("jal fonction" + ((SymboleFonction)symbole).getNoBlocS() +"\n\t");
+
+        if(getNombreParametresFonction() > 0)
+            sb.append("addi $sp, $sp, " + getNombreParametresFonction() * decalage +"\n\t");
+
+        sb.append("addi $sp, $sp, "+decalage+"\n\t");
+
         return sb.toString();
     }
 
