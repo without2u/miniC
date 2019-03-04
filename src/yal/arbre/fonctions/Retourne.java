@@ -43,43 +43,38 @@ public class Retourne extends Instruction {
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-
         sb.append(e.toMIPS());
         sb.append("# sauvegarde du resultat " + e + " dans son emplacement retour\n\t");
-
         for(Entree entree : TDS.getInstance()) {
             if(entree instanceof EntreeFonction) {
-
                 Symbole symbole = TDS.getInstance().getSymboleTable(entree);
-                if(((SymboleFonction)symbole).getNumBloc() == numBlocRetourne) {
-
+                if(((SymboleFonction)symbole).getNoBlocS() == numBlocRetourne) {
                     if(((SymboleFonction)symbole).getNbrParamSymbole() > 0) {
-                        sb.append("sw $v0, " + (16 + ((SymboleFonction)symbole).getNbrParamSymbole() * decalage) + "($s7)\n\t");
-                        System.out.println();
+                        sb.append("sw $v0, " + (16 + ((SymboleFonction)symbole).getNbrParamSymbole() * 4) + "($s7)\n\t");
                     } else {
                         sb.append("sw $v0, 16($s7)\n\t");
                     }
-
                     break;
                 }
             }
         }
-
-        int cmp = 0;
+        int compteur = 0;
         for(Entree entree : TDS.getInstance()) {
-            if(entree instanceof EntreeVar && entree.getNumeroBloc() == numBlocRetourne) {
-                cmp++;
-            }
+            if(entree instanceof EntreeVar && entree.getNoBloc() == numBlocRetourne)
+                compteur++;
         }
-
-        sb.append("# dépilement des variables locales\n\t");
-        sb.append("addi $sp, $sp, " + (cmp * decalage) + "\n\t");
+        sb.append("# dépilement des " + compteur +" variables locales\n\t");
+        sb.append("addi $sp, $sp, " + (compteur * 4) + "\n\t");
+        sb.append("# dépilement du numero bloc + ancienne base\n\t");
         sb.append("addi $sp, $sp, 8\n\t");
+        sb.append("# chargement dans $s7 de l'ancienne base pour le retour de la fonction\n\t");
         sb.append("lw $s7, 0($sp)\n\t");
+        sb.append("# dépilement de l'adresse de retour de l'appelant\n\t");
         sb.append("addi $sp, $sp, 4\n\t");
+        sb.append("# chargement dans $ra de l'adresse de retour de l'appelant\n\t");
         sb.append("lw $ra, 0($sp)\n\t");
+        sb.append("# branchement vers la prochaine instruction de l'appelant\n\t");
         sb.append("jr $ra\n\t");
-
         return sb.toString();
     }
 

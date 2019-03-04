@@ -1,6 +1,7 @@
 package yal.arbre.expressions.binaire.arithmetique;
 
 import yal.arbre.expressions.Expression;
+import yal.arbre.fonctions.AppelFonction;
 import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
@@ -49,11 +50,14 @@ public class Division extends BinaireArithmetique {
             ListeDErreurs.getErreurs().addErreur(a);
         } else {
             setType(Type.ENTIER);
-
+            if (!(getFilsDroite() instanceof AppelFonction)) {
+                if (getFilsDroite().getValeur() == 0)
+                    throw new AnalyseSyntaxiqueException(getNoLigne() + ": " + "impossible !! Division par 0 !");
+                else
+                    setValeur(getValeur());
+            }
         }
-        if(getFilsDroite().getValeur() == 0)
-            throw new AnalyseSyntaxiqueException(getNoLigne() + ": " + "impossible !! Division par 0 !");
-        else
-            setValeur(getValeur());
     }
+
+
 }

@@ -23,6 +23,7 @@ public class Identificateur extends Expression{
         super(n);
         this.numBloc = TDS.getInstance().getNoBlocCourant();
         this.nom = nom;
+        this.valeur = 0;
 
     }
 
@@ -30,10 +31,10 @@ public class Identificateur extends Expression{
     public void verifier() throws AnalyseException {
 
         Entree e =new EntreeVar(this.nom);
-        e.setNumeroBloc(numBloc);
+        e.setNoBloc(numBloc);
         symbole = (SymboleVar)TDS.getInstance().getSymboleTable(e);
         if(symbole == null) {
-            e.setNumeroBloc(0);
+            e.setNoBloc(0);
             symbole = (SymboleVar) TDS.getInstance().getSymboleTable(e);
 
             if (symbole == null) {
@@ -64,7 +65,7 @@ public class Identificateur extends Expression{
             return null;
 
         }else {
-            return  symbole.getType();
+            return  symbole.getTypeS();
         }
     }
 
@@ -72,12 +73,12 @@ public class Identificateur extends Expression{
     public String codeToMips() {
 
         StringBuilder sb = new StringBuilder();
-        if( (getNumBloc() != 0) && (symbole.getNumBloc() != getNumBloc()))  {
-            sb.append("# chargement de la variable " + nom + " du bloc " + symbole.getNumBloc() + "\n\t");
+        if((symbole.getNoBlocS() != getNumBloc()) && (getNumBloc() != 0))  {
+            sb.append("# chargement de la variable " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $t8, 8($s7)\n\t");
             sb.append("lw $v0, " + getDeplacement() + "($t8)\n\t");
         } else {
-            sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNumBloc() + "\n\t");
+            sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $v0, " + getDeplacement() + "($s7)\n\t");
         }
         return sb.toString();

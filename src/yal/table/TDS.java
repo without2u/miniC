@@ -49,7 +49,7 @@ public class TDS implements Iterable<Entree>{
                 ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
                 ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
             }
-            if(!existe(e.getNomEntree(), e.getNumeroBloc(), no)) {
+            if(!existe(e.getNomEntree(), e.getNoBloc(), no)) {
                 if(e instanceof EntreeVar) {
                     decalage -= 4;
                     ((SymboleVar)s).setDeplacement(decalage);
@@ -63,11 +63,12 @@ public class TDS implements Iterable<Entree>{
     private boolean existe(String nom, int numeroBloc, int noLigne) {
         boolean estVrai = false;
         for(Entree e : tableDeSymbole.keySet()) {
-            if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNumeroBloc() == numeroBloc) {
+            if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
                 estVrai = true;
                 AnalyseException erreur = new DoublonsException(noLigne+"\"" + nom + "\"" + " et variable " + "\"" + e + "\"" + " dupliquées !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
                 break;
+
             }
         }
         return estVrai;

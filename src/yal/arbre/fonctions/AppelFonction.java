@@ -55,7 +55,7 @@ public class AppelFonction extends Expression {
 
             for (int i = 0; i < getNombreParametresFonction(); i++) {
 
-                sb.append("# empilements d'arguments :\n\t");
+                //sb.append("# empilements d'arguments :\n\t");
                 sb.append(listE.get(i).toMIPS());
                 sb.append("sw $v0, 0($sp)\n\t");
                 sb.append("addi $sp, $sp, -4\n\t");
@@ -68,14 +68,24 @@ public class AppelFonction extends Expression {
 
     @Override
     public String codeToMips() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        sb.append("addi $sp, $sp, -4\n\t");
+        if(getNombreParametresFonction() > 0) {
+            empilementDArguments(sb);
+        }
+        sb.append("jal fonct" + ((SymboleFonction)symbole).getNoBlocS() +"\n\t");
+        if(getNombreParametresFonction() > 0) {
+            sb.append("addi $sp, $sp, " + getNombreParametresFonction() * 4 +"\n\t");
+        }
+        sb.append("addi $sp, $sp, 4\n\t");
+        return sb.toString();
     }
 
     @Override
     public void verifier() throws AnalyseException {
         int taille=listE.size();
         Entree entree = new EntreeFonction(nomFonction, taille);
-        entree.setNumeroBloc(0);
+        entree.setNoBloc(0);
 
         symbole = (SymboleFonction)TDS.getInstance().getSymboleTable(entree);
 
@@ -109,20 +119,7 @@ public class AppelFonction extends Expression {
 
     @Override
     public String toMIPS() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("addi $sp, $sp, -4\n\t");
-
-        if(getNombreParametresFonction() > 0) {
-
-            empilementDArguments(sb);
-        }
-        sb.append("jal fonct" + ((SymboleFonction)symbole).getNumBloc() +"\n\t");
-
-        if(getNombreParametresFonction() > 0) {
-            sb.append("addi $sp, $sp, " + getNombreParametresFonction() * decalage +"\n\t");
-        }
-        sb.append("addi $sp, $sp, 4\n\t");
-        return sb.toString();
+        return codeToMips();
     }
     public int getNombreParametresFonction(){
         return ((SymboleFonction)symbole).getNbrParamSymbole();

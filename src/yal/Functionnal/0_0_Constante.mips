@@ -1,46 +1,4 @@
-# l'empilement de l'adresse de retour
-	fonct1: sw $ra, 0($sp)
-	addi $sp, $sp, -4
-	# empilement de l'ancienne base
-	sw $s7, 0($sp)
-	addi $sp, $sp, -4
-	# l'empilement du numero de la region du bloc
-	li $v0, 1
-	sw $v0, ($sp)
-	addi $sp, $sp, -4
-	move $s7, $sp
-	addi $sp, $sp, -4
-	# liste d'instructions de la fonction
-	# on clacule l'expression (10 - (3 * 2))
-	li $v0,10
-
-sw $v0, 0($sp)
-	addi $sp, $sp, -4
-	# on clacule l'expression (3 * 2)
-	li $v0,3
-
-sw $v0, 0($sp)
-	addi $sp, $sp, -4
-	li $v0,2
-
-addi $sp, $sp, 4
-	lw $t8, 0($sp)
-	mult $v0, $t8 
-mflo $v0 
-addi $sp, $sp, 4
-	lw $t8, 0($sp)
-	sub $v0, $t8, $v0 
-# sauvegarde du resultat (10 - (3 * 2)) dans son emplacement retour
-	sw $v0, 16($s7)
-	# dépilement des variables locales
-	addi $sp, $sp, 0
-	addi $sp, $sp, 8
-	lw $s7, 0($sp)
-	addi $sp, $sp, 4
-	lw $ra, 0($sp)
-	jr $ra
-	 
- .data
+.data
  finLigne:   .asciiz "\n"
               .align 2
 vrai:	.asciiz "vrai"
@@ -84,4 +42,52 @@ end :
 move $v1, $v0
  li $v0, 10 
  syscall
+# fonction un () avec 0 parametre(s)
+# empilement de l'adresse de retour
+	fonct1: sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	# empilement de l'ancienne base
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	# empilement du numero de region (bloc)
+	li $v0, 1
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	# charger dans $s7 la nouvelle base
+	move $s7, $sp
+	# instructions de la fonction
+	# on clacule l'expression (10 - (3 * 2))
+	li $v0,10
 
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# on clacule l'expression (3 * 2)
+	li $v0,3
+
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,2
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	mult $v0, $t8 
+mflo $v0 
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	sub $v0, $t8, $v0 
+# sauvegarde du resultat (10 - (3 * 2)) dans son emplacement retour
+	sw $v0, 16($s7)
+	# dépilement des 0 variables locales
+	addi $sp, $sp, 0
+	# dépilement du numero bloc + ancienne base
+	addi $sp, $sp, 8
+	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
+	lw $s7, 0($sp)
+	# dépilement de l'adresse de retour de l'appelant
+	addi $sp, $sp, 4
+	# chargement dans $ra de l'adresse de retour de l'appelant
+	lw $ra, 0($sp)
+	# branchement vers la prochaine instruction de l'appelant
+	jr $ra
+	 
+ 

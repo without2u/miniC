@@ -13,9 +13,9 @@ import yal.table.tabDesEntrees.EntreeFonction;
 import yal.table.tabDesEntrees.EntreeVar;
 
 public class Fonction extends ArbreAbstrait{
+    private int noBlocFonction;
     private BlocDInstructions bloc;
     private String nomFonction;
-    private int noBlocFonction;
     private int nbrParamFonction;
     private Symbole symbole;
     private static int decalage = 4;
@@ -29,7 +29,7 @@ public class Fonction extends ArbreAbstrait{
     @Override
     public void verifier() throws AnalyseException {
         EntreeFonction entree = new EntreeFonction(nomFonction, nbrParamFonction);
-        entree.setNumeroBloc(0);
+        entree.setNoBloc(0);
         symbole = TDS.getInstance().getSymboleTable(entree);
         if(symbole == null) {
             AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " : la fonction "+ this + " n'est pas declarée !");
@@ -49,26 +49,31 @@ public class Fonction extends ArbreAbstrait{
     @Override
     public String toMIPS() {
         StringBuilder sb = new StringBuilder();
-        sb.append("# l'empilement de l'adresse de retour\n\t");
+        sb.append("# fonction " + nomFonction + " () avec " + getNbrParamFonction() + " parametre(s)\n");
+        sb.append("# empilement de l'adresse de retour\n\t");
         sb.append("fonct" + getNoBlocFonction() + ": sw $ra, 0($sp)\n\t");
         sb.append("addi $sp, $sp, -4\n\t");
         sb.append("# empilement de l'ancienne base\n\t");
         sb.append("sw $s7, 0($sp)\n\t");
         sb.append("addi $sp, $sp, -4\n\t");
-        sb.append("# l'empilement du numero de la region du bloc\n\t");
+        sb.append("# empilement du numero de region (bloc)\n\t");
         sb.append("li $v0, " + getNoBlocFonction() + "\n\t");
         sb.append("sw $v0, ($sp)\n\t");
         sb.append("addi $sp, $sp, -4\n\t");
+        sb.append("# charger dans $s7 la nouvelle base\n\t");
         sb.append("move $s7, $sp\n\t");
-        int nbrVar = getNbrVariablesDeFonction();
-        if(nbrVar != 0) {
-            sb.append("addi $sp, $sp, " + nbrVar * (-decalage) + "\n\t");
-        }
+        int compteur = getNbrVariablesDeFonction();
+        // reserver l'espace pour les variables locales
+        if(compteur != 0){
+          //  sb.append("addi $sp, $sp, " + (compteur * (-4)) + "\n\t");
+            System.out.println("c est vrai");}
+        // recuperer les arguments si cette fonction possede des parametres
         if(getNbrParamFonction() > 0) {
             getMipsArgumentForFonction(sb);
         }
-        sb.append("# liste d'instructions de la fonction\n\t");
+        sb.append("# instructions de la fonction\n\t");
         sb.append(bloc.toMIPS());
+
         return sb.toString();
     }
 
@@ -90,8 +95,9 @@ public class Fonction extends ArbreAbstrait{
     private int getNbrVariablesDeFonction() {
         int nbr = 0;
         for(Entree entree : TDS.getInstance()) {
-            if(entree instanceof EntreeVar && entree.getNumeroBloc() == getNoBloc()) {
+            if(entree instanceof EntreeVar && entree.getNoBloc() == getNoBlocFonction()) {
                 nbr++;
+                System.out.println("oui");
             }
         }
         return nbr;

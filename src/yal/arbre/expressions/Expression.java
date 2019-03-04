@@ -6,11 +6,18 @@ import yal.arbre.instructions.Type;
 public abstract class Expression extends ArbreAbstrait {
     protected Type type;
     protected int valeur;
+    protected int noBlocE;
     protected Expression(int n) {
         super(n) ;
     }
 
+    public int getNoBlocE() {
+        return noBlocE;
+    }
 
+    public void setNoBlocE(int noBlocE) {
+        this.noBlocE = noBlocE;
+    }
 
     public Type getType() {
         return type;

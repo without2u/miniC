@@ -2,28 +2,24 @@ package yal.table.Symboles;
 
 import yal.arbre.instructions.Type;
 
-public class SymboleVar  extends Symbole{
+public class SymboleVar extends Symbole{
     private int deplacement;
+    public SymboleVar(Type typeV) {
 
-    public SymboleVar(Type type) {
-        super(type);
-    }
-    public Type getType() {
-        return type;
-    }
-    public int getDeplacement() {
-        return deplacement;
+        super(typeV);
+
     }
 
     public void setDeplacement(int deplacement) {
         this.deplacement = deplacement;
     }
 
+    public int getDeplacement() {
+        return deplacement;
+    }
+
     @Override
     public String toString() {
-        return "Symbole{" +
-                "type=" + type +
-                ", deplacement=" + deplacement +
-                '}';
+        return "type :" + typeS + " bloc : " + noBlocS + " deplacement :" + deplacement;
     }
 }

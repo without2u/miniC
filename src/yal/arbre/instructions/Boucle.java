@@ -20,6 +20,8 @@ public class Boucle extends Instruction{
         cmpt++;
         bloc = new BlocDInstructions(n);
         this.tmp=cmpt;
+        this.noBloc = TDS.getInstance().getNoBlocCourant();
+
 
     }
 

@@ -41,7 +41,7 @@ public class Programme extends ArbreAbstrait {
         int cmp = 0;
         for(Entree e : TDS.getInstance()) {
 
-            if((e instanceof EntreeVar) && (e.getNumeroBloc() == 0))
+            if((e instanceof EntreeVar) && (e.getNoBloc() == 0))
                 cmp++;
         }
 
@@ -78,7 +78,7 @@ public class Programme extends ArbreAbstrait {
     public String toMIPS() {
         int cmp = getNbrVariable();
         StringBuilder sb = new StringBuilder("") ;
-        getMipsForFonction(sb);
+
         sb.append(".data\n" +
                 " finLigne:   .asciiz \"\\n\"\n" +
                 "              .align 2\n"+
@@ -99,7 +99,9 @@ public class Programme extends ArbreAbstrait {
                 " li $v0, 10 \n" +
                 " syscall\n") ;
 
+        getMipsForFonction(sb);
         return sb.toString() ;
+
     }
 
     public void setBloc(BlocDInstructions bloc) {

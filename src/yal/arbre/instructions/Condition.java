@@ -4,6 +4,7 @@ import yal.arbre.BlocDInstructions;
 import yal.arbre.expressions.Expression;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
+import yal.table.TDS;
 
 public class Condition extends Instruction {
     private Expression e;
@@ -18,6 +19,8 @@ public class Condition extends Instruction {
         sinon=new BlocDInstructions(n);
         cmpt++;
         tmp=cmpt;
+        this.noBloc = TDS.getInstance().getNoBlocCourant();
+
     }
 
     @Override

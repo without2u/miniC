@@ -31,9 +31,9 @@ public class SymboleFonction extends Symbole {
     @Override
     public String toString() {
 
-        return " type de retour: "+ getType() +
-                " bloc " + getNumBloc() +
-                " etiquette:" + getEtiquetteSymbole();
+        return " type de retour : "+ getTypeS() +
+                " numero bloc :" + getNoBlocS() +
+                " etiquette symbole :" + getEtiquetteSymbole();
     }
 
     public void setNbrParamSymbole(int nbrParamSymbole) {
