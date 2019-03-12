@@ -23,6 +23,7 @@ public class TDS implements Iterable<Entree>{
     private static int numBloc = 0;
     private static int etiquette = 0;
     private Stack<Integer> pileAbloc;
+    private String typeSymboleEntrer=null;
 
 
     //constructeur de table de symboles
@@ -37,27 +38,26 @@ public class TDS implements Iterable<Entree>{
     //on effectue une nouvelle entree dans la table de symbole
     public void ajouter(Entree e, Symbole s ,int no) throws AnalyseException {
         //si le symbole existe deja (pour eviter les doublons)
-        if (tableDeSymbole.containsKey(e)) {
-            DoublonsException erreur= new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
-            ListeDErreurs.getErreurs().addErreur(erreur);
 
-        }else {
-            if(!dejaExiste(e.getNomEntree(), e.getNoBloc(), no)) {
-                // si c'est une variable
-                if(e instanceof EntreeVar) {
-                    decalage -= 4;
-                    ((SymboleVar)s).setDeplacement(decalage);
-                }
 
-            }
-            // si c'est une fonction on lui affecte une étiquette et un nombre de parametres donnee
+        if (!tableDeSymbole.containsKey(e)) {
             if(e instanceof EntreeFonction) {
+                typeSymboleEntrer=" fonction ";
                 etiquette++;
                 ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
                 ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
+            }else{
+                typeSymboleEntrer=" variable ";
+                decalage -= 4;
+                ((SymboleVar)s).setDeplacement(decalage);
             }
-
             tableDeSymbole.put(e,s);
+        }else {
+
+            DoublonsException erreur= new DoublonsException("ligne "+no+" la"+typeSymboleEntrer+" \"" + e + "\" est declaree plusieurs fois !");
+            ListeDErreurs.getErreurs().addErreur(erreur);
+
+
         }
     }
 
@@ -65,6 +65,8 @@ public class TDS implements Iterable<Entree>{
 
         for(Entree e : tableDeSymbole.keySet()) {
             if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
+
+
                 AnalyseException erreur = new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
                 return true;

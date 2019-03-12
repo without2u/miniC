@@ -51,10 +51,12 @@ public class Division extends BinaireArithmetique {
         } else {
             setType(Type.ENTIER);
             if (!(getFilsDroite() instanceof AppelFonction)) {
-                if (getFilsDroite().getValeur() == 0)
-                    throw new AnalyseSyntaxiqueException(getNoLigne() + ": " + "impossible !! Division par 0 !");
-                else
+
+                if (getFilsDroite().getValeur() == 0) {
+                    throw new AnalyseSyntaxiqueException("ligne : "+getNoLigne() + ": " + "impossible !! Division par 0 !");
+                }else {
                     setValeur(getValeur());
+                }
             }
         }
     }

@@ -80,7 +80,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, PAROUV, PARFER;
 terminal String    IDF, CSTENTIERE,CSTBOOLEAN;
-terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE, VIRGULE;
 
 /* Non terminals used in the grammar section.  */
 
@@ -90,7 +90,8 @@ non terminal BlocDInstructions LINST;
 non terminal Identificateur  DECL_VAR;
 non terminal ArrayList<ArbreAbstrait> LDECL;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER;
-non terminal ArrayList<Identificateur> PARAMETRES;
+non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LIST_DECL_VAR;
+non terminal ArrayList<Expression> PAR_EFF;
 
 
 precedence left OU ;
@@ -225,14 +226,33 @@ EXP    ::=      CST:c
         |
                 PAROUV  EXP:e  PARFER
                 {: RESULT = e; :}
-         |
+        |
                 IDF:idf PAROUV PARFER
                 {:
                     AppelFonction af = new AppelFonction(idf, idfleft+1);
                     af.setListE(new ArrayList<Expression>());
                     RESULT = af;
                 :}
+        |
+                IDF:idf PAROUV PAR_EFF:pe PARFER
+                {:
+                    AppelFonction af = new AppelFonction(idf, idfleft+1);
+                    af.setListE(pe);
+                    RESULT = af;
+                :}
         ;
+PAR_EFF	::=		PAR_EFF:pe VIRGULE EXP:e
+				{:
+					pe.add(e);
+					RESULT = pe;
+				:}
+		|
+				EXP:e
+				{: 	ArrayList<Expression> liste = new ArrayList<Expression>();
+					liste.add(e);
+					RESULT = liste;
+				:}
+		;
 
 CST     ::=     CSTENTIERE:e
                 {:
@@ -295,7 +315,7 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 							RESULT = id;
 						:}
 				;
-DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LINST:li FIN
+DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LIST_DECL_VAR:ldv LINST:li FIN
 						{:
 							Fonction f = new Fonction(idf, idfleft);
 							Entree entree = new EntreeFonction(idf, p.size());
@@ -309,6 +329,37 @@ DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LINST:li FIN
 							f.setBloc(li);
 							RESULT = f;
 						:}
+				|
+				        FONCTION IDF:idf PARAMETRES:p DEBUT LINST:li FIN
+                		{:
+                            Fonction f = new Fonction(idf, idfleft);
+                            Entree entree = new EntreeFonction(idf, p.size());
+                            entree.setNoBloc(0);
+                            Type type = Type.ENTIER;
+                            Symbole symbole = new SymboleFonction(type);
+                            int bloc = TDS.getInstance().getNoBlocCourant();
+                            symbole.setNoBlocS(bloc);
+                            TDS.getInstance().ajouter(entree, symbole, idfleft+1);
+                            f.setNbrParamFonction(p.size());
+                            f.setBloc(li);
+                            RESULT = f;
+                		:}
+				;
+
+LPARAMETRES		::=		LPARAMETRES:lp POINTVIRGULE ENTIER IDF:idf
+						{:
+							Identificateur id = new Identificateur(idf, idfleft+1);
+							lp.add(id);
+							RESULT = lp;
+						:}
+				|
+						ENTIER IDF:idf
+						{:
+							Identificateur id = new Identificateur(idf, idfleft+1);
+							ArrayList<Identificateur> al = new ArrayList<Identificateur>();
+							al.add(id);
+							RESULT = al;
+						:}
 				;
 
 PARAMETRES		::=		PAROUV PARFER
@@ -317,7 +368,36 @@ PARAMETRES		::=		PAROUV PARFER
 							ArrayList<Identificateur> al = new ArrayList<Identificateur>();
 							RESULT = al;
 						:}
+				|
+                		PAROUV LPARAMETRES:lp PARFER
+                		{:
+                			TDS.getInstance().nouvelleEntree();
+                			int bloc = TDS.getInstance().getNoBlocCourant();
+                			for(Identificateur idf : lp) {
+                			    Entree e = new EntreeVar(idf.toString());
+                			    e.setNoBloc(bloc);
+                			    idf.setNumBloc(bloc);
+                			    Type type = Type.ENTIER;
+                			    Symbole s = new SymboleVar(type);
+                			    s.setNoBlocS(bloc);
+                			    TDS.getInstance().ajouter(e, s, idf.getNoLigne());
+                			}
+                			RESULT = lp;
+                		:}
+				;
 
+LIST_DECL_VAR	::=		LIST_DECL_VAR:ldv DECL_VAR:dv
+						{:
+							ldv.add(dv);
+							RESULT = ldv;
+						:}
+				|
+						DECL_VAR:dv
+						{:
+							ArrayList<Identificateur> liste = new ArrayList<Identificateur>();
+							liste.add(dv);
+							RESULT = liste;
+						:}
 				;
 
 

@@ -55,7 +55,7 @@ commentaireSlashSlash = [/][/].*
 "entier"			   { return symbol(CodesLexicaux.ENTIER); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
-
+","					   { return symbol(CodesLexicaux.VIRGULE); }
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 {csteB}      	       { return symbol(CodesLexicaux.CSTBOOLEAN, yytext()); }
 "si"				   { return symbol(CodesLexicaux.SI); }

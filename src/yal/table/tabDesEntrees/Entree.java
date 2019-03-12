@@ -8,6 +8,7 @@ public abstract class Entree{
 
         this.nomEntree=nomEntree;
 
+
     }
 
     public int getNoBloc() {

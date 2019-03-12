@@ -1,19 +1,14 @@
 programme test
 debut
 
-    fonction un()
+
+
+    fonction a(entier b )
     debut
-        retourne 10 - 3 * 2;
+        retourne 10 - b * 3;
     fin
 
 
-    entier bite;
-
-    ecrire un();
-    bite = 20;
-
-    bite = bite + un();
-    ecrire bite;
-
+ecrire a(4);
 
 fin

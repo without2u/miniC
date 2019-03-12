@@ -23,9 +23,6 @@ public class EntreeFonction extends Entree {
         return nombreParamFonction;
     }
 
-    public void setNombreParamFonction(int nombreParamFonction) {
-        this.nombreParamFonction = nombreParamFonction;
-    }
 
     @Override
     public String toString() {
