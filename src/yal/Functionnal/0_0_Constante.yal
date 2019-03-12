@@ -2,13 +2,18 @@ programme test
 debut
 
 
-
-    fonction a(entier b )
+    fonction a(entier b ;entier d;entier v)
     debut
-        retourne 10 - b * 3;
+    entier c;
+    c=5;
+        retourne d - b * c+v;
     fin
 
 
-ecrire a(4);
+ecrire a(4,10,1);
+
+
+
+
 
 fin

@@ -90,7 +90,7 @@ non terminal BlocDInstructions LINST;
 non terminal Identificateur  DECL_VAR;
 non terminal ArrayList<ArbreAbstrait> LDECL;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER;
-non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LIST_DECL_VAR;
+non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LDECL_VAR_F;
 non terminal ArrayList<Expression> PAR_EFF;
 
 
@@ -248,7 +248,8 @@ PAR_EFF	::=		PAR_EFF:pe VIRGULE EXP:e
 				:}
 		|
 				EXP:e
-				{: 	ArrayList<Expression> liste = new ArrayList<Expression>();
+				{:
+				    ArrayList<Expression> liste = new ArrayList<Expression>();
 					liste.add(e);
 					RESULT = liste;
 				:}
@@ -283,7 +284,6 @@ LDECL		    ::=		LDECL:ld DECL:d
 			    |
 					    DECL:d
 						{:
-						//BlocDInstructions bloc = new BlocDInstructions(dleft+1);
 						ArrayList<ArbreAbstrait> declar= new ArrayList<ArbreAbstrait>();
 							declar.add(d);
 							RESULT = declar;
@@ -315,7 +315,7 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 							RESULT = id;
 						:}
 				;
-DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LIST_DECL_VAR:ldv LINST:li FIN
+DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LDECL_VAR_F:ldv LINST:li FIN
 						{:
 							Fonction f = new Fonction(idf, idfleft);
 							Entree entree = new EntreeFonction(idf, p.size());
@@ -365,8 +365,8 @@ LPARAMETRES		::=		LPARAMETRES:lp POINTVIRGULE ENTIER IDF:idf
 PARAMETRES		::=		PAROUV PARFER
 						{:
 							TDS.getInstance().nouvelleEntree();
-							ArrayList<Identificateur> al = new ArrayList<Identificateur>();
-							RESULT = al;
+							ArrayList<Identificateur> list = new ArrayList<Identificateur>();
+							RESULT = list;
 						:}
 				|
                 		PAROUV LPARAMETRES:lp PARFER
@@ -386,10 +386,10 @@ PARAMETRES		::=		PAROUV PARFER
                 		:}
 				;
 
-LIST_DECL_VAR	::=		LIST_DECL_VAR:ldv DECL_VAR:dv
+LDECL_VAR_F	::=		    LDECL_VAR_F:ldvf DECL_VAR:dv
 						{:
-							ldv.add(dv);
-							RESULT = ldv;
+							ldvf.add(dv);
+							RESULT = ldvf;
 						:}
 				|
 						DECL_VAR:dv

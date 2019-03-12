@@ -7,14 +7,22 @@ error_div:	.asciiz "Erreur: Division par 0 !
 .text
  main :
 move $s7, $sp
-# affichichage de l'expression entiere : a(4)
+# affichichage de l'expression entiere : a(4, 10, 1)
 addi $sp, $sp, -4
 	li $v0,4
 
 sw $v0, 0($sp)
 	addi $sp, $sp, -4
+	li $v0,10
+
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
 	jal fonction1
-	addi $sp, $sp, 4
+	addi $sp, $sp, 12
 	addi $sp, $sp, 4
 	move $t8, $v0
 li $v0, 1
@@ -28,7 +36,7 @@ end :
 move $v1, $v0
  li $v0, 10 
  syscall
-# la fonction a () elle a  1 parametres
+# la fonction a () elle a  3 parametres
 # l'empilement de l'adresse de retour de la fonction 
 	fonction1: sw $ra, 0($sp)
 	addi $sp, $sp, -4
@@ -41,36 +49,52 @@ move $v1, $v0
 	addi $sp, $sp, -4
 	# chargement dans $s7 la nouvelle base
 	move $s7, $sp
-	addi $sp, $sp, -4
+	addi $sp, $sp, -16
 	# l'empilement des arguments de la fonction
-	la $t8, 16($s7)
+	la $t8, 24($s7)
 	lw $v0, 0($t8)
 	sw $v0, 0($s7)
+	lw $v0, -4($t8)
+	sw $v0, -4($s7)
+	lw $v0, -8($t8)
+	sw $v0, -8($s7)
 	# liste d'instructions de la fonction
-	# on clacule l'expression (10 - (b * 3))
-	li $v0,10
+	li $v0,5
 
-sw $v0, 0($sp)
-	addi $sp, $sp, -4
-	# on clacule l'expression (b * 3)
-	# chargement de la variable b du bloc 1
-	lw $t8, 8($s7)
-	lw $v0, 0($t8)
+# stockage de la valeur de 5 dans la variable c du bloc numero : 1
+	sw $v0, -12($s7)
+	# stockage ok 
+	# on clacule l'expression ((d - (b * c)) + v)
+	# on clacule l'expression (d - (b * c))
+	# chargement de la variable  d du bloc 1
+	lw $v0, -4($s7)
 	sw $v0, 0($sp)
 	addi $sp, $sp, -4
-	li $v0,3
-
-addi $sp, $sp, 4
+	# on clacule l'expression (b * c)
+	# chargement de la variable  b du bloc 1
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# chargement de la variable  c du bloc 1
+	lw $v0, -12($s7)
+	addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	mult $v0, $t8 
 mflo $v0 
 addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	sub $v0, $t8, $v0 
-# sauvegardement du resultat (10 - (b * 3))
-	sw $v0, 20($s7)
-	# dépilement des variables locales de fonction 
+sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# chargement de la variable  v du bloc 1
+	lw $v0, -8($s7)
 	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# sauvegardement du resultat ((d - (b * c)) + v)
+	sw $v0, 28($s7)
+	# dépilement des variables locales de fonction 
+	addi $sp, $sp, 16
 	addi $sp, $sp, 8
 	lw $s7, 0($sp)
 	addi $sp, $sp, 4
