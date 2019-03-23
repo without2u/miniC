@@ -52,7 +52,7 @@ public class TDS implements Iterable<Entree>{
                 typeSymboleEntrer=" variable ";
                 decalage -= 4;
                 ((SymboleVar)s).setDeplacement(decalage);
-            }else {
+            }else if (e instanceof EntreeTableau){
                 decalage -= 4;
                 ((SymboleTableau)s).setDeplacement(decalage);
             }

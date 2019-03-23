@@ -3,9 +3,7 @@ package yal.table.tabDesEntrees;
 public class EntreeVar extends Entree{
     //une Entrée est un identificateur de variable.
 
-
-    public EntreeVar(String nomEntree)
-    {
+    public EntreeVar(String nomEntree) {
         super(nomEntree);
     }
 

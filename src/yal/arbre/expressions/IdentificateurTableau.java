@@ -14,22 +14,20 @@ import yal.table.tabDesEntrees.EntreeVar;
 
 public class IdentificateurTableau extends Expression{
     private String nom;
-    private Symbole symbole;
+    private SymboleTableau symbole;
     private Expression indice;
+    private int numBloc,dep;
     public IdentificateurTableau(String nom, Expression indice, int n) {
         super(n);
         this.nom = nom;
         this.indice = indice;
         this.valeur = indice.getValeur();
-        noBloc = TDS.getInstance().getNoBlocCourant();
+        numBloc = TDS.getInstance().getNoBlocCourant();
 
 
     }
 
-    @Override
-    public String codeToMips() {
-        return null;
-    }
+
 
     @Override
     public void verifier() throws AnalyseException {
@@ -37,7 +35,8 @@ public class IdentificateurTableau extends Expression{
         Entree e =new EntreeTableau(this.nom);
         e.setNoBloc(noBloc);
         symbole = (SymboleTableau)TDS.getInstance().getSymboleTable(e);
-
+            System.out.println(symbole.toString());
+            dep=symbole.getDeplacement();
             if(symbole == null) {
             e.setNoBloc(0);
             symbole = (SymboleTableau) TDS.getInstance().getSymboleTable(e);
@@ -56,6 +55,47 @@ public class IdentificateurTableau extends Expression{
 
     @Override
     public String toMIPS() {
-        return null;
+
+        return codeToMips();
+
+    }
+
+    public int getDeplacement() {
+
+        return dep;
+
+    }
+
+    @Override
+    public String toString() {
+
+        return nom + "[" + indice + "]";
+    }
+    public Type getType() {
+
+        if (symbole == null){
+            return null;
+
+        }else {
+            return  symbole.getTypeS();
+        }
+
+    }
+
+    public int getNumBloc() {
+        return numBloc;
+    }
+
+    public void setNumBloc(int numBloc) {
+        this.numBloc = numBloc;
+    }
+
+    public Symbole getSymbole() {
+        return symbole;
+    }
+    @Override
+    public String codeToMips() {
+
+       return null;
     }
 }

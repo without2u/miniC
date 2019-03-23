@@ -84,6 +84,7 @@ public class Programme extends ArbreAbstrait {
                 "vrai:\t" + ".asciiz \"vrai\"\n"+
                 "faux:\t" + ".asciiz \"faux\"\n"+
                 "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\n"+
+                "erreurAccesTableauInvalide :\n"+
 
         ".text\n" +
                 " main :\n") ;

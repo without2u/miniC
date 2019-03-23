@@ -2,7 +2,8 @@ programme test
 debut
 entier [2] a;
 entier a;
-a[7]=1;
+a[1]=7;
+//ecrire a.longueur;
 ecrire a[0];
 
 fin

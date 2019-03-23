@@ -80,6 +80,7 @@ public class Identificateur extends Expression{
         } else {
             sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $v0, " + getDeplacement() + "($s7)\n\t");
+
         }
         return sb.toString();
 

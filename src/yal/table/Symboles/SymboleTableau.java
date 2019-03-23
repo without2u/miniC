@@ -24,4 +24,12 @@ public class SymboleTableau extends Symbole{
     public void setDeplacement(int deplacement) {
         this.deplacement = deplacement;
     }
+
+    @Override
+    public String toString() {
+        return "SymboleTableau{" +
+                "nbElement=" + nbElement +
+                ", deplacement=" + deplacement +
+                '}';
+    }
 }

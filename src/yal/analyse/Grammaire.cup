@@ -82,7 +82,7 @@ parser code {:
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, PAROUV, PARFER, CROOUV, CROFER;
 terminal String    IDF, CSTENTIERE,CSTBOOLEAN;
-terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE, VIRGULE;
+terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE, VIRGULE, POINT, LONGUEUR;
 
 /* Non terminals used in the grammar section.  */
 
@@ -249,6 +249,12 @@ EXP    ::=      CST:c
                  {:
                    RESULT = new IdentificateurTableau(idf, exp, idfleft+1);
                  :}
+        |
+                IDF:idf POINT LONGUEUR
+                {:
+                    RESULT = new Longueur(idf, idfleft+1);
+                :}
+
         ;
 
 
@@ -288,8 +294,8 @@ AFFECT		    ::=	    IDF:idf EGAL EXP:e POINTVIRGULE
                     IDF:idf CROOUV EXP:e1 CROFER EGAL EXP:e2 POINTVIRGULE
 				    {:
                         IdentificateurTableau i = new IdentificateurTableau(idf,e1, idfleft+1);
-                         Instruction aff = new AffectationTableau(i, e2, idfleft+1);
-                       RESULT = aff;
+                        Instruction aff = new AffectationTableau(i,e1, e2, idfleft+1);
+                        RESULT = aff;
 				    :}
 
 			    ;
@@ -349,7 +355,6 @@ DECL_VAR_TABLEAU ::=    ENTIER  CROOUV EXP:e CROFER IDF:idf POINTVIRGULE
                 		    Type type = Type.ENTIER;
                 		    Symbole s = new SymboleTableau(type);
                 		    s.setNoBlocS(bloc);
-                		    //System.out.println(((SymboleTableau)s).getNbElement());
                 		    ((SymboleTableau)s).setNbElement(e.getValeur());
                 		    TDS.getInstance().ajouter(entree, s, idfleft+1);
                 		    IdentificateurTableau i = new IdentificateurTableau(idf,e, idfleft);

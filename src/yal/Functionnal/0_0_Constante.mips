@@ -4,42 +4,29 @@
 vrai:	.asciiz "vrai"
 faux:	.asciiz "faux"
 error_div:	.asciiz "Erreur: Division par 0 !
+erreurAccesTableauInvalide :
 .text
  main :
 move $s7, $sp
 addi $sp, $sp, -4
-# Affectation d'une valeur à une case d'un tableau
-li $v0,1
+# Affectation
+# On calcule la valeur de l'indiceli $v0,1
 
-# Empile la valeur à mettre dans la variable
+# On multiplie la valeur de l'indice par -4li $t8, -4 
+mult $v0, $t8
+mflo $v0
+# Empilement de la partie gauche
 sw $v0, 0($sp)
 add $sp, $sp, -4
-# Récupère la base courante
-move $t2, $s7
-# Récupère le numéro de région où est déclaré le tableau
-li $v1, 
-tq_789451787 :
-lw $v0, 4($t2) 
-sub $v0, $v0, $v1
-beqz $v0, fintq_789451787
-lw $t2, 8($t2) 
-j tq_789451787
-fintq_789451787 :
-# Chargement de l'adresse du tableau dans $t8
-lw $t8, 1($t2)
-nullbltz $v0, erreurAccesTableauInvalide
-lw $t2, 0($t8)
-sub $t2, $t2, $v0
-blez $t2, erreurAccesTableauInvalide
-li $t3, -4
-mult $v0, $t3
-mflo $t1
-add $t1, $t1, -4# Dépile la valeur à mettre dans la variable
+# Calcul de la partie droite
+li $v0,7
+
+# Dépilement de la partie gauche
 add $sp, $sp, 4
-lw $v0, 0($sp)
-add $t8, $t8, $t1
-sw $v0, 0($t8)
-# affichichage de l'expression entiere : yal.arbre.expressions.IdentificateurTableau@7440e464
+lw $t8, 0($sp)
+add $s7,$s7, -0 
+add $s7,$s7,$t8sw $v0, ($s7)add $s7,$s7, 0 
+sub $s7,$s7,$t8# affichichage de l'expression entiere : a[0]
 nullmove $t8, $v0
 li $v0, 1
 move $a0, $t8
