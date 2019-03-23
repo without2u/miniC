@@ -1,5 +1,6 @@
 package yal.arbre;
 
+
 import yal.exceptions.AnalyseException;
 
 public abstract class ArbreAbstrait {
@@ -20,6 +21,7 @@ public abstract class ArbreAbstrait {
     public int getNoBloc() {
         return noBloc;
     }
+
 
     public void setNoBloc(int noBloc) {
         this.noBloc = noBloc;

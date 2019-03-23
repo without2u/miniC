@@ -5,9 +5,11 @@ import yal.exceptions.DoublonsException;
 import yal.exceptions.ListeDErreurs;
 import yal.table.Symboles.Symbole;
 import yal.table.Symboles.SymboleFonction;
+import yal.table.Symboles.SymboleTableau;
 import yal.table.Symboles.SymboleVar;
 import yal.table.tabDesEntrees.Entree;
 import yal.table.tabDesEntrees.EntreeFonction;
+import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 
 import java.util.BitSet;
@@ -46,10 +48,13 @@ public class TDS implements Iterable<Entree>{
                 etiquette++;
                 ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
                 ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
-            }else{
+            }else if (e instanceof EntreeVar){
                 typeSymboleEntrer=" variable ";
                 decalage -= 4;
                 ((SymboleVar)s).setDeplacement(decalage);
+            }else {
+                decalage -= 4;
+                ((SymboleTableau)s).setDeplacement(decalage);
             }
             tableDeSymbole.put(e,s);
         }else {

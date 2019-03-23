@@ -27,6 +27,8 @@ import yal.table.tabDesEntrees.EntreeVar;
 import yal.arbre.fonctions.Fonction;
 import yal.arbre.fonctions.Retourne;
 import yal.arbre.fonctions.AppelFonction;
+import yal.table.Symboles.SymboleTableau;
+import yal.table.tabDesEntrees.EntreeTableau;
 
 import java_cup.runtime.*;
 
@@ -78,7 +80,7 @@ parser code {:
 
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, PAROUV, PARFER;
+terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, LIRE, EGAL, ENTIER, ECRIRE, SI, ALORS, SINON, FINSI, NON, PAROUV, PARFER, CROOUV, CROFER;
 terminal String    IDF, CSTENTIERE,CSTBOOLEAN;
 terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE, FONCTION, RETOURNE, VIRGULE;
 
@@ -88,6 +90,7 @@ non terminal ArbreAbstrait PROG, DECL, DECL_FONCTION ;
 non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST;
 non terminal Identificateur  DECL_VAR;
+non terminal IdentificateurTableau  DECL_VAR_TABLEAU;
 non terminal ArrayList<ArbreAbstrait> LDECL;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER;
 non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LDECL_VAR_F;
@@ -240,7 +243,15 @@ EXP    ::=      CST:c
                     af.setListE(pe);
                     RESULT = af;
                 :}
+
+        |
+                 IDF:idf CROOUV EXP:exp CROFER
+                 {:
+                   RESULT = new IdentificateurTableau(idf, exp, idfleft+1);
+                 :}
         ;
+
+
 PAR_EFF	::=		PAR_EFF:pe VIRGULE EXP:e
 				{:
 					pe.add(e);
@@ -273,6 +284,13 @@ AFFECT		    ::=	    IDF:idf EGAL EXP:e POINTVIRGULE
 					    Instruction aff = new AffectationVariable(i, e, idfleft+1);
 					    RESULT = aff;
 					:}
+				|
+                    IDF:idf CROOUV EXP:e1 CROFER EGAL EXP:e2 POINTVIRGULE
+				    {:
+                        IdentificateurTableau i = new IdentificateurTableau(idf,e1, idfleft+1);
+                         Instruction aff = new AffectationTableau(i, e2, idfleft+1);
+                       RESULT = aff;
+				    :}
 
 			    ;
 
@@ -298,6 +316,10 @@ DECL		    ::=		DECL_VAR:dv
                         {: TDS.getInstance().uneSortie();
                            RESULT = df;
                         :}
+                |
+                        DECL_VAR_TABLEAU:dvt
+                        {: RESULT = dvt; :}
+
 			    ;
 
 
@@ -314,7 +336,28 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 							id.setNumBloc(bloc);
 							RESULT = id;
 						:}
+
+
+
+
 				;
+DECL_VAR_TABLEAU ::=    ENTIER  CROOUV EXP:e CROFER IDF:idf POINTVIRGULE
+                		{:
+                		    int bloc = TDS.getInstance().getNoBlocCourant();
+                		    Entree entree = new EntreeTableau(idf);
+                		    entree.setNoBloc(bloc);
+                		    Type type = Type.ENTIER;
+                		    Symbole s = new SymboleTableau(type);
+                		    s.setNoBlocS(bloc);
+                		    //System.out.println(((SymboleTableau)s).getNbElement());
+                		    ((SymboleTableau)s).setNbElement(e.getValeur());
+                		    TDS.getInstance().ajouter(entree, s, idfleft+1);
+                		    IdentificateurTableau i = new IdentificateurTableau(idf,e, idfleft);
+                		   // id.setNumBloc(bloc);
+                		    RESULT = i;
+                		:}
+                    ;
+
 DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LDECL_VAR_F:ldv LINST:li FIN
 						{:
 							Fonction f = new Fonction(idf, idfleft);

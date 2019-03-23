@@ -24,6 +24,7 @@ public class Fonction extends ArbreAbstrait{
         this.nomFonction=nomFonction;
         this.noBlocFonction = TDS.getInstance().getNoBlocCourant();
 
+
     }
 
     @Override
@@ -37,9 +38,10 @@ public class Fonction extends ArbreAbstrait{
         }
         else if(bloc != null) {
             bloc.verifier();
+
             if(!bloc.ifContientRetourne()) {
                 AnalyseException erreur = new AnalyseSemantiqueException(bloc.LastInstruction().getNoLigne() ,
-                        " la fonction " + nomFonction + "() retourne un resultat de type ENTIER !");
+                        " la fonction " + nomFonction + "()  doit retourner un resultat de type ENTIER !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
             }
         }

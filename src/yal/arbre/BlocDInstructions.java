@@ -2,7 +2,10 @@ package yal.arbre;
 
 import yal.arbre.fonctions.Fonction;
 import yal.arbre.fonctions.Retourne;
+import yal.arbre.instructions.Condition;
 import yal.exceptions.AnalyseException;
+import yal.exceptions.AnalyseSemantiqueException;
+import yal.exceptions.ListeDErreurs;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,6 +39,8 @@ public class BlocDInstructions extends ArbreAbstrait implements Iterable<ArbreAb
         }
         return false;
     }
+
+
     @Override
     public void verifier() throws AnalyseException {
         for(ArbreAbstrait a : listDesBlocs)

@@ -70,7 +70,8 @@ commentaireSlashSlash = [/][/].*
 "retourne"			   { return symbol(CodesLexicaux.RETOURNE); }
 "("                	   { return symbol(CodesLexicaux.PAROUV); }
 ")"                	   { return symbol(CodesLexicaux.PARFER); }
-
+"["                	   { return symbol(CodesLexicaux.CROOUV); }
+"]"                    { return symbol(CodesLexicaux.CROFER); }
 "-"                	   { return symbol(CodesLexicaux.MOINS); }
 "+"                	   { return symbol(CodesLexicaux.PLUS); }
 "*"                	   { return symbol(CodesLexicaux.MULT); }

@@ -52,4 +52,9 @@ public class Condition extends Instruction {
     public void addConditionSinon(ArbreAbstrait a){
                 sinon.ajouter(a);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -1,19 +1,8 @@
 programme test
 debut
-
-
-    fonction a(entier b ;entier d;entier v)
-    debut
-    entier c;
-    c=5;
-        retourne d - b * c+v;
-    fin
-
-
-ecrire a(4,10,1);
-
-
-
-
+entier [2] a;
+entier a;
+a[7]=1;
+ecrire a[0];
 
 fin
