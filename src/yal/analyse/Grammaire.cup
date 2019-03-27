@@ -29,6 +29,9 @@ import yal.arbre.fonctions.Retourne;
 import yal.arbre.fonctions.AppelFonction;
 import yal.table.Symboles.SymboleTableau;
 import yal.table.tabDesEntrees.EntreeTableau;
+import yal.arbre.Tableau.DeclarationTableau;
+import yal.arbre.Tableau.IdentificateurTableau;
+
 
 import java_cup.runtime.*;
 
@@ -86,11 +89,11 @@ terminal Symbol    MOINS, SUP, INF, EGALEGAL, DIFF, ET, OU, PLUS, MULT, DIV, TAN
 
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, DECL, DECL_FONCTION ;
+non terminal ArbreAbstrait PROG, DECL, DECL_FONCTION, DECL_VAR_TABLEAU ;
 non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST;
 non terminal Identificateur  DECL_VAR;
-non terminal IdentificateurTableau  DECL_VAR_TABLEAU;
+//non terminal IdentificateurTableau  DECL_VAR_TABLEAU;
 non terminal ArrayList<ArbreAbstrait> LDECL;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER;
 non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LDECL_VAR_F;
@@ -349,17 +352,21 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 				;
 DECL_VAR_TABLEAU ::=    ENTIER  CROOUV EXP:e CROFER IDF:idf POINTVIRGULE
                 		{:
-                		    int bloc = TDS.getInstance().getNoBlocCourant();
-                		    Entree entree = new EntreeTableau(idf);
-                		    entree.setNoBloc(bloc);
-                		    Type type = Type.ENTIER;
-                		    Symbole s = new SymboleTableau(type);
-                		    s.setNoBlocS(bloc);
-                		    ((SymboleTableau)s).setNbElement(e.getValeur());
-                		    TDS.getInstance().ajouter(entree, s, idfleft+1);
-                		    IdentificateurTableau i = new IdentificateurTableau(idf,e, idfleft);
-                		   // id.setNumBloc(bloc);
-                		    RESULT = i;
+                		DeclarationTableau t = new DeclarationTableau(idf, idfleft);
+                        							Entree entree = new EntreeTableau(idf);
+                        							int bloc = TDS.getInstance().getNoBlocCourant();
+                        							entree.setNoBloc(bloc);
+                        							Type type = Type.ENTIER;
+                        							Symbole s = new SymboleTableau(type);
+
+                        							s.setNoBlocS(bloc);
+
+                        							((SymboleTableau)s).setNbElement(e.getValeur());
+                        							TDS.getInstance().ajouter(entree, s, idfleft+1);
+                        							//f.setBloc(li);
+                        							RESULT = t;
+
+
                 		:}
                     ;
 

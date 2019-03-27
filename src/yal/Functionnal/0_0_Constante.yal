@@ -1,9 +1,16 @@
 programme test
 debut
-entier [2] a;
-entier a;
-a[1]=7;
-//ecrire a.longueur;
-ecrire a[0];
+
+
+entier [5] t;
+entier b;
+b=0;
+si b<5 alors
+ecrire b;
+finsi
+
+
+
+
 
 fin

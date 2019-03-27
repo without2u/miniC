@@ -4,6 +4,7 @@ import yal.arbre.instructions.Type;
 
 public class SymboleVar extends Symbole{
     private int deplacement;
+
     public SymboleVar(Type typeV) {
 
         super(typeV);
@@ -22,4 +23,5 @@ public class SymboleVar extends Symbole{
     public String toString() {
         return "type :" + typeS + " bloc : " + noBlocS + " deplacement :" + deplacement;
     }
+
 }

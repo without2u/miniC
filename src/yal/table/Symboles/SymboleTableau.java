@@ -1,13 +1,21 @@
 package yal.table.Symboles;
 
 import yal.arbre.instructions.Type;
+import yal.table.TDS;
 
 public class SymboleTableau extends Symbole{
-    public SymboleTableau(Type type) {
-        super(type);
-    }
+
     private int nbElement;
     private int deplacement;
+
+    private int espace;
+    public SymboleTableau(Type type) {
+        super(type);
+        espace = 4;
+        //deplacement= - TDS.getInstance().tailleZoneDesVariables();
+
+
+    }
 
     public void setNbElement(int nbElement) {
         this.nbElement = nbElement;
@@ -31,5 +39,9 @@ public class SymboleTableau extends Symbole{
                 "nbElement=" + nbElement +
                 ", deplacement=" + deplacement +
                 '}';
+    }
+
+    public int getEspace() {
+        return espace;
     }
 }

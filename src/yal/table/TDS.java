@@ -12,10 +12,7 @@ import yal.table.tabDesEntrees.EntreeFonction;
 import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.*;
 
 public class TDS implements Iterable<Entree>{
 
@@ -26,6 +23,7 @@ public class TDS implements Iterable<Entree>{
     private static int etiquette = 0;
     private Stack<Integer> pileAbloc;
     private String typeSymboleEntrer=null;
+
 
 
     //constructeur de table de symboles
@@ -128,4 +126,23 @@ public class TDS implements Iterable<Entree>{
         int bloc = pileAbloc.peek();
         return bloc;
     }
+
+    public static int getDecalage() {
+        return decalage;
+    }
+    public int tailleZoneDesVariables() {
+        int tailleZone = 0;
+
+        for (Map.Entry<Entree, Symbole> map : tableDeSymbole.entrySet()) {
+            Symbole s = map.getValue();
+
+            if (s instanceof SymboleTableau) {
+                tailleZone += ((SymboleTableau) s).getEspace();
+            }
+        }
+
+        return tailleZone;
+    }
+
+
 }
