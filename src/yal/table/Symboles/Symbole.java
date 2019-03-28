@@ -1,6 +1,7 @@
 package yal.table.Symboles;
 
 import yal.arbre.instructions.Type;
+import yal.table.TDS;
 
 public abstract class Symbole {
     protected Type typeS;
@@ -9,6 +10,7 @@ public abstract class Symbole {
     public Symbole(Type type) {
 
         this.typeS = type;
+        noBlocS = TDS.getInstance().getNoBlocCourant();
 
     }
 

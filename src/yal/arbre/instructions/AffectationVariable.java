@@ -35,7 +35,8 @@ public class AffectationVariable extends Affectation {
         filsDroite.verifier();
         //verifier si les deux variables sont du meme type
         if(filsGauche.getType() != filsDroite.getType()) {
-
+                System.out.println(filsGauche.getType());
+            System.out.println(filsDroite.getType());
             AnalyseSemantiqueException erreur =  new AnalyseSemantiqueException(getNoLigne()," Erreur d'affectation: le type de " +
                     filsGauche + " et de " + filsDroite + " n'est pas compatibles !");
             ListeDErreurs.getErreurs().addErreur(erreur);
@@ -59,7 +60,7 @@ public class AffectationVariable extends Affectation {
         sb.append(filsDroite.toMIPS());
         if(filsGauche.getSymbole().getNoBlocS() == getNoBloc()) {
 
-            sb.append("# stockage de la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc numero : "
+            sb.append("# Affectarion de la valeur de " + filsDroite + " dans la variable " + filsGauche + " du bloc numero : "
                     + filsGauche.getSymbole().getNoBlocS() + "\n\t");
             sb.append("sw $v0, " + filsGauche.getDeplacement() + "($s7)\n\t");
             sb.append("# stockage ok \n\t");

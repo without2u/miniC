@@ -2,6 +2,7 @@ package yal.arbre.Tableau;
 
 import yal.arbre.ArbreAbstrait;
 import yal.arbre.BlocDInstructions;
+import yal.arbre.instructions.Instruction;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
@@ -14,7 +15,8 @@ import yal.table.tabDesEntrees.EntreeFonction;
 import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 
-public class DeclarationTableau extends ArbreAbstrait {
+
+public class DeclarationTableau extends Instruction {
     private int noBlocTableau;
     private BlocDInstructions bloc;
     private String nomTableau;
@@ -36,11 +38,13 @@ public class DeclarationTableau extends ArbreAbstrait {
     @Override
     public void verifier() throws AnalyseException {
         Entree e =new EntreeTableau(this.nomTableau);
+
         e.setNoBloc(noBloc);
         symbole = (SymboleTableau)TDS.getInstance().getSymboleTable(e);
-
+        //System.out.println(symbole.toString());
         if(symbole == null) {
-            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " : le tableau "+ this + " n'est pas declarée !");
+            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " : le tableau "+ nomTableau
+                    + " n'est pas declarée !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         }
         else if(bloc != null) {

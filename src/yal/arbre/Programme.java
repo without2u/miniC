@@ -134,6 +134,7 @@ public class Programme extends ArbreAbstrait {
                 "faux:\t" + ".asciiz \"faux\"\n"+
                 "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\n"+
                 "erreurAccesTableauInvalide :\n"+
+                        "erreurLongueurInvalide :\n"+
 
         ".text\n" +
                 " main :\n") ;
@@ -145,7 +146,6 @@ public class Programme extends ArbreAbstrait {
         base(sb);
         getMipsForTableau(sb);
         sb.append(bloc.toMIPS() + "\n");
-
         sb.append("end :\n" +
                 "move $v1, $v0\n"+
                 " li $v0, 10 \n" +

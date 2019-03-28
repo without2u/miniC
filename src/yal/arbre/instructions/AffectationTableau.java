@@ -10,13 +10,14 @@ import yal.table.Symboles.SymboleTableau;
 import yal.table.TDS;
 import yal.table.tabDesEntrees.Entree;
 import yal.table.tabDesEntrees.EntreeTableau;
+import yal.table.tabDesEntrees.EntreeVar;
 
 public class AffectationTableau extends Affectation {
     private Expression indice;
     private Expression droite;
     private IdentificateurTableau idf;
     public static int deplVar;
-    private Symbole symbole;
+    private SymboleTableau symbole;
 
 
 

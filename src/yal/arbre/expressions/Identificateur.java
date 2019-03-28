@@ -33,6 +33,8 @@ public class Identificateur extends Expression{
         Entree e =new EntreeVar(this.nom);
         e.setNoBloc(numBloc);
         symbole = (SymboleVar)TDS.getInstance().getSymboleTable(e);
+            //symbole.setNoBlocS(e.getNoBloc());
+
         if(symbole == null) {
             e.setNoBloc(0);
             symbole = (SymboleVar) TDS.getInstance().getSymboleTable(e);
@@ -73,6 +75,8 @@ public class Identificateur extends Expression{
     public String codeToMips() {
 
         StringBuilder sb = new StringBuilder();
+
+
         if((symbole.getNoBlocS() != getNumBloc()) && (getNumBloc() != 0))  {
             sb.append("# chargement de la variable " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $t8, 8($s7)\n\t");
@@ -83,6 +87,7 @@ public class Identificateur extends Expression{
 
         }
         return sb.toString();
+
 
     }
 

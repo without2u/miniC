@@ -12,7 +12,7 @@ public class SymboleTableau extends Symbole{
     public SymboleTableau(Type type) {
         super(type);
         espace = 4;
-        //deplacement= - TDS.getInstance().tailleZoneDesVariables();
+        deplacement= - TDS.getInstance().tailleZoneDesVariables();
 
 
     }

@@ -5,9 +5,12 @@ import yal.arbre.instructions.Type;
 public class SymboleVar extends Symbole{
     private int deplacement;
 
+    private int espace;
     public SymboleVar(Type typeV) {
 
         super(typeV);
+
+        espace = 4;
 
     }
 
@@ -24,4 +27,7 @@ public class SymboleVar extends Symbole{
         return "type :" + typeS + " bloc : " + noBlocS + " deplacement :" + deplacement;
     }
 
+    public int getEspace() {
+        return espace;
+    }
 }

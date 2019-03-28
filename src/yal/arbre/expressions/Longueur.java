@@ -1,11 +1,13 @@
 package yal.arbre.expressions;
 
+import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.table.Symboles.Symbole;
 import yal.table.Symboles.SymboleTableau;
 import yal.table.TDS;
 import yal.table.tabDesEntrees.Entree;
+import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 
 public class Longueur extends Expression {
@@ -15,6 +17,7 @@ public class Longueur extends Expression {
     public Longueur(String idf, int n) {
         super(n);
         this.idf=idf;
+        this.numeroRegion = TDS.getInstance().getNoBlocCourant();
     }
 
     @Override
@@ -24,8 +27,10 @@ public class Longueur extends Expression {
 
     @Override
     public void verifier() throws AnalyseException {
-        Entree e = new EntreeVar(idf);
+        Entree e = new EntreeTableau(idf);
+        e.setNoBloc(numeroRegion);
         Symbole s = TDS.getInstance().getSymboleTable(e);
+        setType(Type.ENTIER);
 
         if (s == null) {
             throw new AnalyseSemantiqueException(getNoLigne(), "aucune déclaration de `" + idf + "`");
@@ -47,7 +52,7 @@ public class Longueur extends Expression {
         }
 
         deplVar = ((SymboleTableau) s).getDeplacement();
-        numeroRegion = s.getNoBlocS();
+
 
     }
 

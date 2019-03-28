@@ -46,13 +46,16 @@ public class TDS implements Iterable<Entree>{
                 etiquette++;
                 ((SymboleFonction)s).setEtiquetteSymbole(etiquette);
                 ((SymboleFonction)s).setNbrParamSymbole(((EntreeFonction)e).getNombreParamFonction());
-            }else if (e instanceof EntreeVar){
-                typeSymboleEntrer=" variable ";
-                decalage -= 4;
-                ((SymboleVar)s).setDeplacement(decalage);
-            }else if (e instanceof EntreeTableau){
-                decalage -= 4;
-                ((SymboleTableau)s).setDeplacement(decalage);
+            }
+            if(!dejaExiste(e.getNomEntree(), e.getNoBloc(), no)) {
+                if (e instanceof EntreeVar) {
+                    typeSymboleEntrer = " variable ";
+                    decalage -= 4;
+                    ((SymboleVar) s).setDeplacement(decalage);
+                } else if (e instanceof EntreeTableau) {
+                    decalage -= 4;
+                    ((SymboleTableau) s).setDeplacement(decalage);
+                }
             }
             tableDeSymbole.put(e,s);
         }else {
@@ -67,7 +70,7 @@ public class TDS implements Iterable<Entree>{
     private boolean dejaExiste(String nom, int numeroBloc, int no) {
 
         for(Entree e : tableDeSymbole.keySet()) {
-            if((e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
+            if((e instanceof EntreeVar || e instanceof EntreeTableau ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
 
 
                 AnalyseException erreur = new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
@@ -136,9 +139,13 @@ public class TDS implements Iterable<Entree>{
         for (Map.Entry<Entree, Symbole> map : tableDeSymbole.entrySet()) {
             Symbole s = map.getValue();
 
-            if (s instanceof SymboleTableau) {
+            if (s instanceof SymboleTableau ) {
                 tailleZone += ((SymboleTableau) s).getEspace();
             }
+            if (s instanceof SymboleVar ) {
+                tailleZone += ((SymboleVar) s).getEspace();
+            }
+
         }
 
         return tailleZone;

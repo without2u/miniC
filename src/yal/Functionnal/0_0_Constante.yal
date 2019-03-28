@@ -1,16 +1,10 @@
 programme test
 debut
-
-
-entier [5] t;
-entier b;
-b=0;
-si b<5 alors
-ecrire b;
-finsi
-
-
-
-
+entier [7] a;
+entier i;
+i=4;
+a[5]=500;
+ecrire a[i];
+ecrire i;
 
 fin

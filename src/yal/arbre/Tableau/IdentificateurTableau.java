@@ -55,7 +55,7 @@ public class IdentificateurTableau extends Expression {
         }else {
 
             setType(Type.ENTIER);
-                deplVar = ((SymboleTableau)symbole).getDeplacement();
+                deplVar = getDeplacement();
         }
 
 
@@ -192,4 +192,5 @@ public class IdentificateurTableau extends Expression {
     public String getNom() {
         return nom;
     }
+
 }
