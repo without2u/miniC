@@ -143,12 +143,12 @@ public class IdentificateurTableau extends Identificateur {
 
         sb.append(indice.toMIPS());
         sb.append("# verifier l'indice " + indice + "\n\t");
-        sb.append("bgez $v0, indexOK" + cmpt + "\n\t");
+        sb.append("bgez $v0, cmpt" + cmpt + "\n\t");
         sb.append("li $v0, 4\n\t");
         sb.append("la $a0, " + "error_indexTableau" +"\n\t");
         sb.append("syscall\n\t");
         sb.append("j end\n");
-        sb.append("indexOK" + cmpt + ": ");
+        sb.append("cmpt" + cmpt + ": ");
         cmpt++;
         if(getTailleTableau() > 0) {
             sb.append("# " + nom + " est un tableau statique on recupere sa taille dans la TDS\n\t");
@@ -158,32 +158,35 @@ public class IdentificateurTableau extends Identificateur {
             sb.append("lw $t3, " + (getDeplacement() - 4) + "($s7)\n\t");
             sb.append("slt $t2, $v0, $t3\n\t");
         }
-        sb.append("beq $t2, 1, indexOK" + cmpt + "\n\t");
+        sb.append("beq $t2, 1, cmpt" + cmpt + "\n\t");
         sb.append("li $v0, 4\n\t");
         sb.append("la $a0, " + "error_indexTableau" +"\n\t");
         sb.append("syscall\n\t");
         sb.append("j end\n");
-        sb.append("indexOK" + cmpt + ": ");
+        sb.append("cmpt" + cmpt + ": ");
 
         if(symbole.getNoBlocS() != getNoBloc() && getNoBloc() != 0) {
+            //on augmente le compteur d identifiiannt
             Identificateur.cmpt++;
             sb.append("# charger la valeur " + nom  + "[" + indice + "]" + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $t7, 4($s7)\n\t");
             sb.append("la $t6, 0($s7)\n\t");
-            sb.append("chain"+ Identificateur.cmpt + ": beqz $t7, endchain" + Identificateur.cmpt + "\n\t");
+            sb.append("chainageDynamique"+ Identificateur.cmpt + ": beqz $t7, finchainageDynamique" + Identificateur.cmpt + "\n\t");
             sb.append("lw $t6, 8($t6)\n\t");
             sb.append("lw $t7, 4($t6)\n\t");
-            sb.append("j chain" + Identificateur.cmpt + "\n\t");
-            if(getTailleTableau() == 0)
-                sb.append("endchain" + Identificateur.cmpt + ": lw $t6, " + getDeplacement() + "($t6)\n\t");
-            else
-                sb.append("endchain" + Identificateur.cmpt + ": la $t6, " + getDeplacement() + "($t6)\n\t");
+            sb.append("j chainageDynamique" + Identificateur.cmpt + "\n\t");
+            if(getTailleTableau() == 0) {
+                sb.append("finchainageDynamique" + Identificateur.cmpt + ": lw $t6, " + getDeplacement() + "($t6)\n\t");
+            }else {
+                sb.append("finchainageDynamique" + Identificateur.cmpt + ": la $t6, " + getDeplacement() + "($t6)\n\t");
+            }
         } else {
             sb.append("# charger la valeur " + nom + "[" + indice + "]" + " du bloc " + symbole.getNoBlocS() + "\n\t");
-            if(getTailleTableau() == 0)
-                sb.append("lw $t6, "+ getDeplacement() +"($s7)\n\t");
-            else
-                sb.append("la $t6, "+ getDeplacement() +"($s7)\n\t");
+            if(getTailleTableau() == 0) {
+                sb.append("lw $t6, " + getDeplacement() + "($s7)\n\t");
+            }else {
+                sb.append("la $t6, " + getDeplacement() + "($s7)\n\t");
+            }
         }
         sb.append("li $t2, 4\n\t");
         sb.append("mult $v0, $t2\n\t");

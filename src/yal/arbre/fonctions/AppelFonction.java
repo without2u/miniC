@@ -96,8 +96,7 @@ public class AppelFonction extends Expression {
             AnalyseException erreur = new AnalyseSemantiqueException(noLigne, ": la fonction " + "\"" + nomFonction + "\"" + " n'est pas declarée !");
             ListeDErreurs.getErreurs().addErreur(erreur);
 
-        }else {
-            if(listE != null) {
+        }else if(listE != null) {
 
                 for(int i = 0; i < taille; i++) {
 
@@ -115,7 +114,7 @@ public class AppelFonction extends Expression {
 
                 setType(Type.ENTIER);
             }
-        }
+
 
     }
 

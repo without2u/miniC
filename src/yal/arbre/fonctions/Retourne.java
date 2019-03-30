@@ -35,12 +35,16 @@ public class Retourne extends Instruction {
     public void verifier() throws AnalyseException {
         e.verifier();
         if(e.getType() != Type.ENTIER) {
-            AnalyseSemantiqueException erreur = new AnalyseSemantiqueException(getNoLigne(),": la valeur de retour doit être de type entier !");
+            AnalyseSemantiqueException erreur = new AnalyseSemantiqueException(getNoLigne(),": la valeur de retour de la fonction doit être de type entier !");
             ListeDErreurs.getErreurs().addErreur(erreur);
         }
     }
 
-    private void genererMipsSauvegarde(StringBuilder sb) {
+    @Override
+    public String toMIPS() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(e.toMIPS());
+        sb.append("# sauvegarde du resultat " + e + " dans son emplacement retour\n\t");
         for(Entree entree : TDS.getInstance()) {
             if(entree instanceof EntreeFonction) {
                 Symbole symbole = TDS.getInstance().getSymboleTable(entree);
@@ -54,26 +58,14 @@ public class Retourne extends Instruction {
                 }
             }
         }
-    }
-    @Override
-    public String toMIPS() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(e.toMIPS());
-        sb.append("# sauvegarde du resultat " + e + " dans son emplacement retour\n\t");
-        genererMipsSauvegarde(sb);
-        int compteur = getNombrebVariable();
-        sb.append("# dépilement des " + compteur +" variables locales\n\t");
-        sb.append("addi $sp, $sp, " + (compteur * 4) + "\n\t");
+        int cmp = getNbrVariablesDeFonction();
+        sb.append("# dépilement des " + cmp +" variables locales\n\t");
+        sb.append("addi $sp, $sp, " + (cmp * decalage) + "\n\t");
         depilementForTableauxDynamiques(sb);
-        sb.append("# dépilement du numero bloc + ancienne base\n\t");
         sb.append("addi $sp, $sp, 8\n\t");
-        sb.append("# chargement dans $s7 de l'ancienne base pour le retour de la fonction\n\t");
         sb.append("lw $s7, 0($sp)\n\t");
-        sb.append("# dépilement de l'adresse de retour de l'appelant\n\t");
         sb.append("addi $sp, $sp, 4\n\t");
-        sb.append("# chargement dans $ra de l'adresse de retour de l'appelant\n\t");
         sb.append("lw $ra, 0($sp)\n\t");
-        sb.append("# branchement vers la prochaine instruction de l'appelant\n\t");
         sb.append("jr $ra\n\t");
         return sb.toString();
     }
@@ -82,7 +74,7 @@ public class Retourne extends Instruction {
             if(entree instanceof EntreeTableau && entree.getNoBloc() == noBloc) {
                 Symbole symbole = TDS.getInstance().getSymboleTable(entree);
                 if(((SymboleTableau)symbole).getNbElement() == 0) {
-                    sb.append("# le dépilement des variables du tableau dynamique : \t");
+                    sb.append("# le dépilement des variables du tableau (dynamique) : \t");
                     sb.append("lw $t2, " + (((SymboleTableau)symbole).getDeplacement() - decalage) + "($s7)\n\t");
                     sb.append("li $t3, 4\n\t");
                     sb.append("mult $t2, $t3\n\t");
@@ -92,7 +84,7 @@ public class Retourne extends Instruction {
             }
         }
     }
-    private int getNombrebVariable() {
+    private int getNbrVariablesDeFonction() {
         int cmp=0;
         for(Entree entree : TDS.getInstance()) {
             if(entree instanceof EntreeVar && entree.getNoBloc() == numBlocRetourne) {

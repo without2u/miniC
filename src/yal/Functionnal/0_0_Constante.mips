@@ -25,19 +25,19 @@ move $t5, $v0
 	li $v0,0
 
 # verifier l'indice 0
-	bgez $v0, indexOK19
+	bgez $v0, cmpt19
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK19: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt19: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK20
+	beq $t2, 1, cmpt20
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK20: # charger la valeur tab[0] du bloc 0
+cmpt20: # charger la valeur tab[0] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -50,19 +50,19 @@ move $t5, $v0
 	li $v0,1
 
 # verifier l'indice 1
-	bgez $v0, indexOK22
+	bgez $v0, cmpt22
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK22: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt22: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK23
+	beq $t2, 1, cmpt23
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK23: # charger la valeur tab[1] du bloc 0
+cmpt23: # charger la valeur tab[1] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -75,19 +75,19 @@ move $t5, $v0
 	li $v0,2
 
 # verifier l'indice 2
-	bgez $v0, indexOK25
+	bgez $v0, cmpt25
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK25: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt25: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK26
+	beq $t2, 1, cmpt26
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK26: # charger la valeur tab[2] du bloc 0
+cmpt26: # charger la valeur tab[2] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -100,19 +100,19 @@ move $t5, $v0
 	li $v0,3
 
 # verifier l'indice 3
-	bgez $v0, indexOK28
+	bgez $v0, cmpt28
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK28: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt28: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK29
+	beq $t2, 1, cmpt29
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK29: # charger la valeur tab[3] du bloc 0
+cmpt29: # charger la valeur tab[3] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -125,19 +125,19 @@ move $t5, $v0
 	li $v0,4
 
 # verifier l'indice 4
-	bgez $v0, indexOK31
+	bgez $v0, cmpt31
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK31: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt31: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK32
+	beq $t2, 1, cmpt32
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK32: # charger la valeur tab[4] du bloc 0
+cmpt32: # charger la valeur tab[4] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -150,19 +150,19 @@ move $t5, $v0
 	li $v0,5
 
 # verifier l'indice 5
-	bgez $v0, indexOK34
+	bgez $v0, cmpt34
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK34: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt34: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK35
+	beq $t2, 1, cmpt35
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK35: # charger la valeur tab[5] du bloc 0
+cmpt35: # charger la valeur tab[5] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -175,19 +175,19 @@ move $t5, $v0
 	li $v0,6
 
 # verifier l'indice 6
-	bgez $v0, indexOK37
+	bgez $v0, cmpt37
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK37: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt37: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK38
+	beq $t2, 1, cmpt38
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK38: # charger la valeur tab[6] du bloc 0
+cmpt38: # charger la valeur tab[6] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -200,19 +200,19 @@ move $t5, $v0
 	li $v0,7
 
 # verifier l'indice 7
-	bgez $v0, indexOK40
+	bgez $v0, cmpt40
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK40: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt40: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK41
+	beq $t2, 1, cmpt41
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK41: # charger la valeur tab[7] du bloc 0
+cmpt41: # charger la valeur tab[7] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -225,19 +225,19 @@ move $t5, $v0
 	li $v0,8
 
 # verifier l'indice 8
-	bgez $v0, indexOK43
+	bgez $v0, cmpt43
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK43: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt43: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK44
+	beq $t2, 1, cmpt44
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK44: # charger la valeur tab[8] du bloc 0
+cmpt44: # charger la valeur tab[8] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -250,19 +250,19 @@ move $t5, $v0
 	li $v0,9
 
 # verifier l'indice 9
-	bgez $v0, indexOK46
+	bgez $v0, cmpt46
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK46: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt46: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK47
+	beq $t2, 1, cmpt47
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK47: # charger la valeur tab[9] du bloc 0
+cmpt47: # charger la valeur tab[9] du bloc 0
 	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
@@ -350,26 +350,26 @@ addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	add $v0, $t8, $v0 
 # verifier l'indice (j + 1)
-	bgez $v0, indexOK49
+	bgez $v0, cmpt49
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK49: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt49: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK50
+	beq $t2, 1, cmpt50
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK50: # charger la valeur tab[(j + 1)] du bloc 0
+cmpt50: # charger la valeur tab[(j + 1)] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain23: beqz $t7, endchain23
+	chainageDynamique23: beqz $t7, finchainageDynamique23
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain23
-	endchain23: la $t6, 0($t6)
+	j chainageDynamique23
+	finchainageDynamique23: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -380,26 +380,26 @@ indexOK50: # charger la valeur tab[(j + 1)] du bloc 0
 	# la valeur de la variable j du bloc 1
 	lw $v0, -4($s7)
 	# verifier l'indice j
-	bgez $v0, indexOK52
+	bgez $v0, cmpt52
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK52: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt52: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK53
+	beq $t2, 1, cmpt53
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK53: # charger la valeur tab[j] du bloc 0
+cmpt53: # charger la valeur tab[j] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain26: beqz $t7, endchain26
+	chainageDynamique26: beqz $t7, finchainageDynamique26
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain26
-	endchain26: la $t6, 0($t6)
+	j chainageDynamique26
+	finchainageDynamique26: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -420,26 +420,26 @@ addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	add $v0, $t8, $v0 
 # verifier l'indice (j + 1)
-	bgez $v0, indexOK55
+	bgez $v0, cmpt55
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK55: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt55: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK56
+	beq $t2, 1, cmpt56
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK56: # charger la valeur tab[(j + 1)] du bloc 0
+cmpt56: # charger la valeur tab[(j + 1)] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain29: beqz $t7, endchain29
+	chainageDynamique29: beqz $t7, finchainageDynamique29
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain29
-	endchain29: la $t6, 0($t6)
+	j chainageDynamique29
+	finchainageDynamique29: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -451,26 +451,26 @@ indexOK56: # charger la valeur tab[(j + 1)] du bloc 0
 	# la valeur de la variable j du bloc 1
 	lw $v0, -4($s7)
 	# verifier l'indice j
-	bgez $v0, indexOK58
+	bgez $v0, cmpt58
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK58: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt58: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK59
+	beq $t2, 1, cmpt59
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK59: # charger la valeur tab[j] du bloc 0
+cmpt59: # charger la valeur tab[j] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain32: beqz $t7, endchain32
+	chainageDynamique32: beqz $t7, finchainageDynamique32
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain32
-	endchain32: la $t6, 0($t6)
+	j chainageDynamique32
+	finchainageDynamique32: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -488,26 +488,26 @@ addi $sp, $sp, 4
 	lw $t8, 0($sp)
 	add $v0, $t8, $v0 
 # verifier l'indice (j + 1)
-	bgez $v0, indexOK61
+	bgez $v0, cmpt61
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK61: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt61: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK62
+	beq $t2, 1, cmpt62
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK62: # charger la valeur tab[(j + 1)] du bloc 0
+cmpt62: # charger la valeur tab[(j + 1)] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain35: beqz $t7, endchain35
+	chainageDynamique35: beqz $t7, finchainageDynamique35
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain35
-	endchain35: la $t6, 0($t6)
+	j chainageDynamique35
+	finchainageDynamique35: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -519,26 +519,26 @@ indexOK62: # charger la valeur tab[(j + 1)] du bloc 0
 	# la valeur de la variable j du bloc 1
 	lw $v0, -4($s7)
 	# verifier l'indice j
-	bgez $v0, indexOK64
+	bgez $v0, cmpt64
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK64: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt64: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK65
+	beq $t2, 1, cmpt65
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK65: # charger la valeur tab[j] du bloc 0
+cmpt65: # charger la valeur tab[j] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain38: beqz $t7, endchain38
+	chainageDynamique38: beqz $t7, finchainageDynamique38
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain38
-	endchain38: la $t6, 0($t6)
+	j chainageDynamique38
+	finchainageDynamique38: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -597,26 +597,26 @@ beq $v0, 0, fintantque3
 # la valeur de la variable cpt du bloc 1
 	lw $v0, -12($s7)
 	# verifier l'indice cpt
-	bgez $v0, indexOK67
+	bgez $v0, cmpt67
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK67: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt67: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK68
+	beq $t2, 1, cmpt68
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK68: # charger la valeur tab[cpt] du bloc 0
+cmpt68: # charger la valeur tab[cpt] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain42: beqz $t7, endchain42
+	chainageDynamique42: beqz $t7, finchainageDynamique42
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain42
-	endchain42: la $t6, 0($t6)
+	j chainageDynamique42
+	finchainageDynamique42: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -651,15 +651,10 @@ li $v0,0
 	sw $v0, 16($s7)
 	# dépilement des 4 variables locales
 	addi $sp, $sp, 16
-	# dépilement du numero bloc + ancienne base
 	addi $sp, $sp, 8
-	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
 	lw $s7, 0($sp)
-	# dépilement de l'adresse de retour de l'appelant
 	addi $sp, $sp, 4
-	# chargement dans $ra de l'adresse de retour de l'appelant
 	lw $ra, 0($sp)
-	# branchement vers la prochaine instruction de l'appelant
 	jr $ra
 	li $v0, 4
 	la $a0, error_returnFonction
@@ -697,26 +692,26 @@ beq $v0, 0, fintantque4
 # la valeur de la variable cpt du bloc 2
 	lw $v0, 0($s7)
 	# verifier l'indice cpt
-	bgez $v0, indexOK70
+	bgez $v0, cmpt70
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK70: # tab est un tableau statique on recupere sa taille dans la TDS
+cmpt70: # tab est un tableau statique on recupere sa taille dans la TDS
 	slti $t2, $v0, 10
-	beq $t2, 1, indexOK71
+	beq $t2, 1, cmpt71
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK71: # charger la valeur tab[cpt] du bloc 0
+cmpt71: # charger la valeur tab[cpt] du bloc 0
 	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	chain46: beqz $t7, endchain46
+	chainageDynamique46: beqz $t7, finchainageDynamique46
 	lw $t6, 8($t6)
 	lw $t7, 4($t6)
-	j chain46
-	endchain46: la $t6, 0($t6)
+	j chainageDynamique46
+	finchainageDynamique46: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
@@ -751,15 +746,10 @@ li $v0,0
 	sw $v0, 16($s7)
 	# dépilement des 1 variables locales
 	addi $sp, $sp, 4
-	# dépilement du numero bloc + ancienne base
 	addi $sp, $sp, 8
-	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
 	lw $s7, 0($sp)
-	# dépilement de l'adresse de retour de l'appelant
 	addi $sp, $sp, 4
-	# chargement dans $ra de l'adresse de retour de l'appelant
 	lw $ra, 0($sp)
-	# branchement vers la prochaine instruction de l'appelant
 	jr $ra
 	li $v0, 4
 	la $a0, error_returnFonction

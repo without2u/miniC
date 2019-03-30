@@ -27,7 +27,7 @@ public class AffectationTableau extends Affectation {
         idf.verifier();
         droite.verifier();
         if(droite.getType() != Type.ENTIER && droite.getType() != idf.getType()) {
-            AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(getNoLigne() , ": affectation tableau: le type de  " + idf + " et " + droite + " incompatibles !");
+            AnalyseSemantiqueException exception =  new AnalyseSemantiqueException(getNoLigne() , ": erreur affectation tableau: le type de  " + idf + " et " + droite + " incompatibles !");
             ListeDErreurs.getErreurs().addErreur(exception);
         }
 
