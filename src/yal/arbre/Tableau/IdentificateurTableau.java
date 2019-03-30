@@ -217,4 +217,7 @@ public class IdentificateurTableau extends Identificateur {
         else return 0;
     }
 
+    public Expression getIndice() {
+        return indice;
+    }
 }

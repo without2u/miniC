@@ -5,8 +5,10 @@ import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
 import yal.exceptions.VariablePasDeclareeException;
+import yal.table.Symboles.SymboleTableau;
 import yal.table.Symboles.SymboleVar;
 import yal.table.tabDesEntrees.Entree;
+import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 import yal.table.Symboles.Symbole;
 import yal.table.TDS;
@@ -30,23 +32,63 @@ public class Identificateur extends Expression{
 
     @Override
     public void verifier() throws AnalyseException {
+        Entree entree = new EntreeVar(nom);
+        entree.setNoBloc(numBloc);
 
-        Entree e =new EntreeVar(this.nom);
-        e.setNoBloc(numBloc);
-        symbole = (SymboleVar)TDS.getInstance().getSymboleTable(e);
+        Entree entree2 = new EntreeTableau(nom);
+        entree2.setNoBloc(numBloc);
 
-        if(symbole == null) {
-            e.setNoBloc(0);
-            symbole = (SymboleVar) TDS.getInstance().getSymboleTable(e);
+        symbole = (SymboleVar)TDS.getInstance().getSymboleTable(entree);
+        Symbole symbole2 = (SymboleTableau)TDS.getInstance().getSymboleTable(entree2);
+        //setType(Type.ENTIER);
+		/*if(symbole == null) {
+			entree.setNumeroBloc(0);
+			symbole = (SymboleVariable)TDS.getInstance().identifier(entree);
+			if(symbole == null) {
+				AnalyseException a = new AnalyseSemantiqueException(noLigne + ": variable " + "\"" + nom + "\"" + " non declarée !");
+				CompilationErreurs.getInstance().ajouter(a);
+			} else {
+				setType(Type.ENTIER);
+			}
+		} else
+			setType(Type.ENTIER);*/
 
-            if (symbole == null) {
-                VariablePasDeclareeException erreur = new VariablePasDeclareeException("ligne " + noLigne + "\n\t la variable " + nom + " n'est pas declarée !");
-                ListeDErreurs.getErreurs().addErreur(erreur);
+        if(numBloc != 0) {
+            if(symbole == null) {
+                if(symbole2 != null) {
+                    symbole = symbole2;
+                    setType(Type.TABLEAU);
+                } else {
+                    entree.setNoBloc(0);
+                    entree2.setNoBloc(0);
+                    symbole = (SymboleVar)TDS.getInstance().getSymboleTable(entree);
+                    symbole2 = (SymboleTableau)TDS.getInstance().getSymboleTable(entree2);
+                    if(symbole == null) {
+                        if(symbole2 != null) {
+                            symbole = symbole2;
+                            setType(Type.TABLEAU);
+                        } else {
+                            AnalyseException a = new AnalyseSemantiqueException(noLigne ,": variable " + "\"" + nom + "\"" + " non declarée !");
+                            ListeDErreurs.getErreurs().addErreur(a);
+                        }
+                    } else {
+                        setType(Type.ENTIER);
+                    }
+                }
+            } else
+                setType(Type.ENTIER);
+        } else {
+            if(symbole == null) {
+                if(symbole2 != null) {
+                    symbole = symbole2;
+                    setType(Type.TABLEAU);
+                } else {
+                    AnalyseException a = new AnalyseSemantiqueException(noLigne , ": variable " + "\"" + nom + "\"" + " non declarée !");
+                    ListeDErreurs.getErreurs().addErreur(a);                }
             } else {
                 setType(Type.ENTIER);
             }
-        }else {
-            setType(Type.ENTIER);
+
         }
     }
 

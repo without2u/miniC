@@ -127,10 +127,6 @@ public class AppelFonction extends Expression {
         return ((SymboleFonction)symbole).getNbrParamSymbole();
     }
 
-    public ArrayList<Expression> getListE() {
-        return listE;
-    }
-
     public void setListE(ArrayList<Expression> listE) {
         this.listE = listE;
     }

@@ -4,7 +4,8 @@ package yal.arbre.instructions;
     public enum Type {
 
 
-        ENTIER("ENTIER"),BOOLEAN("BOOLEAN");
+        ENTIER("ENTIER"),BOOLEAN("BOOLEAN"),
+        TABLEAU("TABLEAU");
 
 
         private String type;

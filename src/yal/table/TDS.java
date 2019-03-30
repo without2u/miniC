@@ -23,6 +23,7 @@ public class TDS implements Iterable<Entree>{
     private static int etiquette = 0;
     private Stack<Integer> pileAbloc;
     private String typeSymboleEntrer=null;
+    private static int offsetBackup = 4;
 
 
 
@@ -127,11 +128,12 @@ public class TDS implements Iterable<Entree>{
         numBloc++;
         pileAbloc.push(numBloc);
         decalage = 4;
+        offsetBackup = decalage;
     }
     public void uneSortie() {
 
         pileAbloc.pop();
-        decalage = 4;
+        decalage = offsetBackup;
     }
 
     @Override

@@ -19,199 +19,751 @@ error_affectation_tableau:	.asciiz "Erreur: probleme d'affectation tableau !"
 	addi $sp, $sp, -4
 	move $s7, $sp
 	addi $sp, $sp, -44
-addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	addi $sp, $sp, -4
-	sw $s7, 0($sp)
-	addi $sp, $sp, -4
-	li $v0, 0
-	sw $v0, ($sp)
-	addi $sp, $sp, -4
-	move $s7, $sp
-	li $v0,100
+	li $v0,1
 
 move $t5, $v0
-	li $v0,3
+	li $v0,0
 
-# verifier l'indice 3
-	bgez $v0, indexOK9
+# verifier l'indice 0
+	bgez $v0, indexOK19
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK9: # tab est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK10
+indexOK19: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK20
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK10: # charger la valeur tab[3] du bloc 0
-	la $t6, -4($s7)
+indexOK20: # charger la valeur tab[0] du bloc 0
+	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
 	sub $t6, $t6, $v0
 	sw $t5, 0($t6)
-	li $v0,200
+	li $v0,48
 
 move $t5, $v0
-	li $v0,3
+	li $v0,1
 
-# verifier l'indice 3
-	bgez $v0, indexOK12
+# verifier l'indice 1
+	bgez $v0, indexOK22
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK12: # bat est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK13
+indexOK22: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK23
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK13: # charger la valeur bat[3] du bloc 0
-	la $t6, -24($s7)
+indexOK23: # charger la valeur tab[1] du bloc 0
+	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
 	sub $t6, $t6, $v0
 	sw $t5, 0($t6)
-	# affichichage de l'expression entiere : tab[3]
-li $v0,3
+	li $v0,73
 
-# verifier l'indice 3
-	bgez $v0, indexOK15
+move $t5, $v0
+	li $v0,2
+
+# verifier l'indice 2
+	bgez $v0, indexOK25
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK15: # tab est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK16
+indexOK25: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK26
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK16: # charger la valeur tab[3] du bloc 0
-	la $t6, -4($s7)
+indexOK26: # charger la valeur tab[2] du bloc 0
+	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
 	sub $t6, $t6, $v0
-	lw $v0, ($t6)
-	move $t8, $v0
-li $v0, 1
-move $a0, $t8
-syscall
-li $v0, 4      # retour à la ligne
-la $a0, finLigne
-syscall
-# affichichage de l'expression entiere : bat[3]
-li $v0,3
+	sw $t5, 0($t6)
+	li $v0,12
+
+move $t5, $v0
+	li $v0,3
 
 # verifier l'indice 3
-	bgez $v0, indexOK18
+	bgez $v0, indexOK28
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK18: # bat est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK19
+indexOK28: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK29
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK19: # charger la valeur bat[3] du bloc 0
-	la $t6, -24($s7)
+indexOK29: # charger la valeur tab[3] du bloc 0
+	la $t6, 0($s7)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
 	sub $t6, $t6, $v0
-	lw $v0, ($t6)
-	move $t8, $v0
-li $v0, 1
-move $a0, $t8
-syscall
-li $v0, 4      # retour à la ligne
-la $a0, finLigne
-syscall
+	sw $t5, 0($t6)
+	li $v0,90
 
+move $t5, $v0
+	li $v0,4
+
+# verifier l'indice 4
+	bgez $v0, indexOK31
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK31: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK32
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK32: # charger la valeur tab[4] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,5
+
+move $t5, $v0
+	li $v0,5
+
+# verifier l'indice 5
+	bgez $v0, indexOK34
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK34: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK35
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK35: # charger la valeur tab[5] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,2345
+
+move $t5, $v0
+	li $v0,6
+
+# verifier l'indice 6
+	bgez $v0, indexOK37
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK37: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK38
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK38: # charger la valeur tab[6] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,3
+
+move $t5, $v0
+	li $v0,7
+
+# verifier l'indice 7
+	bgez $v0, indexOK40
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK40: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK41
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK41: # charger la valeur tab[7] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,5
+
+move $t5, $v0
+	li $v0,8
+
+# verifier l'indice 8
+	bgez $v0, indexOK43
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK43: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK44
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK44: # charger la valeur tab[8] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,2
+
+move $t5, $v0
+	li $v0,9
+
+# verifier l'indice 9
+	bgez $v0, indexOK46
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK46: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK47
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK47: # charger la valeur tab[9] du bloc 0
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	addi $sp, $sp, -4
+	jal fonction1
+	addi $sp, $sp, 4
+	# Affectarion de la valeur de tri() dans la variable trash du bloc numero : 0
+	sw $v0, -40($s7)
+	# stockage ok 
+	
 end :
 move $v1, $v0
  li $v0, 10 
  syscall
-# la fonction f1 () elle a  0 parametres
+# la fonction tri () avec  0 parametres
 # l'empilement de l'adresse de retour de la fonction 
 	fonction1: sw $ra, 0($sp)
 	addi $sp, $sp, -4
 	# l'empilement de l'ancienne base
 	sw $s7, 0($sp)
 	addi $sp, $sp, -4
-	# l'empilement du numero de region 
+	# l'empilement du numero de bloc (numero de region) 
 	li $v0, 1
 	sw $v0, ($sp)
 	addi $sp, $sp, -4
 	# chargement dans $s7 la nouvelle base
 	move $s7, $sp
+	addi $sp, $sp, -16
 	# liste d'instructions de la fonction
-	li $v0,1000
+	li $v0,1
 
-move $t5, $v0
-	li $v0,3
+# Affectarion de la valeur de 1 dans la variable i du bloc numero : 1
+	sw $v0, 0($s7)
+	# stockage ok 
+	# debut boucle 2
+tantque2: # on clacule l'expression (i < yal.arbre.Tableau.Longueur@2f0e140b)
+	# la valeur de la variable i du bloc 1
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0, 10
+	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	slt $v0, $t8, $v0
+# evaluation de la condition
+beq $v0, 0, fintantque2
+li $v0,0
 
-# verifier l'indice 3
-	bgez $v0, indexOK21
+# Affectarion de la valeur de 0 dans la variable j du bloc numero : 1
+	sw $v0, -4($s7)
+	# stockage ok 
+	# debut boucle 1
+tantque1: # on clacule l'expression (j < (yal.arbre.Tableau.Longueur@7440e464 - i))
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# on clacule l'expression (yal.arbre.Tableau.Longueur@7440e464 - i)
+	li $v0, 10
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# la valeur de la variable i du bloc 1
+	lw $v0, 0($s7)
+	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	sub $v0, $t8, $v0 
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	slt $v0, $t8, $v0
+# evaluation de la condition
+beq $v0, 0, fintantque1
+# debut condition1
+# on clacule l'expression (tab[(j + 1)] < tab[j])
+	# on clacule l'expression (j + 1)
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# verifier l'indice (j + 1)
+	bgez $v0, indexOK49
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK21: # j est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK22
+indexOK49: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK50
 	li $v0, 4
 	la $a0, error_indexTableau
 	syscall
 	j end
-indexOK22: # charger la valeur j[3] du bloc 1
+indexOK50: # charger la valeur tab[(j + 1)] du bloc 0
+	lw $t7, 4($s7)
 	la $t6, 0($s7)
-	li $t2, 4
-	mult $v0, $t2
-	mflo $v0
-	sub $t6, $t6, $v0
-	sw $t5, 0($t6)
-	li $v0,3
-
-# verifier l'indice 3
-	bgez $v0, indexOK24
-	li $v0, 4
-	la $a0, error_indexTableau
-	syscall
-	j end
-indexOK24: # j est un tableau statique on recupere sa taille dans la TDS
-	slti $t2, $v0, 5
-	beq $t2, 1, indexOK25
-	li $v0, 4
-	la $a0, error_indexTableau
-	syscall
-	j end
-indexOK25: # charger la valeur j[3] du bloc 1
-	la $t6, 0($s7)
+	chain23: beqz $t7, endchain23
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain23
+	endchain23: la $t6, 0($t6)
 	li $t2, 4
 	mult $v0, $t2
 	mflo $v0
 	sub $t6, $t6, $v0
 	lw $v0, ($t6)
-	# sauvegardement du resultat j[3]
-	sw $v0, 16($s7)
-	# dépilement des variables locales de fonction 
-	addi $sp, $sp, 0
-	addi $sp, $sp, 8
-	lw $s7, 0($sp)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	# verifier l'indice j
+	bgez $v0, indexOK52
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK52: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK53
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK53: # charger la valeur tab[j] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain26: beqz $t7, endchain26
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain26
+	endchain26: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
 	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	slt $v0, $t8, $v0
+si1: beq $v0, 0, sinon1
+alors1: # on clacule l'expression (j + 1)
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# verifier l'indice (j + 1)
+	bgez $v0, indexOK55
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK55: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK56
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK56: # charger la valeur tab[(j + 1)] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain29: beqz $t7, endchain29
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain29
+	endchain29: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	# Affectarion de la valeur de tab[(j + 1)] dans la variable tmp du bloc numero : 1
+	sw $v0, -8($s7)
+	# stockage ok 
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	# verifier l'indice j
+	bgez $v0, indexOK58
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK58: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK59
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK59: # charger la valeur tab[j] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain32: beqz $t7, endchain32
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain32
+	endchain32: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	move $t5, $v0
+	# on clacule l'expression (j + 1)
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# verifier l'indice (j + 1)
+	bgez $v0, indexOK61
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK61: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK62
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK62: # charger la valeur tab[(j + 1)] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain35: beqz $t7, endchain35
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain35
+	endchain35: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	# la valeur de la variable tmp du bloc 1
+	lw $v0, -8($s7)
+	move $t5, $v0
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	# verifier l'indice j
+	bgez $v0, indexOK64
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK64: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK65
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK65: # charger la valeur tab[j] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain38: beqz $t7, endchain38
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain38
+	endchain38: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	
+j fsi1
+sinon1: 
+# fin condition1
+fsi1: 
+	# on clacule l'expression (j + 1)
+	# la valeur de la variable j du bloc 1
+	lw $v0, -4($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# Affectarion de la valeur de (j + 1) dans la variable j du bloc numero : 1
+	sw $v0, -4($s7)
+	# stockage ok 
+	j tantque1
+# fin de la boucle 1
+fintantque1:
+# on clacule l'expression (i + 1)
+	# la valeur de la variable i du bloc 1
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# Affectarion de la valeur de (i + 1) dans la variable i du bloc numero : 1
+	sw $v0, 0($s7)
+	# stockage ok 
+	j tantque2
+# fin de la boucle 2
+fintantque2:
+# debut boucle 3
+tantque3: # on clacule l'expression (cpt < yal.arbre.Tableau.Longueur@49476842)
+	# la valeur de la variable cpt du bloc 1
+	lw $v0, -12($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0, 10
+	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	slt $v0, $t8, $v0
+# evaluation de la condition
+beq $v0, 0, fintantque3
+# affichichage de l'expression entiere : tab[cpt]
+# la valeur de la variable cpt du bloc 1
+	lw $v0, -12($s7)
+	# verifier l'indice cpt
+	bgez $v0, indexOK67
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK67: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK68
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK68: # charger la valeur tab[cpt] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain42: beqz $t7, endchain42
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain42
+	endchain42: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 4      # retour à la ligne
+la $a0, finLigne
+syscall
+# on clacule l'expression (cpt + 1)
+	# la valeur de la variable cpt du bloc 1
+	lw $v0, -12($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# Affectarion de la valeur de (cpt + 1) dans la variable cpt du bloc numero : 1
+	sw $v0, -12($s7)
+	# stockage ok 
+	j tantque3
+# fin de la boucle 3
+fintantque3:
+li $v0,0
+
+# sauvegarde du resultat 0 dans son emplacement retour
+	sw $v0, 16($s7)
+	# dépilement des 4 variables locales
+	addi $sp, $sp, 16
+	# dépilement du numero bloc + ancienne base
+	addi $sp, $sp, 8
+	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
+	lw $s7, 0($sp)
+	# dépilement de l'adresse de retour de l'appelant
+	addi $sp, $sp, 4
+	# chargement dans $ra de l'adresse de retour de l'appelant
 	lw $ra, 0($sp)
+	# branchement vers la prochaine instruction de l'appelant
 	jr $ra
-	 
+	li $v0, 4
+	la $a0, error_returnFonction
+	syscall
+	j end
+ 
+ # la fonction affichage () avec  0 parametres
+# l'empilement de l'adresse de retour de la fonction 
+	fonction2: sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	# l'empilement de l'ancienne base
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	# l'empilement du numero de bloc (numero de region) 
+	li $v0, 2
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	# chargement dans $s7 la nouvelle base
+	move $s7, $sp
+	addi $sp, $sp, -4
+	# liste d'instructions de la fonction
+	# debut boucle 4
+tantque4: # on clacule l'expression (cpt < yal.arbre.Tableau.Longueur@78308db1)
+	# la valeur de la variable cpt du bloc 2
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0, 10
+	addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	slt $v0, $t8, $v0
+# evaluation de la condition
+beq $v0, 0, fintantque4
+# affichichage de l'expression entiere : tab[cpt]
+# la valeur de la variable cpt du bloc 2
+	lw $v0, 0($s7)
+	# verifier l'indice cpt
+	bgez $v0, indexOK70
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK70: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 10
+	beq $t2, 1, indexOK71
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK71: # charger la valeur tab[cpt] du bloc 0
+	lw $t7, 4($s7)
+	la $t6, 0($s7)
+	chain46: beqz $t7, endchain46
+	lw $t6, 8($t6)
+	lw $t7, 4($t6)
+	j chain46
+	endchain46: la $t6, 0($t6)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 4      # retour à la ligne
+la $a0, finLigne
+syscall
+# on clacule l'expression (cpt + 1)
+	# la valeur de la variable cpt du bloc 2
+	lw $v0, 0($s7)
+	sw $v0, 0($sp)
+	addi $sp, $sp, -4
+	li $v0,1
+
+addi $sp, $sp, 4
+	lw $t8, 0($sp)
+	add $v0, $t8, $v0 
+# Affectarion de la valeur de (cpt + 1) dans la variable cpt du bloc numero : 2
+	sw $v0, 0($s7)
+	# stockage ok 
+	j tantque4
+# fin de la boucle 4
+fintantque4:
+li $v0,0
+
+# sauvegarde du resultat 0 dans son emplacement retour
+	sw $v0, 16($s7)
+	# dépilement des 1 variables locales
+	addi $sp, $sp, 4
+	# dépilement du numero bloc + ancienne base
+	addi $sp, $sp, 8
+	# chargement dans $s7 de l'ancienne base pour le retour de la fonction
+	lw $s7, 0($sp)
+	# dépilement de l'adresse de retour de l'appelant
+	addi $sp, $sp, 4
+	# chargement dans $ra de l'adresse de retour de l'appelant
+	lw $ra, 0($sp)
+	# branchement vers la prochaine instruction de l'appelant
+	jr $ra
+	li $v0, 4
+	la $a0, error_returnFonction
+	syscall
+	j end
+ 
  

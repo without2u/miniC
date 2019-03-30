@@ -36,6 +36,15 @@ public class BlocDInstructions extends ArbreAbstrait implements Iterable<ArbreAb
         return false;
     }
 
+    public boolean instructionExiste(String nomDinstruction) {
+
+        for(ArbreAbstrait a : listDesBlocs) {
+            if(a.getClass().getName().equals(nomDinstruction)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void verifier() throws AnalyseException {

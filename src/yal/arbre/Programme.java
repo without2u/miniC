@@ -125,14 +125,24 @@ public class Programme extends ArbreAbstrait {
     @Override
     public String toMIPS() {
         int cmp = getNbrVariable();
+
         StringBuilder sb = new StringBuilder("") ;
-        mainAndData(sb);
+        sb.append(".data\n");
+        sb.append(" finLigne:   .asciiz \"\\n\"\n" );
+        sb.append("vrai:\t" + ".asciiz \"vrai\"" + "\n");
+        sb.append("faux:\t" + ".asciiz \"faux\"" + "\n");
+        sb.append("error_div:\t" + ".asciiz \"Erreur: Division par 0 !\"" + "\n");
+        sb.append("error_returnFonction:\t" + ".asciiz \"Erreur: le type de retour de la fonction doit etre entier !\"" + "\n");
+        sb.append("error_indexTableau:\t" + ".asciiz \"Erreur: index tableau superieur ou negatif !\"" + "\n");
+        sb.append("error_affectation_tableau:\t" + ".asciiz \"Erreur: probleme d'affectation tableau !\"" + "\n");
+        sb.append("\n");
+        sb.append(".text\n main :\n\t");
         base(sb);
         if(cmp != 0) {
             //on reserve de la memoire pour les variable du bloc local
-            sb.append("addi $sp, $sp, " + cmp*(-decalage) + "\n");
+            sb.append("addi $sp, $sp, " + cmp*(-decalage) + "\n\t");
         }
-        base(sb);
+
 
         sb.append(bloc.toMIPS() + "\n");
         sb.append("end :\n" +
