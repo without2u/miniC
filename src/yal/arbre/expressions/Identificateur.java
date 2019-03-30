@@ -17,6 +17,7 @@ public class Identificateur extends Expression{
     private String nom;
     private int numBloc;
 
+    public static int cmpt=-1;
 
     public Identificateur(String nom, int n) {
 
@@ -33,7 +34,6 @@ public class Identificateur extends Expression{
         Entree e =new EntreeVar(this.nom);
         e.setNoBloc(numBloc);
         symbole = (SymboleVar)TDS.getInstance().getSymboleTable(e);
-            //symbole.setNoBlocS(e.getNoBloc());
 
         if(symbole == null) {
             e.setNoBloc(0);
@@ -73,21 +73,22 @@ public class Identificateur extends Expression{
 
     @Override
     public String codeToMips() {
-
         StringBuilder sb = new StringBuilder();
-
-
-        if((symbole.getNoBlocS() != getNumBloc()) && (getNumBloc() != 0))  {
-            sb.append("# chargement de la variable " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
-            sb.append("lw $t8, 8($s7)\n\t");
-            sb.append("lw $v0, " + getDeplacement() + "($t8)\n\t");
+        if(symbole.getNoBlocS() != getNoBloc() && getNoBloc() != 0) {
+            cmpt++;
+            sb.append("# la valeur de la variable " + nom + " du bloc " + symbole.getNoBlocS() + " avec ( chainage dynamique ) : \n\t");
+            sb.append("lw $t7, 4($s7)\n\t");
+            sb.append("la $t6, 0($s7)\n\t");
+            sb.append("chain"+ cmpt + ": beqz $t7, endchain" + cmpt + "\n\t");
+            sb.append("lw $t6, 8($t6)\n\t");
+            sb.append("lw $t7, 4($t6)\n\t");
+            sb.append("j chain" + cmpt + "\n\t");
+            sb.append("endchain" + cmpt + ": lw $v0, " + getDeplacement() + "($t6)\n\t");
         } else {
-            sb.append("# chargement de la variable  " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
+            sb.append("# la valeur de la variable " + nom + " du bloc " + symbole.getNoBlocS() + "\n\t");
             sb.append("lw $v0, " + getDeplacement() + "($s7)\n\t");
-
         }
         return sb.toString();
-
 
     }
 

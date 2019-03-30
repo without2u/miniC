@@ -1,10 +1,23 @@
 programme test
 debut
-entier [7] a;
+
+
 entier i;
-i=4;
-a[5]=500;
-ecrire a[i];
-ecrire i;
+entier [5] tab;
+entier [5] bat;
+
+fonction f1() debut
+entier [5] j;
+j[3]=1000;
+retourne j[3];
+
+fin
+
+
+tab[3]=100;
+bat[3]=200;
+
+ecrire tab[3];
+ecrire bat[3];
 
 fin

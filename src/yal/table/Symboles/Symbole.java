@@ -7,6 +7,7 @@ public abstract class Symbole {
     protected Type typeS;
     protected int noBlocS;
 
+
     public Symbole(Type type) {
 
         this.typeS = type;
@@ -29,6 +30,9 @@ public abstract class Symbole {
     public Type getTypeS() {
         return typeS;
     }
+
+
+
 
     @Override
     public String toString() {

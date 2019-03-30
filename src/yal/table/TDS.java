@@ -54,9 +54,15 @@ public class TDS implements Iterable<Entree>{
                     ((SymboleVar) s).setDeplacement(decalage);
                 } else if (e instanceof EntreeTableau) {
                     decalage -= 4;
-                    ((SymboleTableau) s).setDeplacement(decalage);
+                    ((SymboleTableau)s).setDeplacement(decalage);
+                    if(((SymboleTableau)s).getNbElement() != 0)
+                        decalage -= 4 * (((SymboleTableau)s).getNbElement() - 1);
+                    else {
+                        decalage -= 4;
+                    }
                 }
             }
+
             tableDeSymbole.put(e,s);
         }else {
 
@@ -71,6 +77,14 @@ public class TDS implements Iterable<Entree>{
 
         for(Entree e : tableDeSymbole.keySet()) {
             if((e instanceof EntreeVar || e instanceof EntreeTableau ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
+
+
+                AnalyseException erreur = new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
+                ListeDErreurs.getErreurs().addErreur(erreur);
+                return true;
+
+            }
+            if((e instanceof EntreeTableau || e instanceof EntreeVar ) && (e.getNomEntree().equals(nom)) && e.getNoBloc() == numeroBloc) {
 
 
                 AnalyseException erreur = new DoublonsException("ligne "+no+" la variable " + e + " est declaree plusieurs fois !");
@@ -133,23 +147,7 @@ public class TDS implements Iterable<Entree>{
     public static int getDecalage() {
         return decalage;
     }
-    public int tailleZoneDesVariables() {
-        int tailleZone = 0;
 
-        for (Map.Entry<Entree, Symbole> map : tableDeSymbole.entrySet()) {
-            Symbole s = map.getValue();
-
-            if (s instanceof SymboleTableau ) {
-                tailleZone += ((SymboleTableau) s).getEspace();
-            }
-            if (s instanceof SymboleVar ) {
-                tailleZone += ((SymboleVar) s).getEspace();
-            }
-
-        }
-
-        return tailleZone;
-    }
 
 
 }

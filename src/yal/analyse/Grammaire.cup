@@ -29,8 +29,10 @@ import yal.arbre.fonctions.Retourne;
 import yal.arbre.fonctions.AppelFonction;
 import yal.table.Symboles.SymboleTableau;
 import yal.table.tabDesEntrees.EntreeTableau;
-import yal.arbre.Tableau.DeclarationTableau;
+import yal.arbre.Tableau.Tableau;
 import yal.arbre.Tableau.IdentificateurTableau;
+import yal.arbre.Tableau.Longueur;
+
 
 
 import java_cup.runtime.*;
@@ -93,7 +95,6 @@ non terminal ArbreAbstrait PROG, DECL, DECL_FONCTION ;
 non terminal Expression EXP, CST ;
 non terminal BlocDInstructions LINST;
 non terminal Identificateur  DECL_VAR;
-//non terminal IdentificateurTableau  DECL_VAR_TABLEAU;
 non terminal ArrayList<ArbreAbstrait> LDECL;
 non terminal Instruction AFFECT, INST, LECTURE, CONDITION, BOUCLE, RETOURNER,DECL_VAR_TABLEAU;
 non terminal ArrayList<Identificateur> PARAMETRES, LPARAMETRES, LDECL_VAR_F;
@@ -288,18 +289,18 @@ CST     ::=     CSTENTIERE:e
 
 
 AFFECT		    ::=	    IDF:idf EGAL EXP:e POINTVIRGULE
-					{:
+					        {:
 					    Identificateur i = new Identificateur(idf, idfleft+1);
 					    Instruction aff = new AffectationVariable(i, e, idfleft+1);
 					    RESULT = aff;
-					:}
-				|
-                    IDF:idf CROOUV EXP:e1 CROFER EGAL EXP:e2 POINTVIRGULE
-				    {:
-                        IdentificateurTableau i = new IdentificateurTableau(idf,e1, idfleft+1);
-                        Instruction aff = new AffectationTableau(i,e1, e2, idfleft+1);
-                        RESULT = aff;
-				    :}
+					        :}
+                |
+						IDF:idf CROOUV EXP:e1 CROFER EGAL EXP:e2 POINTVIRGULE
+						{:
+							IdentificateurTableau idfT = new IdentificateurTableau(idf, e1, idfleft+1);
+							Instruction affectationTableau = new AffectationTableau(idfT, e2, idfleft+1);
+							RESULT = affectationTableau;
+						:}
 
 			    ;
 
@@ -319,15 +320,15 @@ LDECL		    ::=		LDECL:ld DECL:d
 
 
 DECL		    ::=		DECL_VAR:dv
-						{: RESULT = dv; :}
+						{:
+						    RESULT = dv;
+						:}
 				|
                         DECL_FONCTION:df
-                        {: TDS.getInstance().uneSortie();
-                           RESULT = df;
+                        {:
+                            TDS.getInstance().uneSortie();
+                            RESULT = df;
                         :}
-                |
-                        DECL_VAR_TABLEAU:dvt
-                        {: RESULT = dvt; :}
 
 			    ;
 
@@ -340,31 +341,31 @@ DECL_VAR		::=		ENTIER IDF:idf POINTVIRGULE
 							Type type = Type.ENTIER;
 							Symbole s = new SymboleVar(type);
 							s.setNoBlocS(bloc);
-							//System.out.println(s.getNoBloc());
+
 							TDS.getInstance().ajouter(e,s,idfleft+1);
 							Identificateur id = new Identificateur(idf,idfleft);
 							id.setNumBloc(bloc);
 							RESULT = id;
 						:}
 
+                |
+						ENTIER CROOUV EXP:e CROFER IDF:idf POINTVIRGULE
+						{:
+							int bloc = TDS.getInstance().getNoBlocCourant();
+							Entree entree = new EntreeTableau(idf);
+							entree.setNoBloc(bloc);
+							Type type = Type.ENTIER;
+							Symbole symbole = new SymboleTableau(type);
+							symbole.setNoBlocS(bloc);
+							((SymboleTableau)symbole).setNbElement(e.getValeur());
+							TDS.getInstance().ajouter(entree, symbole, idfleft+1);
 
+							Tableau tableau= new Tableau(idf, e, idfleft+1);
+							RESULT = tableau;
 
+						:}
 
 				;
-DECL_VAR_TABLEAU ::=    ENTIER  CROOUV EXP:e CROFER IDF:idf POINTVIRGULE
-                		{:
-                		 int bloc = TDS.getInstance().getNoBlocCourant();
-                		DeclarationTableau t = new DeclarationTableau(idf, idfleft);
-                		Entree entree = new EntreeTableau(idf);
-                		Type type = Type.ENTIER;
-                		SymboleTableau symbole = new SymboleTableau(type);
-                		symbole.setNoBlocS(bloc);
-                		((SymboleTableau)symbole).setNbElement(e.getValeur());
-                		TDS.getInstance().ajouter(entree, symbole, idfleft+1);
-                		RESULT = t;
-
-                		:}
-                    ;
 
 DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LDECL_VAR_F:ldv LINST:li FIN
 						{:
@@ -395,6 +396,7 @@ DECL_FONCTION	::=		FONCTION IDF:idf PARAMETRES:p DEBUT LDECL_VAR_F:ldv LINST:li 
                             f.setBloc(li);
                             RESULT = f;
                 		:}
+
 				;
 
 LPARAMETRES		::=		LPARAMETRES:lp POINTVIRGULE ENTIER IDF:idf

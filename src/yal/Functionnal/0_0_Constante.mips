@@ -1,0 +1,217 @@
+.data
+ finLigne:   .asciiz "\n"
+vrai:	.asciiz "vrai"
+faux:	.asciiz "faux"
+error_div:	.asciiz "Erreur: Division par 0 !"
+error_returnFonction:	.asciiz "Erreur: le type de retour de la fonction doit etre entier !"
+error_indexTableau:	.asciiz "Erreur: index tableau superieur ou negatif !"
+error_affectation_tableau:	.asciiz "Erreur: probleme d'affectation tableau !"
+
+.text
+ main :
+	addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	li $v0, 0
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	move $s7, $sp
+	addi $sp, $sp, -44
+addi $sp, $sp, -4
+	sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	li $v0, 0
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	move $s7, $sp
+	li $v0,100
+
+move $t5, $v0
+	li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK9
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK9: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK10
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK10: # charger la valeur tab[3] du bloc 0
+	la $t6, -4($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,200
+
+move $t5, $v0
+	li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK12
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK12: # bat est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK13
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK13: # charger la valeur bat[3] du bloc 0
+	la $t6, -24($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	# affichichage de l'expression entiere : tab[3]
+li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK15
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK15: # tab est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK16
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK16: # charger la valeur tab[3] du bloc 0
+	la $t6, -4($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 4      # retour à la ligne
+la $a0, finLigne
+syscall
+# affichichage de l'expression entiere : bat[3]
+li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK18
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK18: # bat est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK19
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK19: # charger la valeur bat[3] du bloc 0
+	la $t6, -24($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	move $t8, $v0
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 4      # retour à la ligne
+la $a0, finLigne
+syscall
+
+end :
+move $v1, $v0
+ li $v0, 10 
+ syscall
+# la fonction f1 () elle a  0 parametres
+# l'empilement de l'adresse de retour de la fonction 
+	fonction1: sw $ra, 0($sp)
+	addi $sp, $sp, -4
+	# l'empilement de l'ancienne base
+	sw $s7, 0($sp)
+	addi $sp, $sp, -4
+	# l'empilement du numero de region 
+	li $v0, 1
+	sw $v0, ($sp)
+	addi $sp, $sp, -4
+	# chargement dans $s7 la nouvelle base
+	move $s7, $sp
+	# liste d'instructions de la fonction
+	li $v0,1000
+
+move $t5, $v0
+	li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK21
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK21: # j est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK22
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK22: # charger la valeur j[3] du bloc 1
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	sw $t5, 0($t6)
+	li $v0,3
+
+# verifier l'indice 3
+	bgez $v0, indexOK24
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK24: # j est un tableau statique on recupere sa taille dans la TDS
+	slti $t2, $v0, 5
+	beq $t2, 1, indexOK25
+	li $v0, 4
+	la $a0, error_indexTableau
+	syscall
+	j end
+indexOK25: # charger la valeur j[3] du bloc 1
+	la $t6, 0($s7)
+	li $t2, 4
+	mult $v0, $t2
+	mflo $v0
+	sub $t6, $t6, $v0
+	lw $v0, ($t6)
+	# sauvegardement du resultat j[3]
+	sw $v0, 16($s7)
+	# dépilement des variables locales de fonction 
+	addi $sp, $sp, 0
+	addi $sp, $sp, 8
+	lw $s7, 0($sp)
+	addi $sp, $sp, 4
+	lw $ra, 0($sp)
+	jr $ra
+	 
+ 

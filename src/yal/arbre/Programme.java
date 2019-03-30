@@ -1,14 +1,15 @@
 package yal.arbre;
 
-import yal.arbre.Tableau.DeclarationTableau;
-import yal.arbre.Tableau.IdentificateurTableau;
 import yal.arbre.fonctions.Fonction;
 import yal.exceptions.AnalyseException;
 import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.EnsembleDErreurs;
 import yal.exceptions.ListeDErreurs;
+import yal.table.Symboles.Symbole;
+import yal.table.Symboles.SymboleTableau;
 import yal.table.TDS;
 import yal.table.tabDesEntrees.Entree;
+import yal.table.tabDesEntrees.EntreeTableau;
 import yal.table.tabDesEntrees.EntreeVar;
 
 import java.util.ArrayList;
@@ -19,13 +20,10 @@ public class Programme extends ArbreAbstrait {
     protected BlocDInstructions bloc;
     private static int decalage = 4;
     private ArrayList<ArbreAbstrait> listeDesDecl;
-    private BlocDInstructions tableaux;
-    private int tailleZoneDesVariables;
 
     public Programme(String nomProg,int n) {
         super(n);
         this.nomProg=nomProg;
-        tableaux = new BlocDInstructions(n + 1);
     }
 
     // on genere le code mips pour les fonctions
@@ -41,10 +39,10 @@ public class Programme extends ArbreAbstrait {
         }
 
     }
-    private void getMipsForTableau(StringBuilder sb) {
+   /* private void getMipsForTableau(StringBuilder sb) {
 
-        if(listeDesDecl != null) {
-            for(ArbreAbstrait a : listeDesDecl) {
+        if(tableaux != null) {
+            for(ArbreAbstrait a : tableaux) {
                 if((a instanceof DeclarationTableau)) {
                     sb.append(((DeclarationTableau)a).toMIPS()).append(" \n ");
                 }
@@ -52,6 +50,7 @@ public class Programme extends ArbreAbstrait {
         }
 
     }
+    */
 
     // on compte le nombre des variables dans le bloc principal 0
     private int getNbrVariable() {
@@ -59,6 +58,13 @@ public class Programme extends ArbreAbstrait {
         for(Entree e : TDS.getInstance()) {
             if((e instanceof EntreeVar) && (e.getNoBloc() == 0)) {
                 cmp++;
+            }
+            if(e instanceof EntreeTableau && (e.getNoBloc() == 0)) {
+                Symbole symbole = TDS.getInstance().getSymboleTable(e);
+                int nbrDelement = ((SymboleTableau)symbole).getNbElement();
+                if(nbrDelement > 0) {
+                    cmp += nbrDelement;
+                }
             }
         }
 
@@ -90,61 +96,44 @@ public class Programme extends ArbreAbstrait {
 
             throw new EnsembleDErreurs("");
         }
-        tailleZoneDesVariables = TDS.getInstance().tailleZoneDesVariables();
+
     }
-
-    public void base(StringBuilder mips) {
-        mips.append("# Empile le numéro de région\n");
-        mips.append("li $t8, 0\n");
-        mips.append("sw $t8, 0($sp)\n");
-        mips.append("addi $sp, $sp, -4\n");
-        mips.append("\n");
-
-        mips.append("# Initialisation de la base des variables\n");
-        mips.append("move $s7, $sp\n");
-        mips.append("\n");
-
-        mips.append("# Réservation de l'espace pour ");
-        mips.append(tailleZoneDesVariables / 4);
-        mips.append(" variable(s)\n");
-
-        mips.append("addi $sp, $sp, ");
-        mips.append(- tailleZoneDesVariables);
-        mips.append("\n\n");
-
-        mips.append("# Initialisation des variables\n");
-        mips.append("li $t8, 0\n");
-
-        for (int depl = 0; depl > - tailleZoneDesVariables; depl -= 4) {
-            mips.append("sw $t8, ");
-            mips.append(depl);
-            mips.append("($s7)\n");
-        }
-
-        mips.append("\n");
+    //a revoir
+    public void mainAndData(StringBuilder sb) {
+        sb.append(".data\n");
+        sb.append(" finLigne:   .asciiz \"\\n\"\n" );
+        sb.append("vrai:\t" + ".asciiz \"vrai\"" + "\n");
+        sb.append("faux:\t" + ".asciiz \"faux\"" + "\n");
+        sb.append("error_div:\t" + ".asciiz \"Erreur: Division par 0 !\"" + "\n");
+        sb.append("error_returnFonction:\t" + ".asciiz \"Erreur: le type de retour de la fonction doit etre entier !\"" + "\n");
+        sb.append("error_indexTableau:\t" + ".asciiz \"Erreur: index tableau superieur ou negatif !\"" + "\n");
+        sb.append("error_affectation_tableau:\t" + ".asciiz \"Erreur: probleme d'affectation tableau !\"" + "\n");
+        sb.append("\n");
+        sb.append(".text\n main :\n\t");
+    }
+    public void base(StringBuilder sb) {
+        sb.append("addi $sp, $sp, -4\n\t"+
+                "sw $ra, 0($sp)\n\t"+
+                "addi $sp, $sp, -4\n\t"+
+                "sw $s7, 0($sp)\n\t"+
+                "addi $sp, $sp, -4\n\t"+
+                "li $v0, 0\n\t"+
+                "sw $v0, ($sp)\n\t"+
+                "addi $sp, $sp, -4\n\t"+
+                "move $s7, $sp\n\t");
     }
     @Override
     public String toMIPS() {
         int cmp = getNbrVariable();
         StringBuilder sb = new StringBuilder("") ;
-        sb.append(".data\n" +
-                " finLigne:   .asciiz \"\\n\"\n" +
-                "              .align 2\n"+
-                "vrai:\t" + ".asciiz \"vrai\"\n"+
-                "faux:\t" + ".asciiz \"faux\"\n"+
-                "error_div:\t" + ".asciiz \"Erreur: Division par 0 !\n"+
-                "erreurAccesTableauInvalide :\n"+
-                        "erreurLongueurInvalide :\n"+
-
-        ".text\n" +
-                " main :\n") ;
-        sb.append("move $s7, $sp\n");
+        mainAndData(sb);
+        base(sb);
         if(cmp != 0) {
             //on reserve de la memoire pour les variable du bloc local
             sb.append("addi $sp, $sp, " + cmp*(-decalage) + "\n");
         }
         base(sb);
-        getMipsForTableau(sb);
+
         sb.append(bloc.toMIPS() + "\n");
         sb.append("end :\n" +
                 "move $v1, $v0\n"+

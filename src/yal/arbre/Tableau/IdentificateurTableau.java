@@ -1,32 +1,30 @@
 package yal.arbre.Tableau;
 
 import yal.arbre.expressions.Expression;
+import yal.arbre.expressions.Identificateur;
 import yal.arbre.instructions.Type;
 import yal.exceptions.AnalyseException;
+import yal.exceptions.AnalyseSemantiqueException;
 import yal.exceptions.ListeDErreurs;
 import yal.exceptions.VariablePasDeclareeException;
 import yal.table.Symboles.Symbole;
 import yal.table.Symboles.SymboleTableau;
-import yal.table.Symboles.SymboleVar;
+
 import yal.table.TDS;
 import yal.table.tabDesEntrees.Entree;
 import yal.table.tabDesEntrees.EntreeTableau;
-import yal.table.tabDesEntrees.EntreeVar;
 
-public class IdentificateurTableau extends Expression {
-    private String nom;
-    private Symbole symbole;
-    private Expression indice;
-    private int numBloc,tmp;
-    public static int deplVar;
-    private static int cmpt = 0;
+
+public class IdentificateurTableau extends Identificateur {
+    protected String nom;
+    protected Symbole symbole;
+    protected Expression indice;
+    private static int cmpt = -1,tmp;
     public IdentificateurTableau(String nom, Expression indice, int n) {
-        super(n);
+        super(nom, n);
         this.nom = nom;
         this.indice = indice;
-        this.valeur = indice.getValeur();
-        numBloc = TDS.getInstance().getNoBlocCourant();
-
+        noBloc = TDS.getInstance().getNoBlocCourant();
         cmpt++;
         this.tmp=cmpt;
 
@@ -50,12 +48,50 @@ public class IdentificateurTableau extends Expression {
                 VariablePasDeclareeException erreur = new VariablePasDeclareeException("ligne " + noLigne + "\n\t le tableau " + nom + " n'est pas declarée !");
                 ListeDErreurs.getErreurs().addErreur(erreur);
             } else {
-                setType(Type.ENTIER);
+                indice.verifier();
+                if(indice.getType() != Type.ENTIER) {
+                    AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'indice du tableau " + "\"" + nom + "\" n'est pas de type entier !");
+                    ListeDErreurs.getErreurs().addErreur(erreur);
+                }
+                else {
+                    if(Expression.estConstante(indice)) {
+                        if(indice.getValeur() < 0) {
+                            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'index du tableau " + "\"" + nom + "\" : " + indice.getValeur()+ " outOfBounds !");
+                            ListeDErreurs.getErreurs().addErreur(erreur);
+                        }
+                        if(getTailleTableau() > 0) {
+                            if(indice.getValeur() >= getTailleTableau()) {
+                                AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'index du tableau " + "\"" + nom + "\" : " + indice.getValeur()+ " outOfBounds !");
+                                ListeDErreurs.getErreurs().addErreur(erreur);
+                            }
+                        }
+                    }
+                    setType(Type.ENTIER);
+                }
             }
         }else {
 
-            setType(Type.ENTIER);
-                deplVar = getDeplacement();
+                indice.verifier();
+                if(indice.getType() != Type.ENTIER) {
+                    AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'indice du tableau " + "\"" + nom + "\" n'est pas de type entier !");
+                    ListeDErreurs.getErreurs().addErreur(erreur);
+                }
+                else {
+                    if(Expression.estConstante(indice)) {
+                        if(indice.getValeur() < 0) {
+                            AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'index du tableau " + "\"" + nom + "\" : " + indice.getValeur()+ " outOfBounds !");
+                            ListeDErreurs.getErreurs().addErreur(erreur);
+                        }
+                        if(getTailleTableau() > 0) {
+                            if(indice.getValeur() >= getTailleTableau()) {
+                                AnalyseException erreur = new AnalyseSemantiqueException(noLigne , " l'index du tableau " + "\"" + nom + "\" : " + indice.getValeur()+ " outOfBounds !");
+                                ListeDErreurs.getErreurs().addErreur(erreur);
+                            }
+                        }
+                    }
+                    setType(Type.ENTIER);
+                }
+
         }
 
 
@@ -93,104 +129,92 @@ public class IdentificateurTableau extends Expression {
 
     }
 
-    public int getNumBloc() {
-        return numBloc;
-    }
 
-    public void setNumBloc(int numBloc) {
-        this.numBloc = numBloc;
-    }
 
     public Symbole getSymbole() {
         return symbole;
     }
-   /* public String codeDeclaration(){
 
-    }*/
-    @Override
-    public String codeToMips() {
 
-        StringBuilder accesCase = new StringBuilder(50);
+    public StringBuilder codeGenerique() {
+        cmpt++;
+        Identificateur.cmpt++;
+        StringBuilder sb = new StringBuilder();
 
-        accesCase.append("# Place la valeur d'une case de tableau dans $v0\n");
+        sb.append(indice.toMIPS());
+        sb.append("# verifier l'indice " + indice + "\n\t");
+        sb.append("bgez $v0, indexOK" + cmpt + "\n\t");
+        sb.append("li $v0, 4\n\t");
+        sb.append("la $a0, " + "error_indexTableau" +"\n\t");
+        sb.append("syscall\n\t");
+        sb.append("j end\n");
+        sb.append("indexOK" + cmpt + ": ");
+        cmpt++;
+        if(getTailleTableau() > 0) {
+            sb.append("# " + nom + " est un tableau statique on recupere sa taille dans la TDS\n\t");
+            sb.append("slti $t2, $v0, " + getTailleTableau() + "\n\t");
+        } else {
+            sb.append("# " + nom + " est un tableau dynamique on recupere sa taille\n\t");
+            sb.append("lw $t3, " + (getDeplacement() - 4) + "($s7)\n\t");
+            sb.append("slt $t2, $v0, $t3\n\t");
+        }
+        sb.append("beq $t2, 1, indexOK" + cmpt + "\n\t");
+        sb.append("li $v0, 4\n\t");
+        sb.append("la $a0, " + "error_indexTableau" +"\n\t");
+        sb.append("syscall\n\t");
+        sb.append("j end\n");
+        sb.append("indexOK" + cmpt + ": ");
 
-        /* Base courante */
-        accesCase.append("# Récupère la base courante\n");
-        accesCase.append("move $t2, $s7\n");
-
-        /* Numéro de région où est déclarée la variable */
-        accesCase.append("# Récupère le numéro de région où est déclaré le tableau\n");
-        accesCase.append("li $v1, ");
-        accesCase.append(numBloc);
-        accesCase.append("\n");
-
-        /* Entrée TantQue */
-        accesCase.append("tq_");
-        accesCase.append(hashCode());
-        accesCase.append(" :\n");
-
-        /* On récupère le numéro de région de l'environnement courant */
-        accesCase.append("lw $v0, 4($t2) \n");
-        accesCase.append("sub $v0, $v0, $v1\n");
-
-        /* Branchement vers la fin si les deux numéros sont égaux */
-        accesCase.append("beqz $v0, fintq_");
-        accesCase.append(hashCode());
-        accesCase.append("\n");
-
-        /* On repart au début et on essaye avec l'environnement précédent sinon */
-        accesCase.append("lw $t2, 8($t2) \n");
-        accesCase.append("j tq_");
-        accesCase.append(hashCode());
-        accesCase.append("\n");
-
-        /* Sortie TantQue */
-        accesCase.append("fintq_");
-        accesCase.append(hashCode());
-        accesCase.append(" :\n");
-
-        /* Chargement de l'adresse du tableau dans $t8 */
-        accesCase.append("# Chargement de l'adresse du tableau dans $t8\n");
-        accesCase.append("lw $t8, ");
-        accesCase.append(deplVar);
-        accesCase.append("($t2)");
-        accesCase.append("\n");
-
-        /* Indice dans $v0 */
-        accesCase.append(indice.toMIPS());
-
-        /* Accès avec un indice inférieur à 0 */
-        accesCase.append("bltz $v0, erreurAccesTableauInvalide\n");
-
-        /* On charge la longueur du tableau dans $t2 */
-        accesCase.append("lw $t2, 0($t8)\n");
-
-        /* La longueur moins l'indice dans $t2 */
-        accesCase.append("sub $t2, $t2, $v0\n");
-
-        /* Accès avec un indice supérieur à la longueur du tableau */
-        accesCase.append("blez $t2, erreurAccesTableauInvalide\n");
-
-        /* $v0 = indiceTableau, $t8 = adresse début tableau */
-        /* $t1 va contenir le déplacement pour aller au bon indice */
-        accesCase.append("li $t3, -4\n");
-        accesCase.append("mult $v0, $t3\n");
-        accesCase.append("mflo $t1\n");
-
-        /* On retire -4 à $t1 (place de la longueur) */
-        accesCase.append("add $t1, $t1, -4\n");
-
-        /* Ajout du déplacement de $t1 à $t8 */
-        accesCase.append("add $t8, $t8, $t1\n");
-
-        /* Chargement de la case dans $v0 */
-        accesCase.append("lw $v0, 0($t8)\n");
-
-        return accesCase.toString();
+        if(symbole.getNoBlocS() != getNoBloc() && getNoBloc() != 0) {
+            Identificateur.cmpt++;
+            sb.append("# charger la valeur " + nom  + "[" + indice + "]" + " du bloc " + symbole.getNoBlocS() + "\n\t");
+            sb.append("lw $t7, 4($s7)\n\t");
+            sb.append("la $t6, 0($s7)\n\t");
+            sb.append("chain"+ Identificateur.cmpt + ": beqz $t7, endchain" + Identificateur.cmpt + "\n\t");
+            sb.append("lw $t6, 8($t6)\n\t");
+            sb.append("lw $t7, 4($t6)\n\t");
+            sb.append("j chain" + Identificateur.cmpt + "\n\t");
+            if(getTailleTableau() == 0)
+                sb.append("endchain" + Identificateur.cmpt + ": lw $t6, " + getDeplacement() + "($t6)\n\t");
+            else
+                sb.append("endchain" + Identificateur.cmpt + ": la $t6, " + getDeplacement() + "($t6)\n\t");
+        } else {
+            sb.append("# charger la valeur " + nom + "[" + indice + "]" + " du bloc " + symbole.getNoBlocS() + "\n\t");
+            if(getTailleTableau() == 0)
+                sb.append("lw $t6, "+ getDeplacement() +"($s7)\n\t");
+            else
+                sb.append("la $t6, "+ getDeplacement() +"($s7)\n\t");
+        }
+        sb.append("li $t2, 4\n\t");
+        sb.append("mult $v0, $t2\n\t");
+        sb.append("mflo $v0\n\t");
+        sb.append("sub $t6, $t6, $v0\n\t");
+        cmpt++;
+        Identificateur.cmpt++;
+        return sb;
     }
 
+
+    @Override
+    public String codeToMips() {
+        StringBuilder sb = codeGenerique();
+        instructionLoad(sb);
+        return sb.toString();
+    }
+
+    public void instructionLoad(StringBuilder sb) {
+        sb.append("lw $v0, ($t6)\n\t");
+    }
     public String getNom() {
         return nom;
+    }
+
+
+    public int getTailleTableau() {
+        if (symbole != null) {
+            return ((SymboleTableau) symbole).getNbElement() ;
+        }
+        else return 0;
     }
 
 }

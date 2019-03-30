@@ -11,6 +11,7 @@ public class SymboleFonction extends Symbole {
 
     public SymboleFonction(Type type) {
         super(type);
+
     }
 
 

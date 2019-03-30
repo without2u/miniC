@@ -1,6 +1,8 @@
 package yal.arbre.expressions;
 
 import yal.arbre.ArbreAbstrait;
+import yal.arbre.expressions.binaire.arithmetique.BinaireArithmetique;
+import yal.arbre.expressions.unaire.MoinsUnaire;
 import yal.arbre.instructions.Type;
 
 public abstract class Expression extends ArbreAbstrait {
@@ -35,4 +37,21 @@ public abstract class Expression extends ArbreAbstrait {
         this.type = type;
     }
     public abstract String codeToMips();
+    public static boolean estConstante(Expression expression) {
+        Boolean estVrai=false;
+        if(expression instanceof ConstanteEntiere) {
+            estVrai=true;
+        }else if(expression instanceof BinaireArithmetique) {
+            estVrai = (estConstante(((BinaireArithmetique)expression).getFilsGauche())
+                    && estConstante(((BinaireArithmetique)expression).getFilsDroite())
+                    && expression.getType() == Type.ENTIER);
+        }
+        else if(expression instanceof MoinsUnaire) {
+            estVrai = (estConstante(((MoinsUnaire)expression).getE())  &&
+                    expression.getType() == Type.ENTIER);
+        } else {
+            estVrai =false;
+        }
+        return estVrai;
+    }
 }

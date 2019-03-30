@@ -29,18 +29,27 @@ public abstract class Unaire extends Expression {
         StringBuilder sb = new StringBuilder();
         if(e instanceof Identificateur) {
             if(((Identificateur)e).getNumBloc() == getNoBloc()) {
+
                 sb.append("lw $v0, " + ((Identificateur) e).getDeplacement() + "($s7)\n\t");
+
             } else {
+
                 sb.append("sw $t8, $s7\n\t");
                 sb.append("addi $t8, $t8, 8\n\t");
                 sb.append("lw $v0, " + ((Identificateur)e).getDeplacement() + "($s7)\n\t");
+
             }
         } else {
             sb.append(e.toMIPS());
         }
+
         sb.append(codeToMips());
+
         return sb.toString();
+
     }
 
-
+    public Expression getE() {
+        return e;
+    }
 }
